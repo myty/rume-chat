@@ -1,0 +1,34 @@
+{
+  "deno.enable": true,
+  "deno.lint": true,
+  "editor.defaultFormatter": "denoland.vscode-deno",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "css.customData": [".vscode/tailwind.json"],
+  "codevoid.inner-loop-buddy.defaultUrl": "http://0.0.0.0:8000/",
+  "files.associations": {
+    "*.tsx": "typescriptreact",
+    "*.css": "tailwindcss",
+    "*.scss": "tailwindcss"
+  },
+  "[tailwindcss]": {
+    "tailwindCSS.colorDecorators": true
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ],
+  "trailing-spaces.trimOnSave": true,
+  "editor.stickyScroll.enabled": true
+}

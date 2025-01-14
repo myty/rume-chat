@@ -1,0 +1,35 @@
+{
+  "name": "@myty/fresh-workspace",
+  "version": "0.0.0",
+  "exports": {},
+  "tasks": {
+    "dev": "deno task --filter @myty/fresh-workspace-web dev"
+  },
+  "imports": {
+    "@std/assert": "jsr:@std/assert@1",
+    "preact": "npm:preact@^10.25.2"
+  },
+  "workspace": [
+    "./apps/web"
+  ],
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.asynciterable",
+      "dom.iterable",
+      "deno.ns",
+      "deno.unstable"
+    ],
+    "jsx": "precompile",
+    "jsxImportSource": "preact",
+    "jsxPrecompileSkipElements": [
+      "a",
+      "img",
+      "source",
+      "body",
+      "html",
+      "head"
+    ]
+  },
+  "nodeModulesDir": "none"
+}
