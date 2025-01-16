@@ -1,20 +1,25 @@
 import { define } from "../../../utils.ts";
-import {
-  GetRoomFacade,
-  GetRoomQuery,
-} from "@myty/fresh-workspace-domain/rooms/get";
 import { getService } from "../../../service-collections.ts";
+import { GetRoomQuery } from "@myty/fresh-workspace-domain/rooms/get";
 
 export const handler = define.handlers({
   async GET(ctx) {
-    const getRoomFacade = getService(GetRoomFacade);
-    const query = new GetRoomQuery(ctx.params.id);
-    const room = await getRoomFacade.getRoom(query);
+    try {
+      const queryHandler = getService("GetRoomQueryHandler");
+      const query = new GetRoomQuery(ctx.params.id);
+      const room = await queryHandler.handle(query);
 
-    if (!room) {
-      return new Response("Room not found", { status: 404 });
+      if (!room) {
+        return new Response("Room not found", { status: 404 });
+      }
+
+      return new Response(JSON.stringify(room));
+    } catch (error) {
+      if (error instanceof TypeError) {
+        return new Response(error.message, { status: 400 });
+      }
+
+      return new Response("Internal server error", { status: 500 });
     }
-
-    return new Response(JSON.stringify(room));
   },
 });

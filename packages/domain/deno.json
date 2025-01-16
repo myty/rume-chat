@@ -2,6 +2,7 @@
   "name": "@myty/fresh-workspace-domain",
   "version": "0.0.0",
   "exports": {
+    ".": "./index.ts",
     "./rooms/get": "./rooms/get/index.ts",
     "./entities": "./entities/index.ts"
   }
