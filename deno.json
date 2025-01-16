@@ -10,7 +10,9 @@
     "preact": "npm:preact@^10.25.2"
   },
   "workspace": [
-    "./apps/web"
+    "./apps/web",
+    "./packages/domain",
+    "./packages/persistence"
   ],
   "compilerOptions": {
     "lib": [

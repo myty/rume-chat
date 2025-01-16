@@ -1,0 +1,7 @@
+{
+  "name": "@myty/fresh-workspace-persistence",
+  "version": "0.0.0",
+  "exports": {
+    "./rooms/get": "./rooms/get/index.ts"
+  }
+}

@@ -23,6 +23,7 @@ interface Identity {
 export interface Room {
   id: string;
   name: string;
+  ownerId: string;
 }
 
 interface Connection {
@@ -40,13 +41,14 @@ interface Message {
 
 export async function createRoom(room: Room): Promise<Room> {
   const key = ["rooms", room.id];
+  const res = await kv.atomic()
+    .check({ key, versionstamp: null })
+    .set(key, room)
+    .commit();
 
-  const { value: existingRoom } = await kv.get(key);
-  if (existingRoom) {
-    throw new Error("Room already exists");
+  if (!res.ok) {
+    throw new TypeError("Room already exists");
   }
-
-  await kv.atomic().set(key, room).commit();
 
   return room;
 }
