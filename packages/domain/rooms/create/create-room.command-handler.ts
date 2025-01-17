@@ -18,7 +18,11 @@ export class CreateRoomCommandHandler
 
   private validateCommand(command: CreateRoomCommand) {
     if (!command.roomId) {
-      throw new TypeError("Room ID is required");
+      throw new Error("Room ID is required");
+    }
+
+    if (!command.name) {
+      throw new Error("Room name is required");
     }
   }
 }

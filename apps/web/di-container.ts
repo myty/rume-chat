@@ -47,7 +47,6 @@ export class DiContainer<TTypes> implements Disposable {
   }
 
   [Symbol.dispose](): void {
-    console.log("Disposing container");
     this._resolvedScoped.clear();
     this._resolvedSingletons.clear();
     this._registrations.clear();
