@@ -85,11 +85,9 @@ export class DiContainer<TTypes> implements Disposable {
       case Lifecycle.Scoped:
         if (!this._resolvedScoped.has(type)) {
           this._resolvedScoped.set(type, resolved.resolver(this));
-          console.log("Resolved scoped", type);
         }
         return this._resolvedScoped.get(type) as TTypes[TKey];
       case Lifecycle.Transient:
-        console.log("Resolved transient", type);
         return resolved.resolver(this) as TTypes[TKey];
     }
 
@@ -105,7 +103,6 @@ export class DiContainer<TTypes> implements Disposable {
           type,
           this._registrations.get(type)!.resolver(this),
         );
-        console.log("Resolved singleton", type);
       }
 
       return this._resolvedSingletons.get(type) as TTypes[TKey];

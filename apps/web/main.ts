@@ -1,6 +1,6 @@
 import { App, fsRoutes, staticFiles } from "fresh";
 import { define, type State } from "./utils.ts";
-import { buildContainer } from "./service-collections.ts";
+import { buildContainer } from "./service-collection.ts";
 
 export const app = new App<State>();
 app.use(staticFiles());

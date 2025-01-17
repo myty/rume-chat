@@ -1,28 +1,32 @@
-import { createRoom, getRoom, Room } from "../../../room-store.ts";
 import { define } from "../../../utils.ts";
+import { CreateRoomCommand } from "@myty/fresh-workspace-domain/rooms/create";
 
 export const handler = define.handlers({
   // Index
-  async GET(ctx) {
-    const room = await getRoom(ctx.params.id);
-
-    if (!room) {
-      return new Response("Room not found", { status: 404 });
-    }
-
-    return new Response(JSON.stringify(room));
+  GET() {
+    throw new Error("Not implemented");
   },
 
   // Create
   async POST(ctx) {
-    const existingRoom = await getRoom(ctx.params.id);
-    if (existingRoom) {
-      return new Response("Room already exists", { status: 400 });
+    try {
+      const commandHandler = ctx.state.container.resolve(
+        "CreateRoomCommandHandler",
+      );
+
+      const { id, name, ownerId } = await ctx.req.json();
+      const command = new CreateRoomCommand(id, name, ownerId);
+
+      const room = await commandHandler.execute(command);
+
+      return new Response(JSON.stringify(room));
+    } catch (error) {
+      if (error instanceof TypeError) {
+        return new Response(error.message, { status: 400 });
+      }
+
+      console.error(error);
+      return new Response("Internal server error", { status: 500 });
     }
-
-    const roomInput: Room = await ctx.req.json();
-    const room = await createRoom(roomInput);
-
-    return new Response(JSON.stringify(room));
   },
 });
