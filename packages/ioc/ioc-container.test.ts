@@ -5,13 +5,13 @@ import {
   assertStrictEquals,
 } from "@std/assert";
 import { describe, it } from "@std/testing/bdd";
-import { DiContainer } from "./di-container.ts";
-import { Lifecycle } from "./di-container.ts";
+import { IoCContainer } from "./ioc-container.ts";
+import { Lifecycle } from "./ioc-container.ts";
 
-describe("DiContainer", () => {
+describe("IoCContainer", () => {
   it("should dispose the container", () => {
     // Arrange
-    const container = DiContainer.create();
+    const container = IoCContainer.create();
 
     // Act, Assert
     container.dispose();
@@ -20,7 +20,7 @@ describe("DiContainer", () => {
   describe("beginScope", () => {
     it("should create a new container scope", () => {
       // Arrange
-      const container = DiContainer.create();
+      const container = IoCContainer.create().build();
 
       // Act
       const scope = container.beginScope();
@@ -31,13 +31,14 @@ describe("DiContainer", () => {
 
     it("should share singleton registrations with parent container", () => {
       // Arrange
-      const container = DiContainer
+      const container = IoCContainer
         .create<TEST_DI_TYPES>()
         .bind(
           "TestInterface",
           () => new TestClass(),
           Lifecycle.Singleton,
-        );
+        )
+        .build();
 
       const testInstance = container.resolve("TestInterface");
 
@@ -53,13 +54,14 @@ describe("DiContainer", () => {
   describe("resolve", () => {
     it("should resolve a transient registration", () => {
       // Arrange
-      const container = DiContainer
+      const container = IoCContainer
         .create<TEST_DI_TYPES>()
         .bind(
           "TestInterface",
           () => new TestClass(),
           Lifecycle.Transient,
-        );
+        )
+        .build();
 
       // Act
       const testInstance = container.resolve("TestInterface");
@@ -70,13 +72,14 @@ describe("DiContainer", () => {
 
     it("should resolve a new transient value with each resolution", () => {
       // Arrange
-      const container = DiContainer
+      const container = IoCContainer
         .create<TEST_DI_TYPES>()
         .bind(
           "TestInterface",
           () => new TestClass(),
           Lifecycle.Transient,
-        );
+        )
+        .build();
 
       // Act
       const testInstanceOne = container.resolve("TestInterface");
@@ -88,13 +91,14 @@ describe("DiContainer", () => {
 
     it("should resolve a singleton registration", () => {
       // Arrange
-      const container = DiContainer
+      const container = IoCContainer
         .create<TEST_DI_TYPES>()
         .bind(
           "TestInterface",
           () => new TestClass(),
           Lifecycle.Singleton,
-        );
+        )
+        .build();
 
       // Act
       const testInstance = container.resolve("TestInterface");
@@ -105,13 +109,14 @@ describe("DiContainer", () => {
 
     it("should resolve a scoped registration", () => {
       // Arrange
-      const container = DiContainer
+      const container = IoCContainer
         .create<TEST_DI_TYPES>()
         .bind(
           "TestInterface",
           () => new TestClass(),
           Lifecycle.Scoped,
-        );
+        )
+        .build();
 
       // Act
       using scope = container.beginScope();
@@ -123,13 +128,14 @@ describe("DiContainer", () => {
 
     it("should not resolve a scoped registration from parent container", () => {
       // Arrange
-      const container = DiContainer
+      const container = IoCContainer
         .create<TEST_DI_TYPES>()
         .bind(
           "TestInterface",
           () => new TestClass(),
           Lifecycle.Scoped,
-        );
+        )
+        .build();
 
       const testInstance = container.resolve("TestInterface");
 
@@ -143,13 +149,14 @@ describe("DiContainer", () => {
 
     it("should not resolve a transient registration from parent container", () => {
       // Arrange
-      const container = DiContainer
+      const container = IoCContainer
         .create<TEST_DI_TYPES>()
         .bind(
           "TestInterface",
           () => new TestClass(),
           Lifecycle.Transient,
-        );
+        )
+        .build();
 
       const testInstance = container.resolve("TestInterface");
 

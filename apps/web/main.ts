@@ -36,4 +36,5 @@ await fsRoutes(app, {
 
 if (import.meta.main) {
   await app.listen();
+  container.dispose();
 }

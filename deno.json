@@ -13,6 +13,7 @@
   "workspace": [
     "./apps/web",
     "./packages/domain",
+    "./packages/ioc",
     "./packages/persistence"
   ],
   "compilerOptions": {

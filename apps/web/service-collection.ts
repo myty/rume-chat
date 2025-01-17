@@ -1,3 +1,4 @@
+import { IoCContainer, Lifecycle } from "@myty/fresh-workspace-ioc";
 import { GetRoomDataAccessKv } from "@myty/fresh-workspace-persistence/rooms/get";
 import { CreateRoomDataAccessKv } from "@myty/fresh-workspace-persistence/rooms/create";
 import {
@@ -13,10 +14,9 @@ import {
   CreateRoomResponse,
 } from "@myty/fresh-workspace-domain/rooms/create";
 import { CommandHandler, QueryHandler } from "@myty/fresh-workspace-domain";
-import { DiContainer, Lifecycle } from "./di-container.ts";
 
-export interface DI_TYPES {
-  DenoKv: Deno.Kv;
+export interface ServiceTypes {
+  KV: Deno.Kv;
   GetRoomDataAccess: GetRoomDataAccess;
   GetRoomQueryHandler: QueryHandler<GetRoomQuery, GetRoomResponse>;
   CreateRoomDataAccess: CreateRoomDataAccess;
@@ -29,11 +29,12 @@ export interface DI_TYPES {
 const kv = await Deno.openKv(":memory:");
 
 export const buildContainer = () =>
-  DiContainer.create<DI_TYPES>()
-    .bind("DenoKv", () => kv, Lifecycle.Singleton)
+  IoCContainer
+    .create<ServiceTypes>()
+    .bind("KV", () => kv, Lifecycle.Singleton)
     .bind(
       "GetRoomDataAccess",
-      (c) => new GetRoomDataAccessKv(c.resolve("DenoKv")),
+      (c) => new GetRoomDataAccessKv(c.resolve("KV")),
       Lifecycle.Scoped,
     )
     .bind(
@@ -43,11 +44,12 @@ export const buildContainer = () =>
     )
     .bind(
       "CreateRoomDataAccess",
-      (c) => new CreateRoomDataAccessKv(c.resolve("DenoKv")),
+      (c) => new CreateRoomDataAccessKv(c.resolve("KV")),
       Lifecycle.Scoped,
     )
     .bind(
       "CreateRoomCommandHandler",
       (c) => new CreateRoomCommandHandler(c.resolve("CreateRoomDataAccess")),
       Lifecycle.Scoped,
-    );
+    )
+    .build();

@@ -1,0 +1,7 @@
+{
+  "name": "@myty/fresh-workspace-ioc",
+  "version": "0.0.0",
+  "exports": {
+    ".": "./index.ts"
+  }
+}
