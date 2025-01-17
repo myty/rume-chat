@@ -1,6 +1,8 @@
 # DDD Chat
 
-A modern, real-time chat application showcasing the power of Domain-Driven Design (DDD) principles with Deno's latest features. Built with performance, scalability, and clean architecture in mind.
+A modern, real-time chat application showcasing the power of Domain-Driven
+Design (DDD) principles with Deno's latest features. Built with performance,
+scalability, and clean architecture in mind.
 
 ## ✨ Features
 
