@@ -1,4 +1,4 @@
-import type { Room } from "@myty/fresh-workspace-domain/entities";
+import type { Room } from "../../entities/index.ts";
 import type {
   GetRoomDataAccess,
   GetRoomQuery,

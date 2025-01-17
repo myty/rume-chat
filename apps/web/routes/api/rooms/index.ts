@@ -1,10 +1,29 @@
 import { define } from "../../../utils.ts";
+import { GetUserRoomsQuery } from "@myty/fresh-workspace-domain/rooms/get-user-rooms";
 import { CreateRoomCommand } from "@myty/fresh-workspace-domain/rooms/create";
 
 export const handler = define.handlers({
   // Index
-  GET() {
-    throw new Error("Not implemented");
+  async GET(ctx) {
+    try {
+      const queryHandler = ctx.state.container.resolve(
+        "GetUserRoomsQueryHandler",
+      );
+      const query = new GetUserRoomsQuery(ctx.state.currentUserId);
+      const response = await queryHandler.handle(query);
+
+      if (!response) {
+        return new Response("Room not found", { status: 404 });
+      }
+
+      return new Response(JSON.stringify(response));
+    } catch (error) {
+      if (error instanceof TypeError) {
+        return new Response(error.message, { status: 400 });
+      }
+
+      return new Response("Internal server error", { status: 500 });
+    }
   },
 
   // Create
@@ -14,8 +33,8 @@ export const handler = define.handlers({
         "CreateRoomCommandHandler",
       );
 
-      const { id, name, ownerId } = await ctx.req.json();
-      const command = new CreateRoomCommand(id, name, ownerId);
+      const { id, name } = await ctx.req.json();
+      const command = new CreateRoomCommand(id, name, ctx.state.currentUserId);
 
       const room = await commandHandler.execute(command);
 

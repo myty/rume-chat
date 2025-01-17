@@ -4,7 +4,7 @@
   "exports": {
     ".": "./index.ts",
     "./rooms/get": "./rooms/get/index.ts",
-    "./rooms/create": "./rooms/create/index.ts",
-    "./entities": "./entities/index.ts"
+    "./rooms/get-user-rooms": "./rooms/get-user-rooms/index.ts",
+    "./rooms/create": "./rooms/create/index.ts"
   }
 }

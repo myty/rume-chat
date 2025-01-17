@@ -1,4 +1,4 @@
-import type { Room } from "@myty/fresh-workspace-domain/entities";
+import type { Room } from "../../entities/index.ts";
 import type {
   CreateRoomCommand,
   CreateRoomDataAccess,
@@ -15,10 +15,14 @@ export class CreateRoomDataAccessKv implements CreateRoomDataAccess {
       ownerId: command.ownerId,
     };
 
-    const key = ["rooms", room.id];
+    const roomKey = ["rooms", room.id];
+    const userRoomKey = ["users", room.ownerId, "rooms", room.id];
+
     const res = await this.kv.atomic()
-      .check({ key, versionstamp: null })
-      .set(key, room)
+      .check({ key: roomKey, versionstamp: null })
+      .check({ key: userRoomKey, versionstamp: null })
+      .set(roomKey, room)
+      .set(userRoomKey, room)
       .commit();
 
     if (!res.ok) {
