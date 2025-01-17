@@ -1,5 +1,6 @@
 import { App, fsRoutes, staticFiles } from "fresh";
 import { define, type State } from "./utils.ts";
+import { buildContainer } from "./service-collections.ts";
 
 export const app = new App<State>();
 app.use(staticFiles());
@@ -18,6 +19,14 @@ const exampleLoggerMiddleware = define.middleware((ctx) => {
   return ctx.next();
 });
 app.use(exampleLoggerMiddleware);
+
+// DI
+const container = buildContainer();
+app.use(async (ctx) => {
+  using scopedContainer = container.beginScope();
+  ctx.state.container = scopedContainer;
+  return await ctx.next();
+});
 
 await fsRoutes(app, {
   dir: "./",

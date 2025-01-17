@@ -1,6 +1,9 @@
 import { createDefine } from "fresh";
+import { DiContainer } from "./di-container.ts";
+import { DI_TYPES } from "./service-collections.ts";
 
-// deno-lint-ignore no-empty-interface
-export interface State {}
+export interface State {
+  container: DiContainer<DI_TYPES>;
+}
 
 export const define = createDefine<State>();

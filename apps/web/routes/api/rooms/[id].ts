@@ -1,11 +1,10 @@
 import { define } from "../../../utils.ts";
-import { getService } from "../../../service-collections.ts";
 import { GetRoomQuery } from "@myty/fresh-workspace-domain/rooms/get";
 
 export const handler = define.handlers({
   async GET(ctx) {
     try {
-      const queryHandler = getService("GetRoomQueryHandler");
+      const queryHandler = ctx.state.container.resolve("GetRoomQueryHandler");
       const query = new GetRoomQuery(ctx.params.id);
       const room = await queryHandler.handle(query);
 

@@ -12,7 +12,6 @@ export class GetRoomQueryHandler
 
   async handle(query: GetRoomQuery): Promise<GetRoomResponse> {
     this.validateQuery(query);
-
     return await this.dataAccess.getRoom(query);
   }
 
