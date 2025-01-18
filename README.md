@@ -1,7 +1,8 @@
 # DDD Chat
 
-> [!WORK-IN-PROGRESS]
-> This project is still under active development.  It is incomplete and unfinished.
+> [!IMPORTANT]
+> This project is still under active development. It is incomplete and
+> unfinished.
 
 A modern, real-time chat application showcasing the power of Domain-Driven
 Design (DDD) principles with Deno's latest features. Built with performance,
