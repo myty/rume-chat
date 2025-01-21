@@ -12,11 +12,11 @@ export class CreateRoomDataAccessKv implements CreateRoomDataAccess {
     const room: Room = {
       id: command.roomId,
       name: command.name,
-      ownerId: command.ownerId,
+      ownerHandle: command.ownerHandle,
     };
 
     const roomKey = ["rooms", room.id];
-    const userRoomKey = ["users", room.ownerId, "rooms", room.id];
+    const userRoomKey = ["users", room.ownerHandle, "rooms", room.id];
 
     const res = await this.kv.atomic()
       .check({ key: roomKey, versionstamp: null })

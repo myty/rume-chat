@@ -1,4 +1,4 @@
-import type { QueryHandler } from "../../query-handler.ts";
+import type { QueryHandler } from "../../handlers/query-handler.ts";
 import type { GetRoomQuery } from "./get-room.query.ts";
 import type { GetRoomResponse } from "./get-room.response.ts";
 

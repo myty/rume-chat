@@ -39,29 +39,6 @@ interface Message {
   roomId: string;
 }
 
-export async function createRoom(room: Room): Promise<Room> {
-  const key = ["rooms", room.id];
-  const res = await kv.atomic()
-    .check({ key, versionstamp: null })
-    .set(key, room)
-    .commit();
-
-  if (!res.ok) {
-    throw new TypeError("Room already exists");
-  }
-
-  return room;
-}
-
-export async function getRoom(roomId: string) {
-  const { value: room } = await kv.get<Room>([
-    "rooms",
-    roomId,
-  ]);
-
-  return room;
-}
-
 export async function getRoomMessages(
   roomId: string,
   options: Deno.KvListOptions = { reverse: true, limit: 25 },

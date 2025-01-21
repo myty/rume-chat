@@ -1,4 +1,4 @@
-import type { QueryHandler } from "../../query-handler.ts";
+import type { QueryHandler } from "../../handlers/query-handler.ts";
 import type { GetUserRoomsResponse } from "./get-user-rooms.response.ts";
 import type { GetUserRoomsQuery } from "./get-user-rooms.query.ts";
 

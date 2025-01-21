@@ -4,8 +4,8 @@
   "exports": {},
   "tasks": {
     "check": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx",
-    "dev": "deno run --unstable-kv -A --watch=static/,routes/ dev.ts",
-    "build": "deno run -A dev.ts build",
+    "dev": "deno run --env --unstable-kv -A --watch=static/,routes/ dev.ts",
+    "build": "deno run --unstable-kv -A dev.ts build",
     "start": "deno run -A main.ts",
     "update": "deno run -A -r jsr:@fresh/update ."
   },
@@ -21,6 +21,9 @@
     "**/_fresh/*"
   ],
   "imports": {
+    "@deno/kv-oauth": "jsr:@deno/kv-oauth@^0.11.0",
+    "@headlessui/react": "npm:@headlessui/react@^2.2.0",
+    "@heroicons/react": "npm:@heroicons/react@^2.2.0",
     "@std/ulid": "jsr:@std/ulid@^1.0.0",
     "fresh": "jsr:@fresh/core@^2.0.0-alpha.27",
     "@fresh/plugin-tailwind": "jsr:@fresh/plugin-tailwind@^0.0.1-alpha.7",

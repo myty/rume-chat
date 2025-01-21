@@ -1,2 +1,1 @@
-export type { QueryHandler } from "./query-handler.ts";
-export type { CommandHandler } from "./command-handler.ts";
+export * from "./handlers/index.ts";

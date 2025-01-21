@@ -3,19 +3,19 @@
   "deno.lint": true,
   "editor.defaultFormatter": "denoland.vscode-deno",
   "[typescriptreact]": {
-    "editor.defaultFormatter": "denoland.vscode-deno"
+    "editor.defaultFormatter": "biomejs.biome"
   },
   "[typescript]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
   "[javascriptreact]": {
-    "editor.defaultFormatter": "denoland.vscode-deno"
+    "editor.defaultFormatter": "biomejs.biome"
   },
   "[javascript]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
   "css.customData": [".vscode/tailwind.json"],
-  "codevoid.inner-loop-buddy.defaultUrl": "http://0.0.0.0:8000/",
+  "codevoid.inner-loop-buddy.defaultUrl": "http://localhost:8000/",
   "files.associations": {
     "*.tsx": "typescriptreact",
     "*.css": "tailwindcss",

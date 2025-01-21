@@ -2,6 +2,6 @@ export interface GetUserRoomsResponse {
   rooms: {
     id: string;
     name: string;
-    ownerId: string;
+    ownerHandle: string;
   }[];
 }

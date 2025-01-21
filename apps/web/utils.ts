@@ -1,9 +1,10 @@
 import { createDefine } from "fresh";
-import { ScopableIoCContainer } from "../../packages/ioc/ioc-container.ts";
-import { ServiceTypes } from "./service-collection.ts";
+import { ScopableIoCContainer } from "@myty/fresh-workspace-ioc";
+import { UserDto } from "./dtos/user.dto.ts";
+import { ServiceTypes } from "./plugins/ioc-container.ts";
 
 export interface State {
-  currentUserId: string;
+  currentUser?: UserDto;
   container: ScopableIoCContainer<ServiceTypes>;
 }
 
