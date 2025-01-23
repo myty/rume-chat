@@ -1,11 +1,11 @@
 import {
-  CalendarIcon,
-  ChartPieIcon,
-  DocumentDuplicateIcon,
-  FolderIcon,
-  HomeIcon,
-  UsersIcon,
-} from "@heroicons/react/24/outline";
+  HiOutlineCalendar as CalendarIcon,
+  HiOutlineChartPie as ChartPieIcon,
+  HiOutlineDocumentDuplicate as DocumentDuplicateIcon,
+  HiOutlineFolder as FolderIcon,
+  HiOutlineHome as HomeIcon,
+  HiOutlineUsers as UsersIcon,
+} from "@preact-icons/hi2";
 
 export const navigationItems = [
   { name: "Dashboard", href: "#", icon: HomeIcon, current: true },

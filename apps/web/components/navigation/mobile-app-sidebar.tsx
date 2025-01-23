@@ -5,11 +5,12 @@ import {
   DialogPanel,
   TransitionChild,
 } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import { HiOutlineXMark as XMarkIcon } from "@preact-icons/hi2";
 import SidebarButton from "../SidebarButton.tsx";
 import { NavigationItem } from "./navigation-items.ts";
 import { RoomNavigationItem } from "./room-items.ts";
 import { IS_BROWSER } from "fresh/runtime";
+import NavigationItemLink from "./navigation-item-link.tsx";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -69,20 +70,7 @@ export function MobileAppSidebar({
                   <ul role="list" className="-mx-2 space-y-1">
                     {navigationItems.map((item) => (
                       <li key={item.name}>
-                        <a
-                          href={item.href}
-                          className={classNames(
-                            item.current
-                              ? "bg-gray-800 text-white"
-                              : "text-gray-400 hover:bg-gray-800 hover:text-white",
-                            "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
-                          )}>
-                          <item.icon
-                            aria-hidden="true"
-                            className="size-6 shrink-0"
-                          />
-                          {item.name}
-                        </a>
+                        <NavigationItemLink item={item} />
                       </li>
                     ))}
                   </ul>

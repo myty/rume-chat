@@ -1,6 +1,5 @@
 import type { Signal } from "@preact/signals";
 import { PropsWithChildren } from "preact/compat";
-import { Bars3Icon } from "@heroicons/react/24/outline";
 
 interface SidebarButtonProps {
   sidebarOpen: Signal<boolean>;

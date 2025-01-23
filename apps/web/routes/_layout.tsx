@@ -1,16 +1,14 @@
 import { define } from "../utils.ts";
 import { useSignal } from "@preact/signals";
 import {
-  Dialog,
-  DialogBackdrop,
-  DialogPanel,
-  TransitionChild,
-} from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+  HiOutlineBars3 as Bars3Icon,
+  HiArrowLeftStartOnRectangle,
+} from "@preact-icons/hi2";
 import SidebarButton from "../components/SidebarButton.tsx";
 import { MobileAppSidebar } from "../components/navigation/mobile-app-sidebar.tsx";
 import { navigationItems } from "../components/navigation/navigation-items.ts";
 import { roomsNavigationItems } from "../components/navigation/room-items.ts";
+import NavigationItemLink from "../components/navigation/navigation-item-link.tsx";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -18,22 +16,6 @@ function classNames(...classes: string[]) {
 
 export default define.page(function AppLayout({ Component, state }) {
   const { currentUser } = state;
-
-  //   return (
-  //     <div class="layout">
-  //       {currentUser == null ? (
-  //         <a href={`auth/signin`}>Login w/ GitHub</a>
-  //       ) : (
-  //         <>
-  //           <span>Hello, {currentUser.name}</span>
-  //           <a href={`auth/signout`}>Logout</a>
-  //         </>
-  //       )}
-  //       <Component />
-  //     </div>
-  //   );
-  // });
-
   const sidebarOpen = useSignal(false);
 
   return (
@@ -61,20 +43,7 @@ export default define.page(function AppLayout({ Component, state }) {
                 <ul role="list" className="-mx-2 space-y-1">
                   {navigationItems.map((item) => (
                     <li key={item.name}>
-                      <a
-                        href={item.href}
-                        className={classNames(
-                          item.current
-                            ? "bg-gray-800 text-white"
-                            : "text-gray-400 hover:bg-gray-800 hover:text-white",
-                          "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
-                        )}>
-                        <item.icon
-                          aria-hidden="true"
-                          className="size-6 shrink-0"
-                        />
-                        {item.name}
-                      </a>
+                      <NavigationItemLink item={item} />
                     </li>
                   ))}
                 </ul>
@@ -104,9 +73,7 @@ export default define.page(function AppLayout({ Component, state }) {
                 </ul>
               </li>
               <li className="-mx-6 mt-auto">
-                <a
-                  href="#"
-                  className="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-white hover:bg-gray-800">
+                <div className="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-white hover:bg-gray-800">
                   <img
                     alt=""
                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
@@ -114,7 +81,20 @@ export default define.page(function AppLayout({ Component, state }) {
                   />
                   <span className="sr-only">Your profile</span>
                   <span aria-hidden="true">{currentUser?.name}</span>
-                </a>
+                  {currentUser == null ? (
+                    <a
+                      className="text-gray-400 hover:bg-gray-800 hover:text-white flex-1 grow"
+                      href={`auth/signin`}>
+                      Login w/ GitHub
+                    </a>
+                  ) : (
+                    <a
+                      className="text-gray-400 hover:bg-gray-800 hover:text-white flex-1 grow"
+                      href={`auth/signout`}>
+                      <HiArrowLeftStartOnRectangle />
+                    </a>
+                  )}
+                </div>
               </li>
             </ul>
           </nav>

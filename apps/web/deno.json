@@ -23,7 +23,7 @@
   "imports": {
     "@deno/kv-oauth": "jsr:@deno/kv-oauth@^0.11.0",
     "@headlessui/react": "npm:@headlessui/react@^2.2.0",
-    "@heroicons/react": "npm:@heroicons/react@^2.2.0",
+    "@preact-icons/hi2": "jsr:@preact-icons/hi2@^1.0.12",
     "@std/ulid": "jsr:@std/ulid@^1.0.0",
     "fresh": "jsr:@fresh/core@^2.0.0-alpha.27",
     "@fresh/plugin-tailwind": "jsr:@fresh/plugin-tailwind@^0.0.1-alpha.7",
