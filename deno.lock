@@ -10,7 +10,8 @@
     "jsr:@preact-icons/hi2@^1.0.12": "1.0.12",
     "jsr:@std/assert@0.221": "0.221.0",
     "jsr:@std/assert@1": "1.0.10",
-    "jsr:@std/assert@^1.0.10": "1.0.10",
+    "jsr:@std/assert@^1.0.10": "1.0.11",
+    "jsr:@std/assert@^1.0.11": "1.0.11",
     "jsr:@std/assert@^1.0.6": "1.0.10",
     "jsr:@std/async@0.221": "0.221.0",
     "jsr:@std/async@^1.0.5": "1.0.7",
@@ -164,6 +165,12 @@
     },
     "@std/assert@1.0.10": {
       "integrity": "59b5cbac5bd55459a19045d95cc7c2ff787b4f8527c0dd195078ff6f9481fbb3",
+      "dependencies": [
+        "jsr:@std/internal@^1.0.5"
+      ]
+    },
+    "@std/assert@1.0.11": {
+      "integrity": "2461ef3c368fe88bc60e186e7744a93112f16fd110022e113a0849e94d1c83c1",
       "dependencies": [
         "jsr:@std/internal@^1.0.5"
       ]
@@ -2022,7 +2029,7 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@std/assert@1",
+      "jsr:@std/assert@^1.0.11",
       "jsr:@std/http@1",
       "jsr:@std/testing@1",
       "npm:preact@^10.25.2"
