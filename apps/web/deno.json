@@ -28,6 +28,11 @@
     "fresh": "jsr:@fresh/core@^2.0.0-alpha.27",
     "@fresh/plugin-tailwind": "jsr:@fresh/plugin-tailwind@^0.0.1-alpha.7",
     "@preact/signals": "npm:@preact/signals@^1.3.1",
-    "tailwindcss": "npm:tailwindcss@^3.4.3"
+    "tailwindcss": "npm:tailwindcss@^3.4.3",
+    "@/": "./",
+    "@components/": "./components/",
+    "@dtos/": "./dtos/",
+    "@islands/": "./islands/",
+    "@routes/": "./routes/"
   }
 }

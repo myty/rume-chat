@@ -4,7 +4,7 @@ export default define.middleware(async (ctx) => {
   if (ctx.state.currentUser == null) {
     return new Response("", {
       status: 307,
-      headers: { Location: "/login" },
+      headers: { Location: "/login", Referrer: ctx.req.url },
     });
   }
 

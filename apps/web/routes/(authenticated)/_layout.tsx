@@ -1,14 +1,14 @@
-import { define } from "../../utils.ts";
+import { define } from "@/utils.ts";
 import { useSignal } from "@preact/signals";
 import {
   HiOutlineBars3 as Bars3Icon,
   HiArrowLeftStartOnRectangle,
 } from "@preact-icons/hi2";
-import { SidebarButton } from "../../components/SidebarButton.tsx";
-import { MobileAppSidebar } from "../../components/navigation/mobile-app-sidebar.tsx";
-import { navigationItems } from "../../components/navigation/navigation-items.ts";
-import { roomsNavigationItems } from "../../components/navigation/room-items.ts";
-import NavigationItemLink from "../../components/navigation/navigation-item-link.tsx";
+import { SidebarButton } from "@components/SidebarButton.tsx";
+import { MobileAppSidebar } from "@components/navigation/mobile-app-sidebar.tsx";
+import { navigationItems } from "@components/navigation/navigation-items.ts";
+import { roomsNavigationItems } from "@components/navigation/room-items.ts";
+import NavigationItemLink from "@components/navigation/navigation-item-link.tsx";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
