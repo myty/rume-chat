@@ -1,4 +1,3 @@
-import { useMemo } from "preact/hooks";
 import { NavigationItem } from "./navigation-items.ts";
 
 interface NavigationItemLinkProps {

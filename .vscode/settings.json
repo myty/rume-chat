@@ -31,5 +31,5 @@
   ],
   "trailing-spaces.trimOnSave": true,
   "editor.stickyScroll.enabled": true,
-  "biome.lspBin": "biome-lsp",
+  "biome.lspBin": "biome-lsp"
 }
