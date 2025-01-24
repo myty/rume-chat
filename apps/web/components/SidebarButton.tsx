@@ -1,22 +1,16 @@
-import type { Signal } from "@preact/signals";
-import { PropsWithChildren } from "preact/compat";
+import type { ComponentChildren } from "preact";
 
 interface SidebarButtonProps {
-  sidebarOpen: Signal<boolean>;
-  openOnClick: boolean;
-  className?: string;
-  srOnly?: string;
+  class: string;
+  srOnly: string;
+  children: ComponentChildren;
+  onClick: () => void;
 }
 
-export default function SidebarButton(
-  props: PropsWithChildren<SidebarButtonProps>,
-) {
+export function SidebarButton(props: SidebarButtonProps) {
   return (
-    <button
-      type="button"
-      onClick={() => (props.sidebarOpen.value = props.openOnClick)}
-      className="-m-2.5 p-2.5 text-gray-400 lg:hidden">
-      <span className="sr-only">Open sidebar</span>
+    <button type="button" onClick={props.onClick} class={props.class}>
+      <span class="sr-only">{props.srOnly}</span>
       {props.children}
     </button>
   );

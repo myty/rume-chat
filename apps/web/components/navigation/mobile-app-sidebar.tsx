@@ -6,7 +6,7 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 import { HiOutlineXMark as XMarkIcon } from "@preact-icons/hi2";
-import SidebarButton from "../SidebarButton.tsx";
+import { SidebarButton } from "../SidebarButton.tsx";
 import { NavigationItem } from "./navigation-items.ts";
 import { RoomNavigationItem } from "./room-items.ts";
 import { IS_BROWSER } from "fresh/runtime";
@@ -32,7 +32,7 @@ export function MobileAppSidebar({
 
   return (
     <Dialog
-      open={sidebarOpen.value}
+      open={true}
       onClose={(value: boolean) => (sidebarOpen.value = value)}
       className="relative z-50 lg:hidden">
       <DialogBackdrop
@@ -47,11 +47,14 @@ export function MobileAppSidebar({
           <TransitionChild>
             <div className="absolute left-full top-0 flex w-16 justify-center pt-5 duration-300 ease-in-out data-[closed]:opacity-0">
               <SidebarButton
-                openOnClick={false}
-                sidebarOpen={sidebarOpen}
-                className="-m-2.5 p-2.5"
+                onClick={() => (sidebarOpen.value = false)}
+                class="-m-2.5 p-2.5"
                 srOnly="Close sidebar">
-                <XMarkIcon aria-hidden="true" className="size-6 text-white" />
+                <XMarkIcon
+                  aria-hidden="true"
+                  size={24}
+                  className="size-6 text-white"
+                />
               </SidebarButton>
             </div>
           </TransitionChild>

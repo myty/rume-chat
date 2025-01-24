@@ -21,11 +21,16 @@ export class LoginUserByProviderDataAccessKv
         handle: authProviderResponse.login,
         sessionId: command.sessionId,
         name: authProviderResponse.name,
+        avatarUrl: authProviderResponse.avatarUrl,
       });
     }
 
     return await this.updateUserSession(
-      { ...user.value, name: authProviderResponse.name },
+      {
+        ...user.value,
+        name: authProviderResponse.name,
+        avatarUrl: authProviderResponse.avatarUrl,
+      },
       command.sessionId,
     );
   }

@@ -1,14 +1,14 @@
-import { define } from "../utils.ts";
+import { define } from "../../utils.ts";
 import { useSignal } from "@preact/signals";
 import {
   HiOutlineBars3 as Bars3Icon,
   HiArrowLeftStartOnRectangle,
 } from "@preact-icons/hi2";
-import SidebarButton from "../components/SidebarButton.tsx";
-import { MobileAppSidebar } from "../components/navigation/mobile-app-sidebar.tsx";
-import { navigationItems } from "../components/navigation/navigation-items.ts";
-import { roomsNavigationItems } from "../components/navigation/room-items.ts";
-import NavigationItemLink from "../components/navigation/navigation-item-link.tsx";
+import { SidebarButton } from "../../components/SidebarButton.tsx";
+import { MobileAppSidebar } from "../../components/navigation/mobile-app-sidebar.tsx";
+import { navigationItems } from "../../components/navigation/navigation-items.ts";
+import { roomsNavigationItems } from "../../components/navigation/room-items.ts";
+import NavigationItemLink from "../../components/navigation/navigation-item-link.tsx";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -16,7 +16,12 @@ function classNames(...classes: string[]) {
 
 export default define.page(function AppLayout({ Component, state }) {
   const { currentUser } = state;
-  const sidebarOpen = useSignal(false);
+  const sidebarOpen = useSignal(true);
+
+  const handleSidebarOpen = () => {
+    console.log("sidebarOpen", sidebarOpen);
+    sidebarOpen.value = true;
+  };
 
   return (
     <div>
@@ -50,7 +55,7 @@ export default define.page(function AppLayout({ Component, state }) {
               </li>
               <li>
                 <div className="text-xs/6 font-semibold text-gray-400">
-                  Your teams
+                  Your rooms
                 </div>
                 <ul role="list" className="-mx-2 mt-2 space-y-1">
                   {roomsNavigationItems.map((room) => (
@@ -76,22 +81,23 @@ export default define.page(function AppLayout({ Component, state }) {
                 <div className="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-white hover:bg-gray-800">
                   <img
                     alt=""
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    src={currentUser?.avatarUrl}
                     className="size-8 rounded-full bg-gray-800"
                   />
                   <span className="sr-only">Your profile</span>
                   <span aria-hidden="true">{currentUser?.name}</span>
+                  <span className="flex-1"></span>
                   {currentUser == null ? (
                     <a
-                      className="text-gray-400 hover:bg-gray-800 hover:text-white flex-1 grow"
+                      className="text-gray-400 hover:bg-gray-800 hover:text-white"
                       href={`auth/signin`}>
                       Login w/ GitHub
                     </a>
                   ) : (
                     <a
-                      className="text-gray-400 hover:bg-gray-800 hover:text-white flex-1 grow"
+                      className="text-gray-400 hover:bg-gray-800 hover:text-white"
                       href={`auth/signout`}>
-                      <HiArrowLeftStartOnRectangle />
+                      <HiArrowLeftStartOnRectangle size={24} />
                     </a>
                   )}
                 </div>
@@ -103,20 +109,19 @@ export default define.page(function AppLayout({ Component, state }) {
 
       <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-gray-900 px-4 py-4 shadow-sm sm:px-6 lg:hidden">
         <SidebarButton
-          openOnClick={true}
-          sidebarOpen={sidebarOpen}
-          className="-m-2.5 p-2.5 text-gray-400 lg:hidden"
+          onClick={handleSidebarOpen}
+          class="-m-2.5 p-2.5 text-gray-400 lg:hidden"
           srOnly="Open sidebar">
-          <Bars3Icon aria-hidden="true" className="size-6" />
+          <Bars3Icon aria-hidden="true" className="size-6" size={24} />
         </SidebarButton>
         <div className="flex-1 text-sm/6 font-semibold text-white">
-          Dashboard
+          Active Rooms
         </div>
         <a href="#">
           <span className="sr-only">Your profile</span>
           <img
             alt=""
-            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            src={currentUser?.avatarUrl}
             className="size-8 rounded-full bg-gray-800"
           />
         </a>
