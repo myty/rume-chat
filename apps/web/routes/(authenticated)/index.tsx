@@ -1,13 +1,13 @@
-import { Button } from "../../components/Button.tsx";
+import { useSignal } from "@preact/signals";
 import { define } from "../../utils.ts";
+import YourRooms from "./(_islands)/your-rooms.tsx";
 
 export default define.page(function Home() {
+  const rooms = useSignal(["Engineering Managers", "OSS", "Pairing Room #1"]);
+
   return (
     <div class="p-4 mx-auto">
-      <h1 class="text-4xl font-bold mb-2">Your Rooms</h1>
-      <Button onClick={() => console.log("Create a room")}>
-        Create a Room
-      </Button>
+      <YourRooms rooms={rooms} />
     </div>
   );
 });
