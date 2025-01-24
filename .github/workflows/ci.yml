@@ -11,5 +11,6 @@ jobs:
         with:
           deno-version: v2.x
       - run: deno fmt --check
+      - run: deno run -A npm:@biomejs/biome format .
       - run: deno lint
       - run: deno test

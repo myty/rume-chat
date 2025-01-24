@@ -6,6 +6,9 @@ interface RoomProps {
 }
 
 export default function Room(props: RoomProps) {
+  // Return any prerenderable JSX here which makes sense for your island
+  if (!IS_BROWSER) return <ul></ul>;
+
   const [messages, setMessages] = useState<string[]>([]);
 
   useEffect(() => {
@@ -21,12 +24,13 @@ export default function Room(props: RoomProps) {
     return () => eventSource.close();
   }, []);
 
-  // Return any prerenderable JSX here which makes sense for your island
-  if (!IS_BROWSER) return <ul></ul>;
-
   return (
     <div class="flex gap-8 py-6">
-      <ul>{messages.map((m) => <li>{m}</li>)}</ul>
+      <ul>
+        {messages.map((m) => (
+          <li>{m}</li>
+        ))}
+      </ul>
     </div>
   );
 }

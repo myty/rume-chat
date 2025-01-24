@@ -1,3 +1,3 @@
 export class GetUserRoomsQuery {
-  constructor(public readonly userId: string) {}
+  constructor(public readonly userHandle: string) {}
 }

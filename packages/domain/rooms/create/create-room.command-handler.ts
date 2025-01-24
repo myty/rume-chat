@@ -1,4 +1,4 @@
-import type { CommandHandler } from "../../command-handler.ts";
+import type { CommandHandler } from "../../handlers/command-handler.ts";
 import type { CreateRoomCommand } from "./create-room.command.ts";
 import type { CreateRoomResponse } from "./create-room.response.ts";
 

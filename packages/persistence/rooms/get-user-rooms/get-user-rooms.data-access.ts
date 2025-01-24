@@ -12,7 +12,7 @@ export class GetUserRoomsDataAccessKv implements GetUserRoomsDataAccess {
     const rooms: GetUserRoomsResponse["rooms"] = [];
 
     const iter = this.kv.list<Room>({
-      prefix: ["users", query.userId, "rooms"],
+      prefix: ["users", query.userHandle, "rooms"],
     });
 
     for await (const res of iter) rooms.push(res.value);

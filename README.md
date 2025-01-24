@@ -1,4 +1,4 @@
-# DDD Chat
+# Fresh Chat
 
 > [!IMPORTANT]
 > This project is still under active development. It is incomplete and
@@ -25,8 +25,8 @@ scalability, and clean architecture in mind.
 2. **Installation**
 
    ```bash
-   git clone https://github.com/yourusername/ddd-chat.git
-   cd ddd-chat
+   git clone https://github.com/yourusername/fresh-chat.git
+   cd fresh-chat
    deno install
    ```
 

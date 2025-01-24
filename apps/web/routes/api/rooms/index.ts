@@ -9,7 +9,7 @@ export const handler = define.handlers({
       const queryHandler = ctx.state.container.resolve(
         "GetUserRoomsQueryHandler",
       );
-      const query = new GetUserRoomsQuery(ctx.state.currentUserId);
+      const query = new GetUserRoomsQuery(ctx.state.currentUser.handle);
       const response = await queryHandler.handle(query);
 
       if (!response) {
@@ -34,7 +34,11 @@ export const handler = define.handlers({
       );
 
       const { id, name } = await ctx.req.json();
-      const command = new CreateRoomCommand(id, name, ctx.state.currentUserId);
+      const command = new CreateRoomCommand(
+        id,
+        name,
+        ctx.state.currentUser.handle,
+      );
 
       const room = await commandHandler.execute(command);
 

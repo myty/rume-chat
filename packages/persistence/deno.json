@@ -4,6 +4,9 @@
   "exports": {
     "./rooms/get": "./rooms/get/index.ts",
     "./rooms/get-user-rooms": "./rooms/get-user-rooms/index.ts",
-    "./rooms/create": "./rooms/create/index.ts"
+    "./rooms/create": "./rooms/create/index.ts",
+    "./users/get-user-by-handle": "./users/get-user-by-handle/index.ts",
+    "./users/get-user-by-session-id": "./users/get-user-by-session-id/index.ts",
+    "./users/login-user-by-provider": "./users/login-user-by-provider/index.ts"
   }
 }
