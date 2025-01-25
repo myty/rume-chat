@@ -1,11 +1,15 @@
 import type { Signal } from "@preact/signals";
 import { Button } from "@components/Button.tsx";
+import { IS_BROWSER } from "fresh/runtime";
 
 interface YourRoomsProps {
   rooms: Signal<string[]>;
 }
 
 export default function YourRooms(props: YourRoomsProps) {
+  // Return any prerenderable JSX here which makes sense for your island
+  if (!IS_BROWSER) return <ul></ul>;
+
   return (
     <div class="p-4 mx-auto">
       <h1 class="text-4xl font-bold mb-2">Your Rooms</h1>

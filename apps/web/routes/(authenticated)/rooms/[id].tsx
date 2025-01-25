@@ -1,6 +1,6 @@
 import { PageProps } from "fresh";
-import Room from "../../../islands/Room.tsx";
-import { define } from "../../../utils.ts";
+import Room from "@islands/Room.tsx";
+import { define } from "@/utils.ts";
 
 export default define.page(function Streams(props: PageProps) {
   return (

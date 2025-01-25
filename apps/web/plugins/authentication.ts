@@ -12,6 +12,13 @@ export function authentication<T extends State>(
   );
 
   const authenticationMiddleware = define.middleware(async (ctx) => {
+    ctx.state.currentUser = {
+      avatarUrl: "",
+      handle: "",
+      sessionId: "",
+      name: "",
+    };
+
     const sessionId = await githubAuth.getSessionId(ctx.req);
 
     if (sessionId) {

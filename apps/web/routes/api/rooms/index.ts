@@ -1,4 +1,4 @@
-import { define } from "../../../utils.ts";
+import { define } from "@/utils.ts";
 import { GetUserRoomsQuery } from "@myty/fresh-workspace-domain/rooms/get-user-rooms";
 import { CreateRoomCommand } from "@myty/fresh-workspace-domain/rooms/create";
 
