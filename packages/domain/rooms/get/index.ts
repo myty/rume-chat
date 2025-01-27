@@ -1,4 +1,25 @@
-export { GetRoomQuery } from "./get-room.query.ts";
-export { GetRoomQueryHandler } from "./get-room.query-handler.ts";
-export type { GetRoomDataAccess } from "./get-room.query-handler.ts";
-export type { GetRoomResponse } from "./get-room.response.ts";
+import { type BindableIoCModule, Lifecycle } from "@myty/fresh-workspace-ioc";
+import type { QueryHandler } from "../../handlers/query-handler.ts";
+import {
+  type GetRoomDataAccess,
+  GetRoomQueryHandler,
+} from "./get-room.query-handler.ts";
+import { GetRoomQuery } from "./get-room.query.ts";
+import type { GetRoomResponse } from "./get-room.response.ts";
+
+export interface GetRoomTypes {
+  GetRoomDataAccess: GetRoomDataAccess;
+  GetRoomQueryHandler: QueryHandler<GetRoomQuery, GetRoomResponse>;
+}
+
+export const GetRoomIocModule: BindableIoCModule<GetRoomTypes> = (c) => {
+  c.bind(
+    "GetRoomQueryHandler",
+    (c) => new GetRoomQueryHandler(c.resolve("GetRoomDataAccess")),
+    Lifecycle.Scoped,
+  );
+};
+
+export { GetRoomQuery };
+export type { GetRoomDataAccess };
+export type { GetRoomResponse };

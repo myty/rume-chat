@@ -1,15 +1,9 @@
 import type { App } from "fresh";
-import { define, type State } from "../utils.ts";
+import { define, type State } from "@/utils.ts";
 import { IoCContainer, Lifecycle } from "@myty/fresh-workspace-ioc";
 import { GetRoomDataAccessKv } from "@myty/fresh-workspace-persistence/rooms/get";
 import { GetUserRoomsDataAccessKv } from "@myty/fresh-workspace-persistence/rooms/get-user-rooms";
 import { CreateRoomDataAccessKv } from "@myty/fresh-workspace-persistence/rooms/create";
-import {
-  GetRoomDataAccess,
-  GetRoomQuery,
-  GetRoomQueryHandler,
-  GetRoomResponse,
-} from "@myty/fresh-workspace-domain/rooms/get";
 import {
   GetUserRoomsDataAccess,
   GetUserRoomsQuery,
@@ -17,12 +11,10 @@ import {
   GetUserRoomsResponse,
 } from "@myty/fresh-workspace-domain/rooms/get-user-rooms";
 import {
-  CreateRoomCommand,
-  CreateRoomCommandHandler,
-  CreateRoomDataAccess,
-  CreateRoomResponse,
-} from "@myty/fresh-workspace-domain/rooms/create";
-import { CommandHandler, QueryHandler } from "@myty/fresh-workspace-domain";
+  CommandHandler,
+  DomainIocModule,
+  QueryHandler,
+} from "@myty/fresh-workspace-domain";
 import {
   LoginUserByProviderCommand,
   LoginUserByProviderCommandHandler,
@@ -61,13 +53,6 @@ export function iocContainer<T extends State>(
 
 export interface ServiceTypes {
   KvStore: Deno.Kv;
-  GetRoomDataAccess: GetRoomDataAccess;
-  GetRoomQueryHandler: QueryHandler<GetRoomQuery, GetRoomResponse>;
-  CreateRoomDataAccess: CreateRoomDataAccess;
-  CreateRoomCommandHandler: CommandHandler<
-    CreateRoomCommand,
-    CreateRoomResponse
-  >;
   GetUserRoomsDataAccess: GetUserRoomsDataAccess;
   GetUserRoomsQueryHandler: QueryHandler<
     GetUserRoomsQuery,
@@ -91,6 +76,7 @@ const kv = await Deno.openKv();
 export const buildContainer = () =>
   IoCContainer
     .create<ServiceTypes>()
+    .addModule(DomainIocModule)
     .bind("KvStore", () => kv, Lifecycle.Singleton)
     .bind(
       "GetRoomDataAccess",
@@ -98,18 +84,8 @@ export const buildContainer = () =>
       Lifecycle.Scoped,
     )
     .bind(
-      "GetRoomQueryHandler",
-      (c) => new GetRoomQueryHandler(c.resolve("GetRoomDataAccess")),
-      Lifecycle.Scoped,
-    )
-    .bind(
       "CreateRoomDataAccess",
       (c) => new CreateRoomDataAccessKv(c.resolve("KvStore")),
-      Lifecycle.Scoped,
-    )
-    .bind(
-      "CreateRoomCommandHandler",
-      (c) => new CreateRoomCommandHandler(c.resolve("CreateRoomDataAccess")),
       Lifecycle.Scoped,
     )
     .bind(
