@@ -7,7 +7,6 @@ import { CreateRoomDataAccessKv } from "@myty/fresh-workspace-persistence/rooms/
 import {
   GetUserRoomsDataAccess,
   GetUserRoomsQuery,
-  GetUserRoomsQueryHandler,
   GetUserRoomsResponse,
 } from "@myty/fresh-workspace-domain/rooms/get-user-rooms";
 import {
@@ -17,7 +16,6 @@ import {
 } from "@myty/fresh-workspace-domain";
 import {
   LoginUserByProviderCommand,
-  LoginUserByProviderCommandHandler,
   LoginUserByProviderDataAccess,
   LoginUserByProviderResponse,
 } from "@myty/fresh-workspace-domain/users/login-user-by-provider";
@@ -27,7 +25,6 @@ import { LoginUserByProviderDataAccessKv } from "@myty/fresh-workspace-persisten
 import {
   GetUserBySessionIdDataAccess,
   GetUserBySessionIdQuery,
-  GetUserBySessionIdQueryHandler,
   GetUserBySessionIdResponse,
 } from "@myty/fresh-workspace-domain/users/get-user-by-session-id";
 import { GetUserBySessionIdDataAccessKv } from "@myty/fresh-workspace-persistence/users/get-user-by-session-id";
@@ -94,11 +91,6 @@ export const buildContainer = () =>
       Lifecycle.Scoped,
     )
     .bind(
-      "GetUserRoomsQueryHandler",
-      (c) => new GetUserRoomsQueryHandler(c.resolve("GetUserRoomsDataAccess")),
-      Lifecycle.Scoped,
-    )
-    .bind(
       "GetAuthProviderUserDataAccess",
       () => new GetAuthProviderUserDataAccessGitHub(),
       Lifecycle.Scoped,
@@ -109,25 +101,8 @@ export const buildContainer = () =>
       Lifecycle.Scoped,
     )
     .bind(
-      "LoginUserByProviderCommandHandler",
-      (c) =>
-        new LoginUserByProviderCommandHandler(
-          c.resolve("LoginUserByProviderDataAccess"),
-          c.resolve("GetAuthProviderUserDataAccess"),
-        ),
-      Lifecycle.Scoped,
-    )
-    .bind(
       "GetUserBySessionIdDataAccess",
       (c) => new GetUserBySessionIdDataAccessKv(c.resolve("KvStore")),
-      Lifecycle.Scoped,
-    )
-    .bind(
-      "GetUserBySessionIdQueryHandler",
-      (c) =>
-        new GetUserBySessionIdQueryHandler(
-          c.resolve("GetUserBySessionIdDataAccess"),
-        ),
       Lifecycle.Scoped,
     )
     .build();
