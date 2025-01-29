@@ -147,7 +147,9 @@ export class IoCContainer<TTypes> implements BindableIoCContainer<TTypes> {
   /**
    * Creates a new instance of the DiContainer class.
    */
-  static create<TTypes>(): BindableIoCContainer<TTypes> {
+  static create<
+    TTypes = Record<string | number | symbol, never>,
+  >(): BindableIoCContainer<TTypes> {
     return new IoCContainer<TTypes>();
   }
 

@@ -4,6 +4,9 @@ import type { LoginUserByProviderCommand } from "./login-user-by-provider.comman
 import type { LoginUserByProviderResponse } from "./login-user-by-provider.response.ts";
 import type { GetAuthProviderUserDataAccess } from "../../auth-providers/get-auth-provider-user/index.ts";
 
+export const ERROR_INVALID_COMMAND = "Access token and session id are required";
+export const ERROR_USER_NOT_FOUND = "Auth Provider: User not found";
+
 export class LoginUserByProviderCommandHandler implements
   CommandHandler<
     LoginUserByProviderCommand,
@@ -25,7 +28,7 @@ export class LoginUserByProviderCommandHandler implements
       );
 
     if (!authProviderUser.login) {
-      throw new Error("Auth Provider: User not found");
+      throw new TypeError(ERROR_USER_NOT_FOUND);
     }
 
     return await this.dataAccess.loginUser(
@@ -36,7 +39,7 @@ export class LoginUserByProviderCommandHandler implements
 
   private validateCommand(command: LoginUserByProviderCommand) {
     if (!command.accessToken || !command.sessionId) {
-      throw new TypeError("Access token and session id are required");
+      throw new TypeError(ERROR_INVALID_COMMAND);
     }
   }
 }

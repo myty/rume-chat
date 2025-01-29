@@ -2,6 +2,7 @@
   "name": "@myty/fresh-workspace-persistence",
   "version": "0.0.0",
   "exports": {
+    ".": "./index.ts",
     "./rooms/get": "./rooms/get/index.ts",
     "./rooms/get-user-rooms": "./rooms/get-user-rooms/index.ts",
     "./rooms/create": "./rooms/create/index.ts",
