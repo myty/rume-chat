@@ -24,6 +24,13 @@ export interface BindableIoCContainer<TTypes> extends Disposable {
     resolver: (container: ResolvableIoCContainer<TTypes>) => TTypes[TKey],
     lifecycle?: Lifecycle,
   ): this;
+  addModule<TModuleTypes>(
+    module: BindableIoCModule<TModuleTypes>,
+  ): BindableIoCContainer<TTypes & TModuleTypes>;
+}
+
+export interface BindableIoCModule<TModuleTypes> {
+  (container: BindableIoCContainer<TModuleTypes>): void;
 }
 
 export class BoundIoCContainer<TTypes> implements ScopableIoCContainer<TTypes> {
@@ -163,5 +170,12 @@ export class IoCContainer<TTypes> implements BindableIoCContainer<TTypes> {
     this._registrations.set(type, { lifecycle, resolver });
 
     return this;
+  }
+
+  addModule<TModuleTypes>(
+    module: BindableIoCModule<TModuleTypes>,
+  ): BindableIoCContainer<TTypes & TModuleTypes> {
+    module(this as IoCContainer<TTypes & TModuleTypes>);
+    return this as unknown as BindableIoCContainer<TTypes & TModuleTypes>;
   }
 }
