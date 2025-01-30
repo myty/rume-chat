@@ -8,9 +8,9 @@ import {
 import { HiOutlineXMark as XMarkIcon } from "@preact-icons/hi2";
 import { SidebarButton } from "../SidebarButton.tsx";
 import { NavigationItem } from "./navigation-items.ts";
-import { RoomNavigationItem } from "./room-items.ts";
 import { IS_BROWSER } from "fresh/runtime";
 import NavigationItemLink from "./navigation-item-link.tsx";
+import { rooms } from "../../state/rooms.ts";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -18,13 +18,11 @@ function classNames(...classes: string[]) {
 
 interface MobileAppSidebarProps {
   navigationItems: NavigationItem[];
-  roomNavigationItems: RoomNavigationItem[];
   sidebarOpen: Signal<boolean>;
 }
 
 export function MobileAppSidebar({
   navigationItems,
-  roomNavigationItems,
   sidebarOpen,
 }: MobileAppSidebarProps) {
   // Return any prerenderable JSX here which makes sense for your island
@@ -83,20 +81,20 @@ export function MobileAppSidebar({
                     Your rooms
                   </div>
                   <ul role="list" className="-mx-2 mt-2 space-y-1">
-                    {roomNavigationItems.map((team) => (
-                      <li key={team.name}>
+                    {rooms.value.map((room) => (
+                      <li key={room.name}>
                         <a
-                          href={team.href}
+                          href={room.href}
                           className={classNames(
-                            team.current
+                            room.current
                               ? "bg-gray-800 text-white"
                               : "text-gray-400 hover:bg-gray-800 hover:text-white",
                             "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
                           )}>
                           <span className="flex size-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">
-                            {team.initial}
+                            {room.initial}
                           </span>
-                          <span className="truncate">{team.name}</span>
+                          <span className="truncate">{room.name}</span>
                         </a>
                       </li>
                     ))}

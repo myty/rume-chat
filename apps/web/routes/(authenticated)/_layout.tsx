@@ -7,8 +7,8 @@ import {
 import { SidebarButton } from "../../components/SidebarButton.tsx";
 import { MobileAppSidebar } from "../../components/navigation/mobile-app-sidebar.tsx";
 import { navigationItems } from "../../components/navigation/navigation-items.ts";
-import { roomsNavigationItems } from "../../components/navigation/room-items.ts";
 import NavigationItemLink from "../../components/navigation/navigation-item-link.tsx";
+import { rooms } from "../../state/rooms.ts";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -28,7 +28,6 @@ export default define.page(function AppLayout({ Component, state }) {
       <MobileAppSidebar
         sidebarOpen={sidebarOpen}
         navigationItems={navigationItems}
-        roomNavigationItems={roomsNavigationItems}
       />
 
       {/* Static sidebar for desktop */}
@@ -58,7 +57,7 @@ export default define.page(function AppLayout({ Component, state }) {
                   Your rooms
                 </div>
                 <ul role="list" className="-mx-2 mt-2 space-y-1">
-                  {roomsNavigationItems.map((room) => (
+                  {rooms.value.map((room) => (
                     <li key={room.name}>
                       <a
                         href={room.href}
