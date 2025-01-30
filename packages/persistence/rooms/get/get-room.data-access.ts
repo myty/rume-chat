@@ -2,7 +2,7 @@ import type { Room } from "../../entities/index.ts";
 import type {
   GetRoomDataAccess,
   GetRoomQuery,
-} from "@myty/fresh-workspace-domain/rooms/get";
+} from "../../../domain/rooms/get-room/index.ts";
 
 export class GetRoomDataAccessKv implements GetRoomDataAccess {
   constructor(private kv: Deno.Kv) {}

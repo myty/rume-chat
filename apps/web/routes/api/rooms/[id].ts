@@ -1,5 +1,5 @@
 import { define } from "@/utils.ts";
-import { GetRoomQuery } from "@myty/fresh-workspace-domain/rooms/get";
+import { GetRoomQuery } from "@myty/fresh-workspace-domain/rooms/get-room";
 
 export const handler = define.handlers({
   async GET(ctx) {

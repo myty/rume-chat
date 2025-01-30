@@ -3,7 +3,7 @@ import type {
   CreateRoomCommand,
   CreateRoomDataAccess,
   CreateRoomResponse,
-} from "@myty/fresh-workspace-domain/rooms/create";
+} from "../../../domain/rooms/create-room/index.ts";
 
 export class CreateRoomDataAccessKv implements CreateRoomDataAccess {
   constructor(private kv: Deno.Kv) {}

@@ -1,6 +1,6 @@
 import { define } from "@/utils.ts";
 import { GetUserRoomsQuery } from "@myty/fresh-workspace-domain/rooms/get-user-rooms";
-import { CreateRoomCommand } from "@myty/fresh-workspace-domain/rooms/create";
+import { CreateRoomCommand } from "@myty/fresh-workspace-domain/rooms/create-room";
 
 export const handler = define.handlers({
   // Index

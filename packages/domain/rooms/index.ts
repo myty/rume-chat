@@ -1,6 +1,9 @@
 import type { BindableIoCModule } from "@myty/fresh-workspace-ioc";
-import { GetRoomIocModule, type GetRoomTypes } from "./get/index.ts";
-import { CreateRoomIocModule, type CreateRoomTypes } from "./create/index.ts";
+import { GetRoomIocModule, type GetRoomTypes } from "./get-room/index.ts";
+import {
+  CreateRoomIocModule,
+  type CreateRoomTypes,
+} from "./create-room/index.ts";
 import { GetUserRoomsIocModule } from "./get-user-rooms/index.ts";
 import type { GetUserRoomsTypes } from "./get-user-rooms/index.ts";
 
