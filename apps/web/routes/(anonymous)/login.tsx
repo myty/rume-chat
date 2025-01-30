@@ -1,6 +1,21 @@
-import { define } from "@/utils.ts";
+import { define } from "../../utils.ts";
+import { page } from "fresh";
 
-export default define.page(function Login(props) {
+interface LoginPageViewModel {
+  loginUrl: string;
+}
+
+export const handler = define.handlers({
+  GET(ctx) {
+    const pageViewModel: LoginPageViewModel = {
+      loginUrl: `/auth/signin?success_url=${ctx.req.referrer ?? "/"}`,
+    };
+
+    return page(pageViewModel);
+  },
+});
+
+export default define.page<typeof handler>(({ data }) => {
   return (
     <>
       <div className="bg-gray-900 flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -17,7 +32,7 @@ export default define.page(function Login(props) {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <a
-            href={`/auth/signin?success_url=${props.req.referrer ?? "/"}`}
+            href={data.loginUrl}
             className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent">
             <svg
               fill="currentColor"

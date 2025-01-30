@@ -8,6 +8,11 @@ export function logging<T extends State>(
   const loggerMiddleware = define.middleware(async (ctx) => {
     const response = await ctx.next();
     console.log(`${ctx.req.method} ${ctx.req.url} => ${response.status}`);
+
+    const clonedRepsonse = response.clone();
+    const text = await clonedRepsonse.text();
+    console.log(text);
+
     return response;
   });
   app.use(loggerMiddleware);

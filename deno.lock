@@ -4,6 +4,7 @@
     "jsr:@deno/kv-oauth@0.11": "0.11.0",
     "jsr:@fresh/core@^2.0.0-alpha.1": "2.0.0-alpha.29",
     "jsr:@fresh/core@^2.0.0-alpha.27": "2.0.0-alpha.29",
+    "jsr:@fresh/core@^2.0.0-alpha.29": "2.0.0-alpha.29",
     "jsr:@fresh/plugin-tailwind@^0.0.1-alpha.7": "0.0.1-alpha.7",
     "jsr:@luca/esbuild-deno-loader@0.11": "0.11.1",
     "jsr:@preact-icons/common@^1.0.12": "1.0.12",
@@ -53,6 +54,7 @@
     "npm:@opentelemetry/api@^1.9.0": "1.9.0",
     "npm:@preact/signals@^1.2.3": "1.3.2_preact@10.22.1",
     "npm:@preact/signals@^1.3.1": "1.3.2_preact@10.22.1",
+    "npm:@preact/signals@^2.0.1": "2.0.1_preact@10.22.1",
     "npm:autoprefixer@10.4.17": "10.4.17_postcss@8.4.35",
     "npm:cssnano@6.0.3": "6.0.3_postcss@8.4.35",
     "npm:esbuild-wasm@0.23.1": "0.23.1",
@@ -63,6 +65,7 @@
     "npm:preact@^10.22.1": "10.25.4",
     "npm:preact@^10.25.1": "10.25.4",
     "npm:preact@^10.25.2": "10.25.4",
+    "npm:preact@^10.25.4": "10.25.4",
     "npm:tailwindcss@^3.4.1": "3.4.17_postcss@8.5.1",
     "npm:tailwindcss@^3.4.3": "3.4.17_postcss@8.5.1"
   },
@@ -94,7 +97,8 @@
         "npm:esbuild-wasm",
         "npm:preact-render-to-string",
         "npm:preact@^10.25.1",
-        "npm:preact@^10.25.2"
+        "npm:preact@^10.25.2",
+        "npm:preact@^10.25.4"
       ]
     },
     "@fresh/plugin-tailwind@0.0.1-alpha.7": {
@@ -120,7 +124,8 @@
       "integrity": "f7d7329d55c2753b0162438b120b638e5058fa406f49fe6b422e3b0694f6e0c1",
       "dependencies": [
         "npm:preact@^10.22.1",
-        "npm:preact@^10.25.2"
+        "npm:preact@^10.25.2",
+        "npm:preact@^10.25.4"
       ]
     },
     "@preact-icons/hi2@1.0.12": {
@@ -494,6 +499,13 @@
     },
     "@preact/signals@1.3.2_preact@10.22.1": {
       "integrity": "sha512-naxcJgUJ6BTOROJ7C3QML7KvwKwCXQJYTc5L/b0eEsdYgPB6SxwoQ1vDGcS0Q7GVjAenVq/tXrybVdFShHYZWg==",
+      "dependencies": [
+        "@preact/signals-core",
+        "preact@10.22.1"
+      ]
+    },
+    "@preact/signals@2.0.1_preact@10.22.1": {
+      "integrity": "sha512-f9p/utMgttPb9bJ+UgRBkTDZ9uQiZfX1/gV3pXGWz+yGNQj8MrnG55Xo8MAG4IHcb5UXQO6tvt9ZlsM4A2j+Rw==",
       "dependencies": [
         "@preact/signals-core",
         "preact@10.22.1"
@@ -1570,18 +1582,18 @@
       "jsr:@std/assert@^1.0.11",
       "jsr:@std/http@1",
       "jsr:@std/testing@1",
-      "npm:preact@^10.25.2"
+      "npm:preact@^10.25.4"
     ],
     "members": {
       "apps/web": {
         "dependencies": [
           "jsr:@deno/kv-oauth@0.11",
-          "jsr:@fresh/core@^2.0.0-alpha.27",
+          "jsr:@fresh/core@^2.0.0-alpha.29",
           "jsr:@fresh/plugin-tailwind@^0.0.1-alpha.7",
           "jsr:@preact-icons/hi2@^1.0.12",
           "jsr:@std/ulid@1",
           "npm:@headlessui/react@^2.2.0",
-          "npm:@preact/signals@^1.3.1",
+          "npm:@preact/signals@^2.0.1",
           "npm:tailwindcss@^3.4.3"
         ]
       }

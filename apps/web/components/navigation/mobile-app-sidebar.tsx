@@ -6,11 +6,11 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 import { HiOutlineXMark as XMarkIcon } from "@preact-icons/hi2";
-import { SidebarButton } from "@components/SidebarButton.tsx";
-import { NavigationItem } from "@components/navigation/navigation-items.ts";
-import { RoomNavigationItem } from "@components/navigation/room-items.ts";
+import { SidebarButton } from "../SidebarButton.tsx";
+import { NavigationItem } from "./navigation-items.ts";
+import { RoomNavigationItem } from "./room-items.ts";
 import { IS_BROWSER } from "fresh/runtime";
-import NavigationItemLink from "@components/navigation/navigation-item-link.tsx";
+import NavigationItemLink from "./navigation-item-link.tsx";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");

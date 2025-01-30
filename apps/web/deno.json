@@ -5,34 +5,20 @@
   "tasks": {
     "check": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx",
     "dev": "deno run --env --unstable-kv -A --watch=static/,routes/ dev.ts",
-    "build": "deno run --unstable-kv -A dev.ts build",
-    "start": "deno run -A main.ts",
-    "update": "deno run -A -r jsr:@fresh/update ."
+    "build": "deno run --env --unstable-kv -A dev.ts build",
+    "start": "deno run --env --unstable-kv -A main.ts",
+    "update": "deno run -A -r jsr:@fresh/update@^2.0.0-alpha.29 ."
   },
-  "lint": {
-    "rules": {
-      "tags": [
-        "fresh",
-        "recommended"
-      ]
-    }
-  },
-  "exclude": [
-    "**/_fresh/*"
-  ],
+  "lint": { "rules": { "tags": ["fresh", "recommended"] } },
+  "exclude": ["**/_fresh/*"],
   "imports": {
     "@deno/kv-oauth": "jsr:@deno/kv-oauth@^0.11.0",
+    "@fresh/plugin-tailwind": "jsr:@fresh/plugin-tailwind@^0.0.1-alpha.7",
     "@headlessui/react": "npm:@headlessui/react@^2.2.0",
     "@preact-icons/hi2": "jsr:@preact-icons/hi2@^1.0.12",
+    "@preact/signals": "npm:@preact/signals@^2.0.1",
     "@std/ulid": "jsr:@std/ulid@^1.0.0",
-    "fresh": "jsr:@fresh/core@^2.0.0-alpha.27",
-    "@fresh/plugin-tailwind": "jsr:@fresh/plugin-tailwind@^0.0.1-alpha.7",
-    "@preact/signals": "npm:@preact/signals@^1.3.1",
-    "tailwindcss": "npm:tailwindcss@^3.4.3",
-    "@/": "./",
-    "@components/": "./components/",
-    "@dtos/": "./dtos/",
-    "@islands/": "./islands/",
-    "@routes/": "./routes/"
+    "fresh": "jsr:@fresh/core@^2.0.0-alpha.29",
+    "tailwindcss": "npm:tailwindcss@^3.4.3"
   }
 }

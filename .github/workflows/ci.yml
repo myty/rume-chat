@@ -10,7 +10,5 @@ jobs:
       - uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x
-      - run: deno fmt --check
-      - run: deno run -A npm:@biomejs/biome format .
-      - run: deno lint
+      - run: deno task check
       - run: deno test

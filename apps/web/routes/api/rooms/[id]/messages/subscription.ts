@@ -1,5 +1,5 @@
-import { createMessageStream } from "@/room-store.ts";
-import { define } from "@/utils.ts";
+import { createMessageStream } from "../../../../../room-store.ts";
+import { define } from "../../../../../utils.ts";
 
 export const handler = define.handlers({
   GET(ctx) {

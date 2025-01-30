@@ -1,6 +1,6 @@
 import { useSignal } from "@preact/signals";
-import { define } from "@/utils.ts";
-import YourRooms from "@islands/your-rooms.tsx";
+import { define } from "../../utils.ts";
+import YourRooms from "../../islands/YourRooms.tsx";
 
 export default define.page(function Home() {
   const rooms = useSignal(["Engineering Managers", "OSS", "Pairing Room #1"]);

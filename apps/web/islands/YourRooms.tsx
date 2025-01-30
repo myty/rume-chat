@@ -1,5 +1,5 @@
 import type { Signal } from "@preact/signals";
-import { Button } from "@components/Button.tsx";
+import { Button } from "../components/Button.tsx";
 import { IS_BROWSER } from "fresh/runtime";
 
 interface YourRoomsProps {

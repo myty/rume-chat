@@ -1,4 +1,4 @@
-import { define } from "@/utils.ts";
+import { define } from "../../../utils.ts";
 import { GetRoomQuery } from "@myty/fresh-workspace-domain/rooms/get-room";
 
 export const handler = define.handlers({

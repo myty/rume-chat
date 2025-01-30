@@ -1,4 +1,4 @@
-import { define } from "@/utils.ts";
+import { define } from "../../utils.ts";
 
 export default define.middleware(async (ctx) => {
   if (!ctx.state.currentUser.sessionId) {

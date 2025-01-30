@@ -1,6 +1,6 @@
 import { createGitHubOAuthConfig, createHelpers } from "@deno/kv-oauth";
 import type { App } from "fresh";
-import { define, type State } from "@/utils.ts";
+import { define, type State } from "../utils.ts";
 import { LoginUserByProviderCommand } from "@myty/fresh-workspace-domain/users/login-user-by-provider";
 import { GetUserBySessionIdQuery } from "@myty/fresh-workspace-domain/users/get-user-by-session-id";
 

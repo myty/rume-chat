@@ -1,4 +1,4 @@
-import { NavigationItem } from "@components/navigation/navigation-items.ts";
+import { NavigationItem } from "./navigation-items.ts";
 
 interface NavigationItemLinkProps {
   item: NavigationItem;

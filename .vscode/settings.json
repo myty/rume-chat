@@ -30,6 +30,5 @@
     ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
   ],
   "trailing-spaces.trimOnSave": true,
-  "editor.stickyScroll.enabled": true,
-  "biome.lspBin": "biome-lsp"
+  "editor.stickyScroll.enabled": true
 }
