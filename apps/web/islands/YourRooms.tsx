@@ -7,15 +7,12 @@ interface YourRoomsProps {
 }
 
 export default function YourRooms(props: YourRoomsProps) {
-  // Return any prerenderable JSX here which makes sense for your island
-  if (!IS_BROWSER) return <ul></ul>;
-
   return (
     <div class="p-4 mx-auto">
       <h1 class="text-4xl font-bold mb-2">Your Rooms</h1>
       <Button
         onClick={() => {
-          props.rooms.value.push("New Room");
+          props.rooms.value = [...props.rooms.value, "New Room"];
         }}>
         Create a Room
       </Button>

@@ -16,7 +16,7 @@ function classNames(...classes: string[]) {
 
 export default define.page(function AppLayout({ Component, state }) {
   const { currentUser } = state;
-  const sidebarOpen = useSignal(true);
+  const sidebarOpen = useSignal(false);
 
   const handleSidebarOpen = () => {
     console.log("sidebarOpen", sidebarOpen);
