@@ -1,5 +1,5 @@
 import { define } from "../../utils.ts";
-import YourRooms from "../../islands/YourRooms.tsx";
+import YourRooms from "./(_islands)/YourRooms.tsx";
 import { rooms } from "../../state/rooms.ts";
 
 export default define.page(function Home() {

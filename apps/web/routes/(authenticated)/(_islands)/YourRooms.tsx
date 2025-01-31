@@ -1,7 +1,6 @@
 import type { Signal } from "@preact/signals";
-import { Button } from "../components/Button.tsx";
-import { Room } from "../state/rooms.ts";
-
+import { Button } from "../../../components/Button.tsx";
+import { Room } from "../../../state/rooms.ts";
 interface YourRoomsProps {
   rooms: Signal<Room[]>;
 }
