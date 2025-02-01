@@ -19,7 +19,6 @@
     "@preact/signals": "npm:@preact/signals@^2.0.1",
     "@std/ulid": "jsr:@std/ulid@^1.0.0",
     "fresh": "jsr:@fresh/core@^2.0.0-alpha.29",
-    "tailwindcss": "npm:tailwindcss@^3.4.3",
-    "react": "npm:@preact/compat@^18.3.1"
+    "tailwindcss": "npm:tailwindcss@^3.4.17"
   }
 }
