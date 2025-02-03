@@ -5,6 +5,7 @@
     "jsr:@fresh/core@^2.0.0-alpha.1": "2.0.0-alpha.29",
     "jsr:@fresh/core@^2.0.0-alpha.29": "2.0.0-alpha.29",
     "jsr:@fresh/plugin-tailwind@^0.0.1-alpha.7": "0.0.1-alpha.7",
+    "jsr:@hono/hono@^4.6.20": "4.6.20",
     "jsr:@luca/esbuild-deno-loader@0.11": "0.11.1",
     "jsr:@preact-icons/common@^1.0.12": "1.0.12",
     "jsr:@preact-icons/hi2@^1.0.12": "1.0.12",
@@ -13,10 +14,10 @@
     "jsr:@std/assert@^1.0.11": "1.0.11",
     "jsr:@std/async@0.221": "0.221.0",
     "jsr:@std/async@^1.0.9": "1.0.10",
-    "jsr:@std/bytes@^1.0.2": "1.0.4",
+    "jsr:@std/bytes@^1.0.2": "1.0.5",
     "jsr:@std/cli@0.221": "0.221.0",
     "jsr:@std/cli@^1.0.12": "1.0.12",
-    "jsr:@std/crypto@1": "1.0.3",
+    "jsr:@std/crypto@1": "1.0.4",
     "jsr:@std/data-structures@^1.0.6": "1.0.6",
     "jsr:@std/datetime@0.221": "0.221.0",
     "jsr:@std/datetime@~0.225.2": "0.225.3",
@@ -26,10 +27,9 @@
     "jsr:@std/encoding@^1.0.7": "1.0.7",
     "jsr:@std/fmt@0.221": "0.221.0",
     "jsr:@std/fmt@1": "1.0.5",
-    "jsr:@std/fmt@^1.0.3": "1.0.4",
     "jsr:@std/fmt@^1.0.5": "1.0.5",
-    "jsr:@std/fs@1": "1.0.10",
-    "jsr:@std/fs@^1.0.9": "1.0.10",
+    "jsr:@std/fs@1": "1.0.11",
+    "jsr:@std/fs@^1.0.9": "1.0.11",
     "jsr:@std/html@1": "1.0.3",
     "jsr:@std/html@^1.0.3": "1.0.3",
     "jsr:@std/http@0.221": "0.221.0",
@@ -53,21 +53,19 @@
     "npm:@biomejs/biome@*": "1.9.4",
     "npm:@headlessui/react@^2.2.0": "2.2.0_react@19.0.0_react-dom@19.0.0__react@19.0.0",
     "npm:@opentelemetry/api@^1.9.0": "1.9.0",
-    "npm:@preact/signals@^1.2.3": "1.3.2_preact@10.25.4",
+    "npm:@preact/signals@^1.2.3": "1.3.2_preact@10.22.1",
     "npm:@preact/signals@^2.0.1": "2.0.1_preact@10.25.4",
     "npm:autoprefixer@10.4.17": "10.4.17_postcss@8.4.35",
     "npm:cssnano@6.0.3": "6.0.3_postcss@8.4.35",
     "npm:esbuild-wasm@0.23.1": "0.23.1",
     "npm:esbuild@0.23.1": "0.23.1",
     "npm:postcss@8.4.35": "8.4.35",
-    "npm:preact-render-to-string@^6.5.11": "6.5.13_preact@10.25.4",
+    "npm:preact-render-to-string@^6.5.11": "6.5.13_preact@10.22.1",
     "npm:preact@10.22.1": "10.22.1",
     "npm:preact@^10.22.1": "10.25.4",
     "npm:preact@^10.25.1": "10.25.4",
-    "npm:preact@^10.25.4": "10.25.4",
     "npm:tailwindcss@^3.4.1": "3.4.17_postcss@8.5.1",
-    "npm:tailwindcss@^3.4.17": "3.4.17_postcss@8.5.1",
-    "npm:tailwindcss@^3.4.3": "3.4.17_postcss@8.5.1"
+    "npm:tailwindcss@^3.4.17": "3.4.17_postcss@8.5.1"
   },
   "jsr": {
     "@deno/kv-oauth@0.11.0": {
@@ -96,8 +94,7 @@
         "npm:esbuild",
         "npm:esbuild-wasm",
         "npm:preact-render-to-string",
-        "npm:preact@^10.25.1",
-        "npm:preact@^10.25.4"
+        "npm:preact@^10.25.1"
       ]
     },
     "@fresh/plugin-tailwind@0.0.1-alpha.7": {
@@ -111,6 +108,9 @@
         "npm:tailwindcss@^3.4.1"
       ]
     },
+    "@hono/hono@4.6.20": {
+      "integrity": "0db02d7b80db67a17e18b434c6105af002412cada5e908013086eb9fa9466a87"
+    },
     "@luca/esbuild-deno-loader@0.11.1": {
       "integrity": "dc020d16d75b591f679f6b9288b10f38bdb4f24345edb2f5732affa1d9885267",
       "dependencies": [
@@ -122,8 +122,7 @@
     "@preact-icons/common@1.0.12": {
       "integrity": "f7d7329d55c2753b0162438b120b638e5058fa406f49fe6b422e3b0694f6e0c1",
       "dependencies": [
-        "npm:preact@^10.22.1",
-        "npm:preact@^10.25.4"
+        "npm:preact@^10.22.1"
       ]
     },
     "@preact-icons/hi2@1.0.12": {
@@ -148,8 +147,8 @@
     "@std/async@1.0.10": {
       "integrity": "2ff1b1c7d33d1416159989b0f69e59ec7ee8cb58510df01e454def2108b3dbec"
     },
-    "@std/bytes@1.0.4": {
-      "integrity": "11a0debe522707c95c7b7ef89b478c13fb1583a7cfb9a85674cd2cc2e3a28abc"
+    "@std/bytes@1.0.5": {
+      "integrity": "4465dd739d7963d964c809202ebea6d5c6b8e3829ef25c6a224290fbb8a1021e"
     },
     "@std/cli@0.221.0": {
       "integrity": "157c2f881f0f85a73d994e7668754aeeccdf597680bd9c65de9c6bcd670416ac",
@@ -160,8 +159,8 @@
     "@std/cli@1.0.12": {
       "integrity": "e5cfb7814d189da174ecd7a34fbbd63f3513e24a1b307feb2fcd5da47a070d90"
     },
-    "@std/crypto@1.0.3": {
-      "integrity": "a2a32f51ddef632d299e3879cd027c630dcd4d1d9a5285d6e6788072f4e51e7f"
+    "@std/crypto@1.0.4": {
+      "integrity": "cee245c453bd5366207f4d8aa25ea3e9c86cecad2be3fefcaa6cb17203d79340"
     },
     "@std/data-structures@1.0.6": {
       "integrity": "76a7fd8080c66604c0496220a791860492ab21a04a63a969c0b9a0609bbbb760"
@@ -175,23 +174,17 @@
     "@std/encoding@0.221.0": {
       "integrity": "d1dd76ef0dc5d14088411e6dc1dede53bf8308c95d1537df1214c97137208e45"
     },
-    "@std/encoding@1.0.6": {
-      "integrity": "ca87122c196e8831737d9547acf001766618e78cd8c33920776c7f5885546069"
-    },
     "@std/encoding@1.0.7": {
       "integrity": "f631247c1698fef289f2de9e2a33d571e46133b38d042905e3eac3715030a82d"
     },
     "@std/fmt@0.221.0": {
       "integrity": "379fed69bdd9731110f26b9085aeb740606b20428ce6af31ef6bd45ef8efa62a"
     },
-    "@std/fmt@1.0.4": {
-      "integrity": "e14fe5bedee26f80877e6705a97a79c7eed599e81bb1669127ef9e8bc1e29a74"
-    },
     "@std/fmt@1.0.5": {
       "integrity": "0cfab43364bc36650d83c425cd6d99910fc20c4576631149f0f987eddede1a4d"
     },
-    "@std/fs@1.0.10": {
-      "integrity": "bf041f9d7a0a460817f0421be8946d0e06011b3433e6c83a215628de5e3c7c2c",
+    "@std/fs@1.0.11": {
+      "integrity": "ba674672693340c5ebdd018b4fe1af46cb08741f42b4c538154e97d217b55bdd",
       "dependencies": [
         "jsr:@std/path@^1.0.8"
       ]
@@ -501,11 +494,11 @@
     "@preact/signals-core@1.8.0": {
       "integrity": "sha512-OBvUsRZqNmjzCZXWLxkZfhcgT+Fk8DDcT/8vD6a1xhDemodyy87UJRJfASMuSD8FaAIeGgGm85ydXhm7lr4fyA=="
     },
-    "@preact/signals@1.3.2_preact@10.25.4": {
+    "@preact/signals@1.3.2_preact@10.22.1": {
       "integrity": "sha512-naxcJgUJ6BTOROJ7C3QML7KvwKwCXQJYTc5L/b0eEsdYgPB6SxwoQ1vDGcS0Q7GVjAenVq/tXrybVdFShHYZWg==",
       "dependencies": [
         "@preact/signals-core",
-        "preact@10.25.4"
+        "preact@10.22.1"
       ]
     },
     "@preact/signals@2.0.1_preact@10.25.4": {
@@ -900,8 +893,8 @@
         "micromatch"
       ]
     },
-    "fastq@1.18.0": {
-      "integrity": "sha512-QKHXPW0hD8g4UET03SdOdunzSouc9N4AuHdsX8XNcTsuz+yYFILVNIX4l9yHABMhiEI9Db0JTTIpu0wB+Y1QQw==",
+    "fastq@1.19.0": {
+      "integrity": "sha512-7SFSRCNjBQIZH/xZR3iy5iQYR8aGBE0h3VG6/cwlbrpdciNYBMotQav8c1XI3HjHH+NikUpP53nPdlZSdWmFzA==",
       "dependencies": [
         "reusify"
       ]
@@ -1355,10 +1348,10 @@
         "source-map-js"
       ]
     },
-    "preact-render-to-string@6.5.13_preact@10.25.4": {
+    "preact-render-to-string@6.5.13_preact@10.22.1": {
       "integrity": "sha512-iGPd+hKPMFKsfpR2vL4kJ6ZPcFIoWZEcBf0Dpm3zOpdVvj77aY8RlLiQji5OMrngEyaxGogeakTb54uS2FvA6w==",
       "dependencies": [
-        "preact@10.25.4"
+        "preact@10.22.1"
       ]
     },
     "preact@10.22.1": {
@@ -1585,10 +1578,15 @@
     "dependencies": [
       "jsr:@std/assert@^1.0.11",
       "jsr:@std/http@^1.0.13",
-      "jsr:@std/testing@^1.0.9",
-      "npm:preact@^10.25.4"
+      "jsr:@std/testing@^1.0.9"
     ],
     "members": {
+      "apps/api": {
+        "dependencies": [
+          "jsr:@deno/kv-oauth@0.11",
+          "jsr:@hono/hono@^4.6.20"
+        ]
+      },
       "apps/web": {
         "dependencies": [
           "jsr:@deno/kv-oauth@0.11",

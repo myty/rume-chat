@@ -1,0 +1,11 @@
+{
+  "name": "@myty/fresh-workspace-api",
+  "exports": {},
+  "tasks": {
+    "dev": "deno run --env --unstable-kv -A --watch ./main.ts"
+  },
+  "imports": {
+    "@deno/kv-oauth": "jsr:@deno/kv-oauth@^0.11.0",
+    "hono": "jsr:@hono/hono@^4.6.20"
+  }
+}
