@@ -1,4 +1,4 @@
-import { JSX } from "preact";
+import type { JSX } from "preact";
 import { forwardRef } from "preact/compat";
 
 export const Button = forwardRef<

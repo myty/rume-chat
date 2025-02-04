@@ -1,16 +1,19 @@
-# Fresh project
+# Vite + Deno + React + TypeScript
 
-Your new Fresh project is ready to go. You can follow the Fresh "Getting
-Started" guide here: https://fresh.deno.dev/docs/getting-started
+## Running
 
-### Usage
+You need to have Deno v2.0.0 or later installed to run this repo.
 
-Make sure to install Deno: https://deno.land/manual/getting_started/installation
-
-Then start the project in development mode:
+Start a dev server:
 
 ```
-deno task dev
+$ deno task dev
 ```
 
-This will watch the project directory and restart as necessary.
+## Deploy
+
+Build production assets:
+
+```
+$ deno task build
+```

@@ -1,4 +1,4 @@
-import { PageProps } from "fresh";
+import type { PageProps } from "fresh";
 import Room from "../../../islands/Room.tsx";
 import { define } from "../../../utils.ts";
 

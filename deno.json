@@ -22,11 +22,7 @@
     "./packages/persistence",
     "./packages/github"
   ],
-  "unstable": [
-    "sloppy-imports"
-  ],
   "fmt": {
     "exclude": ["**/*.tsx"]
-  },
-  "nodeModulesDir": "none"
+  }
 }

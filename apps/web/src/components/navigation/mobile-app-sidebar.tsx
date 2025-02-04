@@ -7,7 +7,7 @@ import {
 import { HiOutlineXMark as XMarkIcon } from "@preact-icons/hi2";
 import { SidebarButton } from "../SidebarButton.tsx";
 import { IS_BROWSER } from "fresh/runtime";
-import { ComponentChildren } from "preact";
+import type { ComponentChildren } from "preact";
 import { useEffect, useState } from "preact/hooks";
 
 interface MobileAppSidebarProps {
