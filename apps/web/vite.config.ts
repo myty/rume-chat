@@ -11,4 +11,16 @@ export default defineConfig({
     // deno-lint-ignore no-explicit-any
     (react as any)(),
   ],
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:3000",
+        changeOrigin: true,
+      },
+      "/auth": {
+        target: "http://localhost:3000",
+        changeOrigin: true,
+      },
+    },
+  },
 });
