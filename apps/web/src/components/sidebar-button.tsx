@@ -1,11 +1,13 @@
-import { forwardRef } from "preact/compat";
-import type { ComponentChildren, JSX } from "preact";
+import {
+  forwardRef,
+  type ButtonHTMLAttributes,
+  type PropsWithChildren,
+} from "react";
 
 interface SidebarButtonProps
-  extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {
+  extends PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>> {
   class: string;
   srOnly: string;
-  children: ComponentChildren;
   onClick: () => void;
 }
 
@@ -15,9 +17,9 @@ export const SidebarButton = forwardRef<HTMLButtonElement, SidebarButtonProps>(
       <button
         type="button"
         onClick={props.onClick}
-        class={props.class}
+        className={props.class}
         ref={ref}>
-        <span class="sr-only">{props.srOnly}</span>
+        <span className="sr-only">{props.srOnly}</span>
         {props.children}
       </button>
     );

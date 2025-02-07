@@ -1,7 +1,4 @@
-import {
-  HiOutlineArrowsUpDown as ArrowsUpDownIcon,
-  HiOutlineMegaphone as MegaphoneIcon,
-} from "@preact-icons/hi2";
+import { ArrowsUpDownIcon, MegaphoneIcon } from "@heroicons/react/24/outline";
 
 export const navigationItems = [
   { name: "Active Rooms", href: "#", icon: MegaphoneIcon, current: true },

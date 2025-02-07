@@ -20,7 +20,7 @@ export default function NavigationItemLink({ item }: NavigationItemLinkProps) {
           : "text-gray-400 hover:bg-gray-800 hover:text-white",
         "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
       )}>
-      <Icon aria-hidden="true" className="size-6 shrink-0" size={24} />
+      <Icon aria-hidden="true" className="size-6 shrink-0" />
       {name}
     </a>
   );

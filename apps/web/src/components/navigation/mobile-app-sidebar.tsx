@@ -4,23 +4,18 @@ import {
   DialogPanel,
   TransitionChild,
 } from "@headlessui/react";
-import { HiOutlineXMark as XMarkIcon } from "@preact-icons/hi2";
-import { SidebarButton } from "../SidebarButton.tsx";
-import { IS_BROWSER } from "fresh/runtime";
-import type { ComponentChildren } from "preact";
-import { useEffect, useState } from "preact/hooks";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import { SidebarButton } from "../sidebar-button.tsx";
+import { useEffect, useState, type PropsWithChildren } from "react";
 
 interface MobileAppSidebarProps {
   isOpen: boolean;
-  children: ComponentChildren;
 }
 
-function MobileAppSidebarInternal({ children, isOpen }: MobileAppSidebarProps) {
-  // Return any prerenderable JSX here which makes sense for your island
-  if (!IS_BROWSER) {
-    return <div></div>;
-  }
-
+function MobileAppSidebarInternal({
+  children,
+  isOpen,
+}: PropsWithChildren<MobileAppSidebarProps>) {
   const [sideBarOpen, setSideBarOpen] = useState(isOpen);
 
   useEffect(() => {
@@ -47,11 +42,7 @@ function MobileAppSidebarInternal({ children, isOpen }: MobileAppSidebarProps) {
                 onClick={() => setSideBarOpen(false)}
                 class="-m-2.5 p-2.5"
                 srOnly="Close sidebar">
-                <XMarkIcon
-                  aria-hidden="true"
-                  size={24}
-                  className="size-6 text-white"
-                />
+                <XMarkIcon aria-hidden="true" className="size-6 text-white" />
               </SidebarButton>
             </div>
           </TransitionChild>
@@ -65,7 +56,7 @@ function MobileAppSidebarInternal({ children, isOpen }: MobileAppSidebarProps) {
 export default function MobileAppSidebar({
   children,
   isOpen,
-}: MobileAppSidebarProps) {
+}: PropsWithChildren<MobileAppSidebarProps>) {
   return (
     <MobileAppSidebarInternal isOpen={isOpen}>
       {children}

@@ -1,12 +1,26 @@
-import { Outlet } from "@tanstack/react-router";
+import { getRouteApi, Outlet } from "@tanstack/react-router";
+import MobileAppSidebar from "../components/navigation/mobile-app-sidebar.tsx";
+import { navigationItems } from "../components/navigation/navigation-items.ts";
+import NavigationItemLink from "../components/navigation/navigation-item-link.tsx";
+import { store } from "../store/index.ts";
+import { useStore } from "@tanstack/react-store";
+import { useState } from "react";
+import { SidebarButton } from "../components/sidebar-button.tsx";
+import {
+  Bars3Icon,
+  ArrowLeftStartOnRectangleIcon,
+} from "@heroicons/react/24/outline";
+import { clsx } from "clsx";
 
 export const AuthenticatedLayout: React.FC = () => {
-  const { currentUser } = state;
-  const sideBarOpen = useSignal(false);
+  const rooms = useStore(store, (state) => state.rooms);
+  const routeApi = getRouteApi("/authenticatedLayout");
+  const { currentUser } = routeApi.useLoaderData();
+  const [sideBarOpen, setSideBarOpen] = useState(false);
 
   return (
     <div>
-      <MobileAppSidebar isOpen={sideBarOpen.value}>
+      <MobileAppSidebar isOpen={sideBarOpen}>
         <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-2 ring-1 ring-white/10">
           <div className="flex h-16 shrink-0 items-center">
             <img
@@ -31,11 +45,11 @@ export const AuthenticatedLayout: React.FC = () => {
                   Your rooms
                 </div>
                 <ul role="list" className="-mx-2 mt-2 space-y-1">
-                  {rooms.value.map((room) => (
+                  {rooms.map((room) => (
                     <li key={room.name}>
                       <a
                         href={room.href}
-                        className={classNames(
+                        className={clsx(
                           room.current
                             ? "bg-gray-800 text-white"
                             : "text-gray-400 hover:bg-gray-800 hover:text-white",
@@ -82,11 +96,11 @@ export const AuthenticatedLayout: React.FC = () => {
                   Your rooms
                 </div>
                 <ul role="list" className="-mx-2 mt-2 space-y-1">
-                  {rooms.value.map((room) => (
+                  {rooms.map((room) => (
                     <li key={room.name}>
                       <a
                         href={room.href}
-                        className={classNames(
+                        className={clsx(
                           room.current
                             ? "bg-gray-800 text-white"
                             : "text-gray-400 hover:bg-gray-800 hover:text-white",
@@ -121,7 +135,7 @@ export const AuthenticatedLayout: React.FC = () => {
                     <a
                       className="text-gray-400 hover:bg-gray-800 hover:text-white"
                       href={`auth/signout`}>
-                      <HiArrowLeftStartOnRectangle size={24} />
+                      <ArrowLeftStartOnRectangleIcon />
                     </a>
                   )}
                 </div>
@@ -133,10 +147,10 @@ export const AuthenticatedLayout: React.FC = () => {
 
       <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-gray-900 px-4 py-4 shadow-sm sm:px-6 lg:hidden">
         <SidebarButton
-          onClick={() => (sideBarOpen.value = true)}
+          onClick={() => setSideBarOpen(true)}
           class="-m-2.5 p-2.5 text-gray-400 lg:hidden"
           srOnly="Open sidebar">
-          <Bars3Icon aria-hidden="true" className="size-6" size={24} />
+          <Bars3Icon aria-hidden="true" className="size-6" />
         </SidebarButton>
         <div className="flex-1 text-sm/6 font-semibold text-white">
           Active Rooms
