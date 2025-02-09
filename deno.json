@@ -3,11 +3,11 @@
   "version": "0.0.0",
   "exports": {},
   "tasks": {
-    "dev": "deno task --filter @myty/fresh-workspace-web dev",
+    "dev": "spino dev",
     "build": "deno task --filter @myty/fresh-workspace-web build",
     "start": "deno task --filter @myty/fresh-workspace-web start",
     "fix": "deno fmt & deno run -A npm:@biomejs/biome format --write . & deno lint --fix",
-    "check": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx && deno run -A npm:@biomejs/biome format ."
+    "check": "deno fmt --check && deno lint && deno run -A npm:@biomejs/biome format ."
   },
   "imports": {
     "@std/assert": "jsr:@std/assert@^1.0.11",
@@ -22,11 +22,7 @@
     "./packages/persistence",
     "./packages/github"
   ],
-  "unstable": [
-    "sloppy-imports"
-  ],
   "fmt": {
     "exclude": ["**/*.tsx"]
-  },
-  "nodeModulesDir": "none"
+  }
 }

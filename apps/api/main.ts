@@ -5,10 +5,12 @@ import { configureIocContainer } from "./middleware/ioc/configure-ioc-container.
 import { configureAuthentication } from "./middleware/authentication.ts";
 import { configureAuthorization } from "./middleware/authorization.ts";
 import rooms from "./rooms/index.ts";
+import users from "./users/index.ts";
 
 const api = new Hono().basePath("/api");
 configureAuthorization(api);
 api.route("/", rooms.api);
+api.route("/", users.api);
 
 const app = new Hono();
 configureLogging(app);

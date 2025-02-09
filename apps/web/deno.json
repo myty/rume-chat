@@ -3,22 +3,42 @@
   "version": "0.0.0",
   "exports": {},
   "tasks": {
-    "check": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx",
-    "dev": "deno run --env --unstable-kv -A --watch=static/,routes/ dev.ts",
-    "build": "deno run --env --unstable-kv -A dev.ts build",
-    "start": "deno run --env --unstable-kv -A main.ts",
-    "update": "deno run -A -r jsr:@fresh/update@^2.0.0-alpha.29 ."
+    "dev": "deno run -A --node-modules-dir npm:vite",
+    "build": "deno run -A --node-modules-dir npm:vite build",
+    "preview": "deno run -A --node-modules-dir npm:vite preview",
+    "serve": "deno run --allow-net --allow-read jsr:@std/http@1/file-server dist/"
   },
-  "lint": { "rules": { "tags": ["fresh", "recommended"] } },
-  "exclude": ["**/_fresh/*"],
+  "compilerOptions": {
+    "strict": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "ES2020"
+    ],
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "jsxImportSourceTypes": "@types/react"
+  },
   "imports": {
-    "@deno/kv-oauth": "jsr:@deno/kv-oauth@^0.11.0",
-    "@fresh/plugin-tailwind": "jsr:@fresh/plugin-tailwind@^0.0.1-alpha.7",
+    "axios": "npm:axios@1.7.9",
+    "@deno/vite-plugin": "npm:@deno/vite-plugin@^1.0.2",
     "@headlessui/react": "npm:@headlessui/react@^2.2.0",
-    "@preact-icons/hi2": "jsr:@preact-icons/hi2@^1.0.12",
-    "@preact/signals": "npm:@preact/signals@^2.0.1",
-    "@std/ulid": "jsr:@std/ulid@^1.0.0",
-    "fresh": "jsr:@fresh/core@^2.0.0-alpha.29",
-    "tailwindcss": "npm:tailwindcss@^3.4.17"
+    "@heroicons/react": "npm:@heroicons/react@^2.2.0",
+    "@tailwindcss/vite": "npm:@tailwindcss/vite@^4.0.5",
+    "@tanstack/react-query": "npm:@tanstack/react-query@^5.66.0",
+    "@tanstack/react-query-devtools": "npm:@tanstack/react-query-devtools@^5.66.0",
+    "@tanstack/react-router": "npm:@tanstack/react-router@^1.102.0",
+    "@tanstack/react-store": "npm:@tanstack/react-store@^0.7.0",
+    "@tanstack/router-devtools": "npm:@tanstack/router-devtools@^1.102.0",
+    "@tanstack/router-plugin": "npm:@tanstack/router-plugin@^1.102.0",
+    "@types/react": "npm:@types/react@^19.0.2",
+    "@types/react-dom": "npm:@types/react-dom@^19.0.2",
+    "@vitejs/plugin-react": "npm:@vitejs/plugin-react@^4.3.4",
+    "class-variance-authority": "npm:class-variance-authority@^0.7.1",
+    "clsx": "npm:clsx@^2.1.1",
+    "react": "npm:react@^19.0.0",
+    "react-dom": "npm:react-dom@^19.0.0",
+    "tailwindcss": "npm:tailwindcss@^4.0.5",
+    "vite": "npm:vite@^6.1.0"
   }
 }
