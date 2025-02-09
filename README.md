@@ -1,4 +1,4 @@
-# Roomi
+# Rume Chat
 
 > [!IMPORTANT]
 > This project is still under active development. It is incomplete and
