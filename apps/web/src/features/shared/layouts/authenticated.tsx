@@ -1,11 +1,11 @@
 import { getRouteApi, Outlet } from "@tanstack/react-router";
-import MobileAppSidebar from "../components/navigation/mobile-app-sidebar.tsx";
-import { navigationItems } from "../components/navigation/navigation-items.ts";
-import NavigationItemLink from "../components/navigation/navigation-item-link.tsx";
-import { store } from "../store/index.ts";
+import MobileAppSidebar from "../../../components/navigation/mobile-app-sidebar.tsx";
+import { navigationItems } from "../../../components/navigation/navigation-items.ts";
+import NavigationItemLink from "../../../components/navigation/navigation-item-link.tsx";
+import { store } from "../../../store/index.ts";
 import { useStore } from "@tanstack/react-store";
 import { useState } from "react";
-import { SidebarButton } from "../components/sidebar-button.tsx";
+import { SidebarButton } from "../../../components/sidebar-button.tsx";
 import {
   Bars3Icon,
   ArrowLeftStartOnRectangleIcon,
@@ -24,8 +24,8 @@ export const AuthenticatedLayout: React.FC = () => {
         <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-2 ring-1 ring-white/10">
           <div className="flex h-16 shrink-0 items-center">
             <img
-              alt="Your Company"
-              src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500"
+              alt="Rume Chat"
+              src="rume-chat-logo.png"
               className="h-8 w-auto"
             />
           </div>
@@ -75,8 +75,8 @@ export const AuthenticatedLayout: React.FC = () => {
         <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6">
           <div className="flex h-16 shrink-0 items-center">
             <img
-              alt="Your Company"
-              src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500"
+              alt="Rume Chat"
+              src="rume-chat-logo.png"
               className="h-8 w-auto"
             />
           </div>
@@ -123,21 +123,13 @@ export const AuthenticatedLayout: React.FC = () => {
                     className="size-8 rounded-full bg-gray-800"
                   />
                   <span className="sr-only">Your profile</span>
-                  <span aria-hidden="true">{currentUser?.name}</span>
+                  <span aria-hidden="true">{currentUser.name}</span>
                   <span className="flex-1"></span>
-                  {currentUser == null ? (
-                    <a
-                      className="text-gray-400 hover:bg-gray-800 hover:text-white"
-                      href={`auth/signin`}>
-                      Login w/ GitHub
-                    </a>
-                  ) : (
-                    <a
-                      className="text-gray-400 hover:bg-gray-800 hover:text-white"
-                      href={`auth/signout`}>
-                      <ArrowLeftStartOnRectangleIcon />
-                    </a>
-                  )}
+                  <a
+                    className="text-gray-400 hover:bg-gray-800 hover:text-white"
+                    href={`auth/signout`}>
+                    <ArrowLeftStartOnRectangleIcon className="size-6" />
+                  </a>
                 </div>
               </li>
             </ul>

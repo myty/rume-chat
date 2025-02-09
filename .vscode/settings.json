@@ -2,8 +2,6 @@
   "deno.enable": true,
   "deno.lint": true,
   "editor.defaultFormatter": "denoland.vscode-deno",
-  "typescript.preferences.preferTypeOnlyAutoImports": true,
-
   "[typescriptreact]": {
     "editor.defaultFormatter": "biomejs.biome"
   },

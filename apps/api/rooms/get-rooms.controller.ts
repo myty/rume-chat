@@ -30,7 +30,7 @@ export const getRoomsController = async (
       });
     }
 
-    return c.json(response);
+    return c.json(response.rooms);
   } catch (error) {
     throw HTTPException.fromError(error);
   }

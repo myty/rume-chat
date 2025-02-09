@@ -3,5 +3,6 @@ export interface GetUserRoomsResponse {
     id: string;
     name: string;
     ownerHandle: string;
+    activeUserCount: number;
   }[];
 }

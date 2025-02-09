@@ -9,20 +9,28 @@
     "serve": "deno run --allow-net --allow-read jsr:@std/http@1/file-server dist/"
   },
   "compilerOptions": {
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "strict": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "ES2020"
+    ],
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "jsxImportSourceTypes": "@types/react"
   },
   "imports": {
+    "axios": "npm:axios@1.7.9",
     "@deno/vite-plugin": "npm:@deno/vite-plugin@^1.0.2",
     "@headlessui/react": "npm:@headlessui/react@^2.2.0",
     "@heroicons/react": "npm:@heroicons/react@^2.2.0",
-    "@tailwindcss/vite": "npm:@tailwindcss/vite@^4.0.0",
-    "@tanstack/react-router": "npm:@tanstack/react-router@^1.99.0",
+    "@tailwindcss/vite": "npm:@tailwindcss/vite@^4.0.5",
+    "@tanstack/react-query": "npm:@tanstack/react-query@^5.66.0",
+    "@tanstack/react-query-devtools": "npm:@tanstack/react-query-devtools@^5.66.0",
+    "@tanstack/react-router": "npm:@tanstack/react-router@^1.101.2",
     "@tanstack/react-store": "npm:@tanstack/react-store@^0.7.0",
-    "@tanstack/router-devtools": "npm:@tanstack/router-devtools@^1.99.0",
-    "@tanstack/router-plugin": "npm:@tanstack/router-plugin@^1.99.3",
+    "@tanstack/router-devtools": "npm:@tanstack/router-devtools@^1.101.2",
+    "@tanstack/router-plugin": "npm:@tanstack/router-plugin@^1.101.2",
     "@types/react": "npm:@types/react@^19.0.2",
     "@types/react-dom": "npm:@types/react-dom@^19.0.2",
     "@vitejs/plugin-react": "npm:@vitejs/plugin-react@^4.3.4",
@@ -30,7 +38,7 @@
     "clsx": "npm:clsx@^2.1.1",
     "react": "npm:react@^19.0.0",
     "react-dom": "npm:react-dom@^19.0.0",
-    "tailwindcss": "npm:tailwindcss@^4.0.0",
-    "vite": "npm:vite@^6.0.5"
+    "tailwindcss": "npm:tailwindcss@^4.0.5",
+    "vite": "npm:vite@^6.1.0"
   }
 }
