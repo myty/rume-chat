@@ -5,7 +5,7 @@ export default function Login() {
         <img
           alt="Rume Chat"
           src="rume-chat-logo.png"
-          className="mx-auto h-10 w-auto"
+          className="mx-auto h-28 w-auto"
         />
         <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">
           Sign in to your account
