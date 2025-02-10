@@ -40,7 +40,7 @@ export const Dashboard: React.FC = () => {
   const activeRooms = activeRoomsQuery.data;
 
   const [isCreateRoomDialogOpen, setIsCreateRoomDialogOpen] = useState(false);
-  const [newRoom, setNewRoom] = useState<Room>();
+  const [newRoom, setNewRoom] = useState<Partial<Room>>();
 
   const handleOpenCreateRoomDialog = () => {
     if (!isError) {
@@ -51,7 +51,13 @@ export const Dashboard: React.FC = () => {
   };
 
   const handleCreateRoom = () => {
-    mutate(newRoom);
+    if (newRoom?.id && newRoom?.name) {
+      mutate({
+        id: newRoom.id,
+        name: newRoom.name,
+      });
+    }
+
     setIsCreateRoomDialogOpen(false);
   };
 
@@ -77,7 +83,8 @@ export const Dashboard: React.FC = () => {
               className="border-dashed border border-gray-500 rounded-lg h-48 w-48 text-sm p-2">
               <h2 className="font-semibold">{room.name}</h2>
               <p className="text-xs font-semibold text-slate-500">
-                {room.currentUserCount ?? 2} active users
+                {room.activeUserCount} active{" "}
+                {room.activeUserCount > 1 ? "users" : "user"}
               </p>
             </Card>
           ))}
@@ -90,7 +97,7 @@ export const Dashboard: React.FC = () => {
           )}
           {!isPending && (
             <Button
-              className="border-dashed border border-gray-500 rounded-lg h-48 w-48 cursor-pointer"
+              className="border-dashed border border-gray-500 rounded-lg h-48 w-48 cursor-pointer dark:hover:bg-gray-800 dark:bg-gray-900"
               onClick={handleOpenCreateRoomDialog}>
               <h2 className="text-sm font-semibold flex items-center justify-center">
                 <PlusIcon className="size-4 mr-1" /> Create a Room

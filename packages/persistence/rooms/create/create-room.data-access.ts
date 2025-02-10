@@ -4,6 +4,7 @@ import type {
   CreateRoomDataAccess,
   CreateRoomResponse,
 } from "../../../domain/rooms/create-room/index.ts";
+import * as keys from "../keys.ts";
 
 export class CreateRoomDataAccessKv implements CreateRoomDataAccess {
   constructor(private kv: Deno.Kv) {}
@@ -15,20 +16,29 @@ export class CreateRoomDataAccessKv implements CreateRoomDataAccess {
       ownerHandle: command.ownerHandle,
     };
 
-    const roomKey = ["rooms", room.id];
-    const userRoomKey = ["users", room.ownerHandle, "rooms", room.id];
+    const roomKey = keys.roomKey(room.id);
+    const roomActiveUsersKey = keys.roomActiveUsersKey(room.id);
+    const userRoomKey = keys.userRoomKey(room.ownerHandle, room.id);
 
     const res = await this.kv.atomic()
       .check({ key: roomKey, versionstamp: null })
       .check({ key: userRoomKey, versionstamp: null })
       .set(roomKey, room)
       .set(userRoomKey, room)
+      .mutate({
+        type: "sum",
+        key: roomActiveUsersKey,
+        value: new Deno.KvU64(1n),
+      })
       .commit();
 
     if (!res.ok) {
       throw new TypeError("Room already exists");
     }
 
-    return room;
+    return {
+      ...room,
+      activeUserCount: 1,
+    };
   }
 }

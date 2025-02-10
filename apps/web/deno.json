@@ -17,8 +17,12 @@
     ],
     "jsx": "react-jsx",
     "jsxImportSource": "react",
-    "jsxImportSourceTypes": "@types/react"
+    "jsxImportSourceTypes": "@types/react",
+    "noImplicitAny": false
   },
+  "exclude": [
+    ".vite"
+  ],
   "imports": {
     "axios": "npm:axios@1.7.9",
     "@deno/vite-plugin": "npm:@deno/vite-plugin@^1.0.2",
