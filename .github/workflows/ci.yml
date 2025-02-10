@@ -10,5 +10,6 @@ jobs:
       - uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x
+      - run: deno install --allow-scripts
       - run: deno task check
       - run: deno test
