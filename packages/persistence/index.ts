@@ -5,6 +5,8 @@ import { CreateRoomDataAccessKv } from "./rooms/create/create-room.data-access.t
 import { GetUserRoomsDataAccessKv } from "./rooms/get-user-rooms/get-user-rooms.data-access.ts";
 import { LoginUserByProviderDataAccessKv } from "./users/login-user-by-provider/login-user-by-provider.data-access.ts";
 import { GetUserBySessionIdDataAccessKv } from "./users/get-user-by-session-id/get-user-by-session-id.data-access.ts";
+import { CreateMessagesSubscriptionByRoomDataAccessKv } from "./messages/create-messages-subscription-by-room/create-messages-subscription-by-room.data-access.ts";
+import { RemoveMessagesSubscriptionByRoomDataAccessKv } from "./messages/remove-messages-subscription-by-room/remove-messages-subscription-by-room.data-access.ts";
 
 interface PersistenceTypes {
   KvStore: Deno.Kv;
@@ -46,6 +48,20 @@ export const PersistenceIocModule: BindableIoCModule<
   c.bind(
     "GetUserBySessionIdDataAccess",
     (c) => new GetUserBySessionIdDataAccessKv(c.resolve("KvStore")),
+    Lifecycle.Scoped,
+  );
+
+  c.bind(
+    "CreateMessagesSubscriptionByRoomDataAccess",
+    (c) =>
+      new CreateMessagesSubscriptionByRoomDataAccessKv(c.resolve("KvStore")),
+    Lifecycle.Scoped,
+  );
+
+  c.bind(
+    "RemoveMessagesSubscriptionByRoomDataAccess",
+    (c) =>
+      new RemoveMessagesSubscriptionByRoomDataAccessKv(c.resolve("KvStore")),
     Lifecycle.Scoped,
   );
 };

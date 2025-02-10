@@ -22,6 +22,7 @@ import {
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import { useEffect } from "react";
 import Input from "../../components/input.tsx";
+import { Link } from "@tanstack/react-router";
 
 export const dashboardLoader = async (queryClient: QueryClient) => {
   const activeRooms = await queryClient.ensureQueryData(
@@ -86,6 +87,12 @@ export const Dashboard: React.FC = () => {
                 {room.activeUserCount} active{" "}
                 {room.activeUserCount > 1 ? "users" : "user"}
               </p>
+              <Link
+                params={{ roomId: room.id }}
+                to={"/rooms/$roomId"}
+                className="text-sm underline">
+                Go to Room &gt;
+              </Link>
             </Card>
           ))}
           {isPending && newRoom && (

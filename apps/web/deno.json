@@ -42,6 +42,7 @@
     "clsx": "npm:clsx@^2.1.1",
     "react": "npm:react@^19.0.0",
     "react-dom": "npm:react-dom@^19.0.0",
+    "react-use-websocket": "npm:react-use-websocket@^4.13.0",
     "tailwindcss": "npm:tailwindcss@^4.0.5",
     "vite": "npm:vite@^6.1.0"
   }

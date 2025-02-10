@@ -37,7 +37,9 @@ export function configureAuthentication(
         "GetUserBySessionIdQueryHandler",
       );
 
-      c.set("currentUser", await handler.handle(query));
+      const user = await handler.handle(query);
+
+      c.set("currentUser", user);
     }
 
     await next();

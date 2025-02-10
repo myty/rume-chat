@@ -1,3 +1,4 @@
+import React, { Suspense } from "react";
 import {
   createRoute,
   redirect,
@@ -12,12 +13,32 @@ import type { QueryClient } from "@tanstack/react-query";
 import { currentUserQueryOptions } from "./features/shared/users.ts";
 import { dashboardLoader } from "./features/dashboard/index.tsx";
 import { Outlet } from "@tanstack/react-router";
+import Room from "./features/rooms/room.tsx";
+
+const TanStackRouterDevtools =
+  import.meta.env.NODE_ENV === "production"
+    ? () => null // Render nothing in production
+    : React.lazy(() =>
+        // Lazy load in development
+        import("@tanstack/router-devtools").then((res) => ({
+          default: res.TanStackRouterDevtools,
+          // For Embedded Mode
+          // default: res.TanStackRouterDevtoolsPanel
+        })),
+      );
 
 export default function setupRouter(queryClient: QueryClient) {
   const rootRoute = createRootRouteWithContext<{
     queryClient: QueryClient;
   }>()({
-    component: Outlet,
+    component: () => (
+      <>
+        <Outlet />
+        <Suspense>
+          <TanStackRouterDevtools />
+        </Suspense>
+      </>
+    ),
     notFoundComponent: () => {
       return (
         <div>
@@ -68,9 +89,26 @@ export default function setupRouter(queryClient: QueryClient) {
     component: Dashboard,
   });
 
+  const roomsRoute = createRoute({
+    getParentRoute: () => authenticatedLayout,
+    path: "rooms",
+  });
+
+  const roomRoute = createRoute({
+    getParentRoute: () => roomsRoute,
+    path: "$roomId",
+    component: Room,
+    onLeave(match) {
+      console.log("Leaving room", match.params.roomId);
+    },
+  });
+
   const routeTree = rootRoute.addChildren([
     loginRoute,
-    authenticatedLayout.addChildren([indexRoute]),
+    authenticatedLayout.addChildren([
+      indexRoute,
+      roomsRoute.addChildren([roomRoute]),
+    ]),
   ]);
 
   const router = createRouter({

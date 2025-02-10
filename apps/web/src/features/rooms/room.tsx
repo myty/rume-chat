@@ -1,32 +1,45 @@
 import { useEffect, useState } from "react";
+import type { Message } from "../shared/messages.ts";
+import { useParams } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
+import useWebSocket, { ReadyState } from "react-use-websocket";
 
-interface RoomProps {
-  id: string;
-}
+export default function Room() {
+  const { roomId } = useParams({ strict: false }) as { roomId: string };
+  const [messages, setMessages] = useState<Message[]>([]);
 
-export default function Room(props: RoomProps) {
-  const [messages, setMessages] = useState<string[]>([]);
+  const url = buildSocketUrl(`/ws/rooms/${roomId}/subscription`);
+
+  const { lastMessage, readyState } = useWebSocket(url);
+
+  const connectionStatus = {
+    [ReadyState.CONNECTING]: "Connecting",
+    [ReadyState.OPEN]: "Open",
+    [ReadyState.CLOSING]: "Closing",
+    [ReadyState.CLOSED]: "Closed",
+    [ReadyState.UNINSTANTIATED]: "Uninstantiated",
+  }[readyState];
 
   useEffect(() => {
-    // opening a connection to the server to begin receiving events from it
-    const eventSource = new EventSource(`/api/streams/${props.id}`);
-
-    // attaching a handler to receive message events
-    eventSource.onmessage = (event) => {
-      setMessages((prev) => [...prev, event.data]);
-    };
-
-    // terminating the connection on component unmount
-    return () => eventSource.close();
-  }, []);
+    if (lastMessage != null) {
+      setMessages((prev) => prev.concat(lastMessage));
+    }
+  }, [lastMessage]);
 
   return (
     <div className="flex gap-8 py-6">
+      <span>The WebSocket is currently {connectionStatus}</span>
+      <Link to="/">Go back to the Dashboard</Link>
       <ul>
         {messages.map((m) => (
-          <li>{m}</li>
+          <li>{m.body}</li>
         ))}
       </ul>
     </div>
   );
+}
+
+function buildSocketUrl(path: string) {
+  const { protocol, host } = globalThis.location;
+  return `${protocol === "https:" ? "wss" : "ws"}://${host}${path}`;
 }

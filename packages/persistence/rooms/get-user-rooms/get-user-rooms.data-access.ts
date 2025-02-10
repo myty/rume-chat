@@ -4,7 +4,7 @@ import type {
   GetUserRoomsQuery,
   GetUserRoomsResponse,
 } from "@myty/fresh-workspace-domain/rooms/get-user-rooms";
-import * as keys from "../keys.ts";
+import * as keys from "../../keys.ts";
 
 export class GetUserRoomsDataAccessKv implements GetUserRoomsDataAccess {
   constructor(private kv: Deno.Kv) {}

@@ -4,7 +4,7 @@ import type {
   GetRoomQuery,
   GetRoomResponse,
 } from "../../../domain/rooms/get-room/index.ts";
-import * as keys from "../keys.ts";
+import * as keys from "../../keys.ts";
 
 export class GetRoomDataAccessKv implements GetRoomDataAccess {
   constructor(private kv: Deno.Kv) {}
