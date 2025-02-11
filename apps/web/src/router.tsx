@@ -15,17 +15,12 @@ import { dashboardLoader } from "./features/dashboard/index.tsx";
 import { Outlet } from "@tanstack/react-router";
 import Room from "./features/rooms/room.tsx";
 
-const TanStackRouterDevtools =
-  import.meta.env.NODE_ENV === "production"
-    ? () => null // Render nothing in production
-    : React.lazy(() =>
-        // Lazy load in development
-        import("@tanstack/router-devtools").then((res) => ({
-          default: res.TanStackRouterDevtools,
-          // For Embedded Mode
-          // default: res.TanStackRouterDevtoolsPanel
-        })),
-      );
+const TanStackRouterDevtools = React.lazy(() =>
+  // Lazy load in development
+  import("@tanstack/router-devtools").then((res) => ({
+    default: res.TanStackRouterDevtools,
+  })),
+);
 
 export default function setupRouter(queryClient: QueryClient) {
   const rootRoute = createRootRouteWithContext<{
@@ -35,7 +30,7 @@ export default function setupRouter(queryClient: QueryClient) {
       <>
         <Outlet />
         <Suspense>
-          <TanStackRouterDevtools />
+          <TanStackRouterDevtools position="bottom-right" />
         </Suspense>
       </>
     ),
