@@ -4,8 +4,6 @@ import type { UserDto } from "../dtos/user.dto.ts";
 import { getRoomsController } from "./get-rooms.controller.ts";
 import { createRoomController } from "./create-room.controller.ts";
 import { getRoomController } from "./get-room.controller.ts";
-import { createRoomSubscriptionController } from "./create-room-subscription.controller.ts";
-import { upgradeWebSocket } from "hono/deno";
 
 const api = new Hono<{
   Variables: {
@@ -22,11 +20,5 @@ api.post("/", createRoomController);
 
 // Get Room
 api.get("/:roomId", getRoomController);
-
-// // Create Room Subscription
-// api.get(
-//   "/:roomId/subscription",
-//   upgradeWebSocket(createRoomSubscriptionController),
-// );
 
 export default { api };

@@ -10,6 +10,7 @@ export default function Room() {
 
   const url = buildSocketUrl(`/ws/rooms/${roomId}/subscription`);
 
+  // @ts-ignore - TODO: not sure why this isn't getting typings
   const { lastMessage, readyState } = useWebSocket(url);
 
   const connectionStatus = {
