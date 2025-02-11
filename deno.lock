@@ -1537,7 +1537,6 @@
           "npm:class-variance-authority@~0.7.1",
           "npm:clsx@^2.1.1",
           "npm:react-dom@19",
-          "npm:react-use-websocket@^4.13.0",
           "npm:react@19",
           "npm:tailwindcss@^4.0.5",
           "npm:vite@^6.1.0"

@@ -5,7 +5,6 @@ import type { BlankInput } from "hono/types";
 import { HTTPException } from "../http-exception.ts";
 import { CreateMessagesSubscriptionByRoomCommand } from "../../../packages/domain/messages/create-messages-subscription-by-room/create-messages-subscription-by-room.command.ts";
 import type { Message } from "../dtos/message.dto.ts";
-import type { WSEvents } from "hono/ws";
 
 export const createRoomSubscriptionController = async (
   c: Context<
@@ -15,10 +14,10 @@ export const createRoomSubscriptionController = async (
         container: ReturnType<typeof buildContainer>;
       };
     },
-    "ws/rooms/:roomId/subscription",
+    "api/rooms/:roomId/subscription",
     BlankInput
   >,
-): Promise<WSEvents<WebSocket>> => {
+) => {
   try {
     const commandHandler = c.var.container.resolve(
       "CreateMessagesSubscriptionByRoomCommandHandler",
@@ -37,8 +36,14 @@ export const createRoomSubscriptionController = async (
     const room = await commandHandler.execute(command);
     const roomMessagesReader = room.messages.getReader();
 
-    return {
-      async onOpen(_evt, ws) {
+    c.req.raw.signal.addEventListener("abort", async () => {
+      console.log("Aborted!");
+      await removeCommandHandler.execute(command);
+      await roomMessagesReader.cancel();
+    });
+
+    const body = new ReadableStream({
+      async start(controller) {
         const welcomeMessage: Message = {
           body: "Welcome to the room",
           id: "welcome",
@@ -47,7 +52,11 @@ export const createRoomSubscriptionController = async (
           createdAt: new Date(),
         };
 
-        ws.send(JSON.stringify(welcomeMessage));
+        controller.enqueue(
+          new TextEncoder().encode(
+            `messages: ${JSON.stringify([welcomeMessage])}\n`,
+          ),
+        );
 
         while (true) {
           const roomMessagesResult = await roomMessagesReader.read();
@@ -55,14 +64,26 @@ export const createRoomSubscriptionController = async (
             break;
           }
 
-          ws.send(JSON.stringify(roomMessagesResult.value));
+          controller.enqueue(
+            new TextEncoder().encode(
+              `messages: ${JSON.stringify(roomMessagesResult.value)}\n`,
+            ),
+          );
         }
       },
-      async onClose() {
-        await removeCommandHandler.execute(command);
-        await roomMessagesReader.cancel();
+      cancel() {
+        console.log("Cancelled!");
+        roomMessagesReader.cancel();
       },
-    };
+    });
+
+    return new Response(body, {
+      headers: {
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache, no-transform",
+        "Connection": "keep-alive",
+      },
+    });
   } catch (error) {
     console.error(error);
     throw HTTPException.fromError(error);
