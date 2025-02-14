@@ -6,6 +6,6 @@
   },
   "imports": {
     "@deno/kv-oauth": "jsr:@deno/kv-oauth@^0.11.0",
-    "hono": "jsr:@hono/hono@^4.7.0"
+    "hono": "jsr:@hono/hono@^4.7.1"
   }
 }

@@ -4,7 +4,6 @@ import type { buildContainer } from "../middleware/ioc/build-container.ts";
 import type { BlankInput } from "hono/types";
 import { HTTPException } from "../http-exception.ts";
 import { CreateMessagesSubscriptionByRoomCommand } from "../../../packages/domain/messages/create-messages-subscription-by-room/create-messages-subscription-by-room.command.ts";
-import type { Message } from "../dtos/message.dto.ts";
 import type { WSEvents } from "hono/ws";
 
 export const createRoomSubscriptionController = async (
@@ -39,16 +38,6 @@ export const createRoomSubscriptionController = async (
 
     return {
       async onOpen(_evt, ws) {
-        const welcomeMessage: Message = {
-          body: "Welcome to the room",
-          id: "welcome",
-          roomId,
-          userHandle: "system",
-          createdAt: new Date(),
-        };
-
-        ws.send(JSON.stringify(welcomeMessage));
-
         while (true) {
           const roomMessagesResult = await roomMessagesReader.read();
           if (roomMessagesResult.done) {

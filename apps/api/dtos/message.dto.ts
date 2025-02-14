@@ -1,8 +1,8 @@
-export interface Message {
+export interface MessageDto {
   id: string;
   roomId: string;
   userHandle: string;
-  body: string;
+  message: string;
   createdAt: Date;
   updatedAt?: Date;
 }

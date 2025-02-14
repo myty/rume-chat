@@ -7,6 +7,7 @@ import { LoginUserByProviderDataAccessKv } from "./users/login-user-by-provider/
 import { GetUserBySessionIdDataAccessKv } from "./users/get-user-by-session-id/get-user-by-session-id.data-access.ts";
 import { CreateMessagesSubscriptionByRoomDataAccessKv } from "./messages/create-messages-subscription-by-room/create-messages-subscription-by-room.data-access.ts";
 import { RemoveMessagesSubscriptionByRoomDataAccessKv } from "./messages/remove-messages-subscription-by-room/remove-messages-subscription-by-room.data-access.ts";
+import { CreateMessageDataAccessKv } from "./messages/create-message/create-message.data-access.ts";
 
 interface PersistenceTypes {
   KvStore: Deno.Kv;
@@ -62,6 +63,12 @@ export const PersistenceIocModule: BindableIoCModule<
     "RemoveMessagesSubscriptionByRoomDataAccess",
     (c) =>
       new RemoveMessagesSubscriptionByRoomDataAccessKv(c.resolve("KvStore")),
+    Lifecycle.Scoped,
+  );
+
+  c.bind(
+    "CreateMessageDataAccess",
+    (c) => new CreateMessageDataAccessKv(c.resolve("KvStore")),
     Lifecycle.Scoped,
   );
 };

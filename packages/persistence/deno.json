@@ -1,6 +1,9 @@
 {
   "name": "@myty/fresh-workspace-persistence",
   "version": "0.0.0",
+  "imports": {
+    "@std/ulid": "jsr:@std/ulid@^1.0.0"
+  },
   "exports": {
     ".": "./index.ts",
     "./rooms/get": "./rooms/get/index.ts",

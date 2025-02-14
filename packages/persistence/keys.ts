@@ -18,6 +18,11 @@ export const userRoomsKey = (
   roomOwnerHandle: string,
 ) => ["users", roomOwnerHandle, "rooms"] as const;
 
-export const roomMessagesKey = (
+export const messageKey = (
   roomId: string,
-) => ["rooms", roomId, "messages"] as const;
+  messageId: string,
+) => ["rooms", roomId, "messages", messageId] as const;
+
+export const lastMessageIdKey = (
+  roomId: string,
+) => ["rooms", roomId, "lastMessageId"] as const;

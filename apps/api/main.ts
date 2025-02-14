@@ -6,7 +6,7 @@ import { configureAuthentication } from "./middleware/authentication.ts";
 import { configureAuthorization } from "./middleware/authorization.ts";
 import rooms from "./rooms/index.ts";
 import users from "./users/index.ts";
-import { createRoomSubscriptionController } from "./rooms/create-room-subscription.controller.ts";
+import { createRoomSubscriptionController } from "./rooms/create-room-subscription.ws.ts";
 
 const api = new Hono().basePath("/api");
 configureAuthorization(api);

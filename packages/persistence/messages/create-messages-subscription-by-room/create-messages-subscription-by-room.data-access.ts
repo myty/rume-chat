@@ -15,7 +15,7 @@ export class CreateMessagesSubscriptionByRoomDataAccessKv
       command.roomId,
       command.userHandle,
     );
-    const roomMessagesKey = keys.roomMessagesKey(command.roomId);
+    const lastRoomMessageIdKey = keys.lastMessageIdKey(command.roomId);
 
     const createSubscriptionResult = await this.kv.atomic()
       .set(roomSubscriptionKey, {
@@ -28,30 +28,58 @@ export class CreateMessagesSubscriptionByRoomDataAccessKv
       throw new Error("Failed to create subscription");
     }
 
-    return this.kv.watch<Message[]>([roomMessagesKey]).pipeThrough(
-      new TransformStream<
-        Deno.KvEntryMaybe<Message>[],
-        DomainMessage[]
-      >({
-        transform: (chunk, controller) => {
-          const messagesChunk = chunk.map((entry): DomainMessage | null => {
-            if (!entry.value) {
-              return null;
-            }
+    const lastRoomMessageIdsReader = this.kv.watch<string[]>([
+      lastRoomMessageIdKey,
+    ]).getReader();
 
-            return {
-              id: entry.value.id,
-              roomId: entry.value.roomId,
-              userHandle: entry.value.userHandle,
-              body: entry.value.message,
-              createdAt: entry.value.createdAt,
-              updatedAt: entry.value.updatedAt ?? undefined,
-            };
-          }).filter((message): message is DomainMessage => message !== null);
+    const kv = this.kv;
+
+    return new ReadableStream<DomainMessage[]>({
+      async start(controller) {
+        let lastSeenMessageId = "";
+
+        while (true) {
+          const nextIdChunk = await lastRoomMessageIdsReader.read();
+          if (nextIdChunk.done) {
+            break;
+          }
+
+          const [lastMessageId] = nextIdChunk.value;
+
+          if (!lastMessageId.value) {
+            continue;
+          }
+
+          const newMessages = await Array.fromAsync(kv.list<Message>({
+            start: [...keys.messageKey(command.roomId, lastSeenMessageId), ""],
+            end: [...keys.messageKey(command.roomId, lastMessageId.value), ""],
+          }));
+
+          const messagesChunk = newMessages.map(
+            (entry): DomainMessage | null => {
+              if (!entry.value) {
+                return null;
+              }
+
+              return {
+                id: entry.value.id,
+                roomId: entry.value.roomId,
+                userHandle: entry.value.userHandle,
+                body: entry.value.message,
+                createdAt: entry.value.createdAt,
+                updatedAt: entry.value.updatedAt ?? undefined,
+              };
+            },
+          ).filter((message): message is DomainMessage => message !== null);
 
           controller.enqueue(messagesChunk);
-        },
-      }),
-    );
+
+          lastSeenMessageId = lastMessageId.value;
+        }
+      },
+      cancel() {
+        lastRoomMessageIdsReader.cancel();
+      },
+    });
   }
 }

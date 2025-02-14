@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import type { NavigationItem } from "./navigation-items.ts";
 
 interface NavigationItemLinkProps {
@@ -12,8 +13,8 @@ export default function NavigationItemLink({ item }: NavigationItemLinkProps) {
   const { href, name, icon: Icon } = item;
 
   return (
-    <a
-      href={href}
+    <Link
+      to={href}
       className={classNames(
         item.current
           ? "bg-gray-800 text-white"
@@ -22,6 +23,6 @@ export default function NavigationItemLink({ item }: NavigationItemLinkProps) {
       )}>
       <Icon aria-hidden="true" className="size-6 shrink-0" />
       {name}
-    </a>
+    </Link>
   );
 }

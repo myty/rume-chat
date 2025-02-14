@@ -11,14 +11,20 @@ import {
   RemoveMessagesSubscriptionByRoomIocModule,
   type RemoveMessagesSubscriptionByRoomTypes,
 } from "./remove-messages-subscription-by-room/index.ts";
+import {
+  CreateMessageIocModule,
+  type CreateMessageTypes,
+} from "./create-message/index.ts";
 
 export type MessageDomainType =
   & GetMessagesByRoomTypes
   & CreateMessagesSubscriptionByRoomTypes
-  & RemoveMessagesSubscriptionByRoomTypes;
+  & RemoveMessagesSubscriptionByRoomTypes
+  & CreateMessageTypes;
 
 export const MessagesIocModule: BindableIoCModule<MessageDomainType> = (c) => {
   c.addModule(GetMessagesByRoomIocModule);
   c.addModule(CreateMessagesSubscriptionByRoomIocModule);
   c.addModule(RemoveMessagesSubscriptionByRoomIocModule);
+  c.addModule(CreateMessageIocModule);
 };

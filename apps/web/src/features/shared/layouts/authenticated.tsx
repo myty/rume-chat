@@ -11,6 +11,7 @@ import {
   ArrowLeftStartOnRectangleIcon,
 } from "@heroicons/react/24/outline";
 import { clsx } from "clsx";
+import { Link } from "@tanstack/react-router";
 
 export const AuthenticatedLayout: React.FC = () => {
   const rooms = useStore(store, (state) => state.rooms);
@@ -47,8 +48,8 @@ export const AuthenticatedLayout: React.FC = () => {
                 <ul role="list" className="-mx-2 mt-2 space-y-1">
                   {rooms.map((room) => (
                     <li key={room.name}>
-                      <a
-                        href={room.href}
+                      <Link
+                        to={room.href}
                         className={clsx(
                           room.current
                             ? "bg-gray-800 text-white"
@@ -59,7 +60,7 @@ export const AuthenticatedLayout: React.FC = () => {
                           {room.initial}
                         </span>
                         <span className="truncate">{room.name}</span>
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -98,8 +99,8 @@ export const AuthenticatedLayout: React.FC = () => {
                 <ul role="list" className="-mx-2 mt-2 space-y-1">
                   {rooms.map((room) => (
                     <li key={room.name}>
-                      <a
-                        href={room.href}
+                      <Link
+                        to={room.href}
                         className={clsx(
                           room.current
                             ? "bg-gray-800 text-white"
@@ -110,7 +111,7 @@ export const AuthenticatedLayout: React.FC = () => {
                           {room.initial}
                         </span>
                         <span className="truncate">{room.name}</span>
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -157,8 +158,8 @@ export const AuthenticatedLayout: React.FC = () => {
         </a>
       </div>
 
-      <main className="py-10 lg:pl-72">
-        <div className="px-4 sm:px-6 lg:px-8">
+      <main className="lg:pl-72">
+        <div className="px-4 sm:px-6 lg:px-8 container mx-auto">
           <Outlet />
         </div>
       </main>
