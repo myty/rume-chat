@@ -75,7 +75,7 @@ export const Dashboard: React.FC = () => {
 
   return (
     <>
-      <div>
+      <div className="p-4">
         <h1 className="text-4xl font-bold">Active Rooms</h1>
         <div className="flex gap-4 flex-wrap py-4">
           {activeRooms.map((room) => (

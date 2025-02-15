@@ -51,6 +51,7 @@
     "npm:react-dom@19": "19.0.0_react@19.0.0",
     "npm:react@19": "19.0.0",
     "npm:tailwindcss@^4.0.6": "4.0.6",
+    "npm:use-stick-to-bottom@^1.0.46": "1.0.46_react@19.0.0",
     "npm:vite@*": "6.1.0",
     "npm:vite@^6.1.0": "6.1.0"
   },
@@ -1418,6 +1419,12 @@
         "picocolors"
       ]
     },
+    "use-stick-to-bottom@1.0.46_react@19.0.0": {
+      "integrity": "sha512-2EQ9dbLNQ+8FylNuG1qx3BBl0WnNEOIkKFLEsG065A27Dd7lgTqSHA7pIlAVItnvOoFzrk9YyD2gW8idjTBPTw==",
+      "dependencies": [
+        "react"
+      ]
+    },
     "use-sync-external-store@1.4.0_react@19.0.0": {
       "integrity": "sha512-9WXSPC5fMv61vaupRkCKCxsPxBocVnwakBEkMIHHpkTTg6icbJtg6jzgtLDm4bl3cSHAca52rYWih0k4K3PfHw==",
       "dependencies": [
@@ -1487,6 +1494,7 @@
           "npm:react-dom@19",
           "npm:react@19",
           "npm:tailwindcss@^4.0.6",
+          "npm:use-stick-to-bottom@^1.0.46",
           "npm:vite@^6.1.0"
         ]
       },

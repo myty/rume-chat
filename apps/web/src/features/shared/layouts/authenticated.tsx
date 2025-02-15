@@ -159,9 +159,7 @@ export const AuthenticatedLayout: React.FC = () => {
       </div>
 
       <main className="lg:pl-72">
-        <div className="px-4 sm:px-6 lg:px-8 container mx-auto">
-          <Outlet />
-        </div>
+        <Outlet />
       </main>
     </div>
   );

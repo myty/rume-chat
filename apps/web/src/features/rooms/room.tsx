@@ -2,10 +2,15 @@ import type { Message } from "../shared/messages.ts";
 import { useParams } from "@tanstack/react-router";
 import { useWebSocket } from "../shared/use-web-socket.ts";
 import Input from "../../components/input.tsx";
-import { type FormEvent, useCallback } from "react";
+import { type FormEvent, useCallback, useEffect, useRef } from "react";
+import { useStickToBottom } from "use-stick-to-bottom";
 
 export default function Room() {
   const { roomId } = useParams({ strict: false }) as { roomId: string };
+  const { scrollRef, contentRef } = useStickToBottom({
+    stiffness: 0.5,
+  });
+  const messageInputRef = useRef<HTMLInputElement>(null);
 
   const url = buildSocketUrl(`/ws/rooms/${roomId}/subscription`);
   const { messageEvents } = useWebSocket<Message | Message[]>({ url });
@@ -37,16 +42,30 @@ export default function Room() {
     [roomId],
   );
 
-  return (
-    <div className="flex flex-col gap-8 py-6 h-screen">
-      <ul className="flex flex-col gap-4 flex-1 flex-grow overflow-y-auto">
-        {messages.map((m) => (
-          <li>{m.body}</li>
-        ))}
-      </ul>
+  useEffect(() => {
+    if (messageInputRef.current) {
+      messageInputRef.current.focus();
+    }
+  }, []);
 
-      <form className="flex-0 grow-0 shrink-0" onSubmit={handleSendMessage}>
-        <Input id="message" label="Message" />
+  return (
+    <div className="flex flex-col lg:h-screen">
+      <div className="flex-0 grow-0 shrink-0">
+        <h1 className="dark:bg-gray-800 dark:text-white text-gray-950 bg-gray-100 text-4xl font-bold uppercase p-4">
+          {roomId}
+        </h1>
+      </div>
+
+      <div className="flex-1 flex-grow overflow-y-auto" ref={scrollRef}>
+        <ul className="flex flex-col" ref={contentRef}>
+          {messages.map((m) => (
+            <li className="ml-8 mt-4">{m.body}</li>
+          ))}
+        </ul>
+      </div>
+
+      <form className="flex-0 grow-0 shrink-0 m-8" onSubmit={handleSendMessage}>
+        <Input id="message" ref={messageInputRef} />
       </form>
     </div>
   );
