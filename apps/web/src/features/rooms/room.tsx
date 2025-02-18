@@ -49,7 +49,7 @@ export default function Room() {
   }, []);
 
   return (
-    <div className="flex flex-col lg:h-screen">
+    <div className="flex flex-col flex-1 lg:h-screen">
       <div className="flex-0 grow-0 shrink-0">
         <h1 className="dark:bg-gray-800 dark:text-white text-gray-950 bg-gray-100 text-4xl font-bold uppercase p-4">
           {roomId}
