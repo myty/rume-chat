@@ -59,13 +59,28 @@ export default function Room() {
       <div className="flex-1 flex-grow overflow-y-auto" ref={scrollRef}>
         <ul className="flex flex-col" ref={contentRef}>
           {messages.map((m) => (
-            <li className="ml-8 mt-4">{m.body}</li>
+            <li className="mx-8 mt-8 flex gap-2">
+              <img
+                alt={`${m.userHandle} avatar`}
+                src="https://avatars.githubusercontent.com/u/37794?v=4"
+                className="inline-block size-12 rounded-full"
+              />
+              <div className="flex flex-col">
+                <div className="flex gap-2">
+                  <h2 className="font-semibold">{m.userHandle}</h2>
+                  <p className="text-xs/6 text-gray-400">
+                    {m.createdAt.toLocaleString()}
+                  </p>
+                </div>
+                <p className="text-gray-800 dark:text-gray-100">{m.body}</p>
+              </div>
+            </li>
           ))}
         </ul>
       </div>
 
       <form className="flex-0 grow-0 shrink-0 m-8" onSubmit={handleSendMessage}>
-        <Input id="message" ref={messageInputRef} />
+        <Input id="message" ref={messageInputRef} autoComplete="off" />
       </form>
     </div>
   );
