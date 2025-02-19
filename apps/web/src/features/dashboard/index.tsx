@@ -89,7 +89,7 @@ export const Dashboard: React.FC = () => {
               </p>
               <Link
                 params={{ roomId: room.id }}
-                to={"/rooms/$roomId"}
+                to="/rooms/$roomId"
                 className="text-sm underline">
                 Go to Room &gt;
               </Link>
