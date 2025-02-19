@@ -5,6 +5,7 @@ import type {
 } from "@myty/fresh-workspace-domain/users/login-user-by-provider";
 import type { GetAuthProviderUserResponse } from "@myty/fresh-workspace-domain/auth-providers/get-auth-provider-user";
 import type { User } from "../../entities/user.entity.ts";
+import * as keys from "../../keys.ts";
 
 export class LoginUserByProviderDataAccessKv
   implements LoginUserByProviderDataAccess {
@@ -14,7 +15,8 @@ export class LoginUserByProviderDataAccessKv
     command: LoginUserByProviderCommand,
     authProviderResponse: GetAuthProviderUserResponse,
   ): Promise<LoginUserByProviderResponse> {
-    const user = await this.kv.get<User>(["users", authProviderResponse.login]);
+    const userKey = keys.userKey(authProviderResponse.login);
+    const user = await this.kv.get<User>(userKey);
 
     if (user.value === null) {
       return await this.createUser({
@@ -36,8 +38,8 @@ export class LoginUserByProviderDataAccessKv
   }
 
   private async createUser(user: User): Promise<User> {
-    const usersKey = ["users", user.handle];
-    const usersBySessionKey = ["users_by_session", user.sessionId];
+    const usersKey = keys.userKey(user.handle);
+    const usersBySessionKey = keys.userBySessionKey(user.sessionId);
 
     const res = await this.kv.atomic()
       .check({ key: usersKey, versionstamp: null })
@@ -56,8 +58,8 @@ export class LoginUserByProviderDataAccessKv
     sessionId: string,
   ): Promise<User> {
     const userKey = ["users", user.handle];
-    const oldUserBySessionKey = ["users_by_session", user.sessionId];
-    const newUserBySessionKey = ["users_by_session", sessionId];
+    const oldUserBySessionKey = keys.userBySessionKey(user.sessionId);
+    const newUserBySessionKey = keys.userBySessionKey(sessionId);
     const newUser: User = { ...user, sessionId };
 
     const res = await this.kv.atomic()

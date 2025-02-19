@@ -26,3 +26,11 @@ export const messageKey = (
 export const lastMessageIdKey = (
   roomId: string,
 ) => ["rooms", roomId, "lastMessageId"] as const;
+
+export const userBySessionKey = (
+  sessionId: string,
+) => ["users_by_session", sessionId] as const;
+
+export const userKey = (
+  userHandle: string,
+) => ["users", userHandle] as const;
