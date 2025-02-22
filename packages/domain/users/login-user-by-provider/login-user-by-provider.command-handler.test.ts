@@ -31,6 +31,8 @@ describe("LoginUserByProviderCommandHandler", () => {
     const authProviderDataAccess = {
       getUserByAccessToken: () =>
         Promise.resolve({
+          id: 1,
+          nodeId: "nodeId",
           login: "login",
           name: "name",
           avatarUrl: "avatarUrl",
