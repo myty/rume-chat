@@ -15,8 +15,9 @@ export class GetAuthProviderUserDataAccessGitHub
       throw new Error(message);
     }
 
-    const { login, name, avatar_url } = await resp.json();
+    const { id, node_id: nodeId, login, name, avatar_url: avatarUrl } =
+      await resp.json();
 
-    return { login, name, avatarUrl: avatar_url };
+    return { login, name, avatarUrl, id, nodeId };
   }
 }

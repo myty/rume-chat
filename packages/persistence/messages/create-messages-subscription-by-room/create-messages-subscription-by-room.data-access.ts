@@ -2,6 +2,7 @@ import type { CreateMessagesSubscriptionByRoomDataAccess } from "../../../domain
 import type { CreateMessagesSubscriptionByRoomCommand } from "../../../domain/messages/create-messages-subscription-by-room/create-messages-subscription-by-room.command.ts";
 import type { Message as DomainMessage } from "../../../domain/messages/create-messages-subscription-by-room/create-messages-subscription-by-room.response.ts";
 import type { Message } from "../../entities/message.entity.ts";
+import type { User } from "../../entities/user.entity.ts";
 import * as keys from "../../keys.ts";
 
 export class CreateMessagesSubscriptionByRoomDataAccessKv
@@ -11,6 +12,9 @@ export class CreateMessagesSubscriptionByRoomDataAccessKv
   async createMessagesSubscriptionByRoom(
     command: CreateMessagesSubscriptionByRoomCommand,
   ): Promise<ReadableStream<DomainMessage[]>> {
+    const kv = this.kv;
+    const getUserAvatarUrl = this.getUserAvatarUrl.bind(this);
+
     const roomSubscriptionKey = keys.roomSubscriptionKey(
       command.roomId,
       command.userHandle,
@@ -31,8 +35,6 @@ export class CreateMessagesSubscriptionByRoomDataAccessKv
     const lastRoomMessageIdsReader = this.kv.watch<string[]>([
       lastRoomMessageIdKey,
     ]).getReader();
-
-    const kv = this.kv;
 
     return new ReadableStream<DomainMessage[]>({
       async start(controller) {
@@ -55,8 +57,8 @@ export class CreateMessagesSubscriptionByRoomDataAccessKv
             end: [...keys.messageKey(command.roomId, lastMessageId.value), ""],
           }));
 
-          const messagesChunk = newMessages.map(
-            (entry): DomainMessage | null => {
+          const messageChunkPromises = await Promise.all(newMessages.map(
+            async (entry): Promise<DomainMessage | null> => {
               if (!entry.value) {
                 return null;
               }
@@ -65,14 +67,21 @@ export class CreateMessagesSubscriptionByRoomDataAccessKv
                 id: entry.value.id,
                 roomId: entry.value.roomId,
                 userHandle: entry.value.userHandle,
+                userAvatarUrl: await getUserAvatarUrl(
+                  entry.value.userHandle,
+                ),
                 body: entry.value.message,
                 createdAt: entry.value.createdAt,
                 updatedAt: entry.value.updatedAt ?? undefined,
               };
             },
-          ).filter((message): message is DomainMessage => message !== null);
+          ));
 
-          controller.enqueue(messagesChunk);
+          controller.enqueue(
+            messageChunkPromises.filter((message): message is DomainMessage =>
+              message !== null
+            ),
+          );
 
           lastSeenMessageId = lastMessageId.value;
         }
@@ -81,5 +90,16 @@ export class CreateMessagesSubscriptionByRoomDataAccessKv
         lastRoomMessageIdsReader.cancel();
       },
     });
+  }
+
+  async getUserAvatarUrl(userHandle: string): Promise<string> {
+    const userKey = keys.userLoginKey(userHandle);
+    const user = await this.kv.get<User>(userKey);
+
+    if (!user.value) {
+      throw new Error("User not found");
+    }
+
+    return user.value.avatarUrl;
   }
 }

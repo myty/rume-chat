@@ -31,6 +31,10 @@ export const userBySessionKey = (
   sessionId: string,
 ) => ["users_by_session", sessionId] as const;
 
-export const userKey = (
+export const userLoginKey = (
   userHandle: string,
 ) => ["users", userHandle] as const;
+
+export const userIdKey = (
+  id: number,
+) => ["users_by_id", `${id}`] as const;
