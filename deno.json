@@ -23,22 +23,13 @@
       "description": "Check if the code is formatted correctly based on biomejs formatting rules"
     },
     "check": {
+      "command": "deno check apps/**/*.ts packages/**/*.ts && deno check apps/**/*.tsx",
       "description": "Check if the code is formatted and linted correctly based on deno and biomejs rules",
       "dependencies": [
         "check:fmt",
         "check:biomejs-fmt",
-        "lint",
-        "check:tsx",
-        "check:ts"
+        "lint"
       ]
-    },
-    "check:ts": {
-      "command": "deno check **/*.ts --node-modules-dir node_modules",
-      "description": "Check typescript types for .ts files"
-    },
-    "check:tsx": {
-      "command": "deno check **/*.tsx --node-modules-dir node_modules",
-      "description": "Check typescript types for .tsx files"
     },
     "fmt": {
       "command": "deno fmt",
