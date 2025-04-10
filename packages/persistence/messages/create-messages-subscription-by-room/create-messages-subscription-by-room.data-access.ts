@@ -57,7 +57,7 @@ export class CreateMessagesSubscriptionByRoomDataAccessKv
             end: [...keys.messageKey(command.roomId, lastMessageId.value), ""],
           }));
 
-          const messageChunkPromises = await Promise.all(newMessages.map(
+          const messagesChunk = await Promise.all(newMessages.map(
             async (entry): Promise<DomainMessage | null> => {
               if (!entry.value) {
                 return null;
@@ -78,7 +78,7 @@ export class CreateMessagesSubscriptionByRoomDataAccessKv
           ));
 
           controller.enqueue(
-            messageChunkPromises.filter((message): message is DomainMessage =>
+            messagesChunk.filter((message): message is DomainMessage =>
               message !== null
             ),
           );
