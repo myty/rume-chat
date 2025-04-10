@@ -1,4 +1,4 @@
-import type { Room } from "../../entities/index.ts";
+import type { Room } from "../../entities/room.entity.ts";
 import type {
   GetUserRoomsDataAccess,
   GetUserRoomsQuery,

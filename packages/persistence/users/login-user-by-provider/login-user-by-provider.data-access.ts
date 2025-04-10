@@ -3,8 +3,7 @@ import type {
   LoginUserByProviderDataAccess,
   LoginUserByProviderResponse,
 } from "@myty/fresh-workspace-domain/users/login-user-by-provider";
-import type { GetAuthProviderUserResponse } from "@myty/fresh-workspace-domain/auth-providers/get-auth-provider-user";
-import type { User } from "../../entities/user.entity.ts";
+import { User } from "../../entities/user.entity.ts";
 import * as keys from "../../keys.ts";
 
 export class LoginUserByProviderDataAccessKv
@@ -13,28 +12,24 @@ export class LoginUserByProviderDataAccessKv
 
   async loginUser(
     command: LoginUserByProviderCommand,
-    authProviderResponse: GetAuthProviderUserResponse,
   ): Promise<LoginUserByProviderResponse> {
-    const userLoginKey = keys.userLoginKey(authProviderResponse.login);
-    const userIdKey = keys.userIdKey(authProviderResponse.id);
-    const [user] = await this.kv.getMany<User[]>([userLoginKey, userIdKey]);
+    const userLoginKey = keys.userLoginKey(command.userInfo.login);
+    const userIdKey = keys.userIdKey(command.userInfo.id);
+    const [persistedUser] = await this.kv.getMany<User[]>([
+      userLoginKey,
+      userIdKey,
+    ]);
+    const user = User.fromCommand(command);
 
-    if (user.value === null) {
-      return await this.createUser({
-        id: authProviderResponse.id,
-        nodeId: authProviderResponse.nodeId,
-        handle: authProviderResponse.login,
-        sessionId: command.sessionId,
-        name: authProviderResponse.name,
-        avatarUrl: authProviderResponse.avatarUrl,
-      });
+    if (persistedUser.value === null) {
+      return await this.createUser(user);
     }
 
     return await this.updateUserSession(
       {
-        ...user.value,
-        name: authProviderResponse.name,
-        avatarUrl: authProviderResponse.avatarUrl,
+        ...persistedUser.value,
+        name: user.name,
+        avatarUrl: user.avatarUrl,
       },
       command.sessionId,
     );

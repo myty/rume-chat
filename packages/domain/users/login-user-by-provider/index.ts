@@ -4,7 +4,6 @@ import type { LoginUserByProviderResponse } from "./login-user-by-provider.respo
 import type { LoginUserByProviderDataAccess } from "./login-user-by-provider.data-access.ts";
 import { type BindableIoCModule, Lifecycle } from "@myty/fresh-workspace-ioc";
 import type { CommandHandler } from "../../handlers/command-handler.ts";
-import type { AuthProvidersDomainTypes } from "../../auth-providers/get-auth-provider-user/index.ts";
 
 export interface LoginUserByProviderTypes {
   LoginUserByProviderDataAccess: LoginUserByProviderDataAccess;
@@ -15,7 +14,7 @@ export interface LoginUserByProviderTypes {
 }
 
 export const LoginUserByProviderIocModule: BindableIoCModule<
-  LoginUserByProviderTypes & AuthProvidersDomainTypes
+  LoginUserByProviderTypes
 > = (
   c,
 ) => {
@@ -24,7 +23,6 @@ export const LoginUserByProviderIocModule: BindableIoCModule<
     (c) =>
       new LoginUserByProviderCommandHandler(
         c.resolve("LoginUserByProviderDataAccess"),
-        c.resolve("GetAuthProviderUserDataAccess"),
       ),
     Lifecycle.Scoped,
   );

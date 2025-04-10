@@ -1,4 +1,4 @@
-import type { Room } from "../../entities/index.ts";
+import { Room } from "../../entities/room.entity.ts";
 import type {
   CreateRoomCommand,
   CreateRoomDataAccess,
@@ -10,12 +10,7 @@ export class CreateRoomDataAccessKv implements CreateRoomDataAccess {
   constructor(private kv: Deno.Kv) {}
 
   async createRoom(command: CreateRoomCommand): Promise<CreateRoomResponse> {
-    const room: Room = {
-      id: command.roomId,
-      name: command.name,
-      ownerHandle: command.ownerHandle,
-    };
-
+    const room = Room.fromCommand(command);
     const roomKey = keys.roomKey(room.id);
     const roomActiveUsersKey = keys.roomActiveUsersKey(room.id);
     const userRoomKey = keys.userRoomKey(room.ownerHandle, room.id);
