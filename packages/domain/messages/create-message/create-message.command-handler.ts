@@ -1,5 +1,5 @@
 import type { CommandHandler } from "../../index.ts";
-import type { CreateMessageCommand } from "./create-meessage.command.ts";
+import type { CreateMessageCommand } from "./create-message.command.ts";
 import type { CreateMessageResponse } from "./create-message.response.ts";
 
 export interface CreateMessageDataAccess {

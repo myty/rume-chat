@@ -3,7 +3,7 @@ import type {
   CreateRoomCommand,
   CreateRoomDataAccess,
   CreateRoomResponse,
-} from "@myty/fresh-workspace-domain/rooms/create-room";
+} from "@myty/fresh-workspace-domain";
 import * as keys from "../../keys.ts";
 
 export class CreateRoomDataAccessKv implements CreateRoomDataAccess {

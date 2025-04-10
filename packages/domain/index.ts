@@ -20,4 +20,9 @@ export const DomainIocModule: BindableIoCModule<DomainTypes> = (c) => {
   c.addModule(AuthProvidersIocModule);
 };
 
+export * from "./auth-providers/domain.ts";
+export * from "./messages/domain.ts";
+export * from "./rooms/domain.ts";
+export * from "./users/domain.ts";
+
 export * from "./handlers/index.ts";

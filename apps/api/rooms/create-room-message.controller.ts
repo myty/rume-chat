@@ -4,7 +4,7 @@ import type { MessageDto } from "../dtos/message.dto.ts";
 import type { buildContainer } from "../middleware/ioc/build-container.ts";
 import type { BlankInput } from "hono/types";
 import { HTTPException } from "../http-exception.ts";
-import { CreateMessageCommand } from "../../../packages/domain/messages/create-message/create-meessage.command.ts";
+import { CreateMessageCommand } from "@myty/fresh-workspace-domain";
 
 export const createRoomMessageController = async (
   c: Context<

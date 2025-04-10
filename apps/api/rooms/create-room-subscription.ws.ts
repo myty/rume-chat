@@ -3,7 +3,7 @@ import type { UserDto } from "../dtos/user.dto.ts";
 import type { buildContainer } from "../middleware/ioc/build-container.ts";
 import type { BlankInput } from "hono/types";
 import { HTTPException } from "../http-exception.ts";
-import { CreateMessagesSubscriptionByRoomCommand } from "../../../packages/domain/messages/create-messages-subscription-by-room/create-messages-subscription-by-room.command.ts";
+import { CreateMessagesSubscriptionByRoomCommand } from "@myty/fresh-workspace-domain";
 import type { WSEvents } from "hono/ws";
 
 export const createRoomSubscriptionController = async (

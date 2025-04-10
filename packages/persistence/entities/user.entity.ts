@@ -1,6 +1,4 @@
-import type {
-  LoginUserByProviderCommand,
-} from "@myty/fresh-workspace-domain/users/login-user-by-provider";
+import type { LoginUserByProviderCommand } from "@myty/fresh-workspace-domain";
 
 export class User {
   constructor(

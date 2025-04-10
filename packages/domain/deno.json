@@ -2,13 +2,6 @@
   "name": "@myty/fresh-workspace-domain",
   "version": "0.0.0",
   "exports": {
-    ".": "./index.ts",
-    "./auth-providers/get-auth-provider-user": "./auth-providers/get-auth-provider-user/index.ts",
-    "./rooms/create-room": "./rooms/create-room/index.ts",
-    "./rooms/get-room": "./rooms/get-room/index.ts",
-    "./rooms/get-user-rooms": "./rooms/get-user-rooms/index.ts",
-    "./users/get-user-by-handle": "./users/get-user-by-handle/index.ts",
-    "./users/get-user-by-session-id": "./users/get-user-by-session-id/index.ts",
-    "./users/login-user-by-provider": "./users/login-user-by-provider/index.ts"
+    ".": "./index.ts"
   }
 }

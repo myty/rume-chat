@@ -3,7 +3,7 @@ import type {
   GetUserRoomsDataAccess,
   GetUserRoomsQuery,
   GetUserRoomsResponse,
-} from "@myty/fresh-workspace-domain/rooms/get-user-rooms";
+} from "@myty/fresh-workspace-domain";
 import * as keys from "../../keys.ts";
 
 export class GetUserRoomsDataAccessKv implements GetUserRoomsDataAccess {

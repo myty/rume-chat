@@ -2,7 +2,7 @@ import type {
   GetUserBySessionIdDataAccess,
   GetUserBySessionIdQuery,
   GetUserBySessionIdResponse,
-} from "@myty/fresh-workspace-domain/users/get-user-by-session-id";
+} from "@myty/fresh-workspace-domain";
 import * as keys from "../../keys.ts";
 import type { User } from "../../entities/user.entity.ts";
 

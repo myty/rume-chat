@@ -1,6 +1,4 @@
-import type {
-  CreateRoomCommand,
-} from "@myty/fresh-workspace-domain/rooms/create-room";
+import type { CreateRoomCommand } from "@myty/fresh-workspace-domain";
 
 export class Room {
   constructor(

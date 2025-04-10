@@ -1,11 +1,13 @@
 import { createGitHubOAuthConfig, createHelpers } from "@deno/kv-oauth";
-import { LoginUserByProviderCommand } from "@myty/fresh-workspace-domain/users/login-user-by-provider";
-import { GetUserBySessionIdQuery } from "@myty/fresh-workspace-domain/users/get-user-by-session-id";
 import { createMiddleware } from "hono/factory";
 import type { Hono } from "hono";
 import type { UserDto } from "../dtos/user.dto.ts";
 import type { buildContainer } from "./ioc/build-container.ts";
-import { GetAuthProviderUserCommand } from "../../../packages/domain/auth-providers/get-auth-provider-user/get-auth-provider-user.command.ts";
+import {
+  GetAuthProviderUserCommand,
+  GetUserBySessionIdQuery,
+  LoginUserByProviderCommand,
+} from "@myty/fresh-workspace-domain";
 
 export function configureAuthentication(
   app: Hono<{ Variables?: { container: ReturnType<typeof buildContainer> } }>,
