@@ -62,7 +62,7 @@ export default function Room() {
             <li className="mx-8 mt-8 flex gap-2">
               <img
                 alt={`${m.userHandle} avatar`}
-                src="https://avatars.githubusercontent.com/u/37794?v=4"
+                src={m.userAvatarUrl}
                 className="inline-block size-12 rounded-full"
               />
               <div className="flex flex-col">

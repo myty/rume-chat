@@ -2,7 +2,8 @@ import type {
   GetUserBySessionIdDataAccess,
   GetUserBySessionIdQuery,
   GetUserBySessionIdResponse,
-} from "@myty/fresh-workspace-domain/users/get-user-by-session-id";
+} from "@myty/fresh-workspace-domain";
+import * as keys from "../../keys.ts";
 import type { User } from "../../entities/user.entity.ts";
 
 export class GetUserBySessionIdDataAccessKv
@@ -12,7 +13,8 @@ export class GetUserBySessionIdDataAccessKv
   async getUserBySessionId(
     query: GetUserBySessionIdQuery,
   ): Promise<GetUserBySessionIdResponse> {
-    const user = await this.kv.get<User>(["users_by_session", query.sessionId]);
+    const userBySessionKey = keys.userBySessionKey(query.sessionId);
+    const user = await this.kv.get<User>(userBySessionKey);
 
     if (user.value === null) {
       throw new Error("User not found");

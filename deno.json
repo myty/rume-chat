@@ -6,13 +6,48 @@
     "dev": "spino dev",
     "build": "deno task --filter @myty/fresh-workspace-web build",
     "start": "deno task --filter @myty/fresh-workspace-web start",
-    "fix": "deno fmt & deno run -A --node-modules-dir npm:@biomejs/biome format --write . & deno lint --fix",
-    "check": "deno fmt --check && deno lint && deno check **/*.tsx --node-modules-dir node_modules && deno check **/*.ts --node-modules-dir node_modules && deno run -A --node-modules-dir npm:@biomejs/biome format ."
+    "fix": {
+      "command": "deno lint --fix",
+      "description": "Check if the code is formatted and linted correctly based on deno and biomejs rules and fix the issues",
+      "dependencies": [
+        "fmt",
+        "fmt:biomejs"
+      ]
+    },
+    "check:fmt": {
+      "command": "deno fmt --check",
+      "description": "Check if the code is formatted correctly based on deno formatting rules"
+    },
+    "check:biomejs-fmt": {
+      "command": "deno run -A --node-modules-dir npm:@biomejs/biome format .",
+      "description": "Check if the code is formatted correctly based on biomejs formatting rules"
+    },
+    "check": {
+      "command": "deno check apps/**/*.ts packages/**/*.ts && deno check apps/**/*.tsx",
+      "description": "Check if the code is formatted and linted correctly based on deno and biomejs rules",
+      "dependencies": [
+        "check:fmt",
+        "check:biomejs-fmt",
+        "lint"
+      ]
+    },
+    "fmt": {
+      "command": "deno fmt",
+      "description": "Formtat the code based on deno formatting rules"
+    },
+    "fmt:biomejs": {
+      "command": "deno run -A --node-modules-dir npm:@biomejs/biome format --write .",
+      "description": "Formtat the code based on biomejs formatting rules"
+    },
+    "lint": {
+      "command": "deno lint",
+      "description": "Check if the code is linted correctly based on deno rules"
+    }
   },
   "imports": {
-    "@std/assert": "jsr:@std/assert@^1.0.11",
-    "@std/http": "jsr:@std/http@^1.0.13",
-    "@std/testing": "jsr:@std/testing@^1.0.9"
+    "@std/assert": "jsr:@std/assert@^1.0.12",
+    "@std/http": "jsr:@std/http@^1.0.14",
+    "@std/testing": "jsr:@std/testing@^1.0.11"
   },
   "workspace": [
     "./apps/api",
@@ -23,7 +58,9 @@
     "./packages/github"
   ],
   "fmt": {
-    "exclude": ["**/*.tsx"]
+    "exclude": [
+      "**/*.tsx"
+    ]
   },
   "nodeModulesDir": "auto"
 }

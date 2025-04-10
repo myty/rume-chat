@@ -4,7 +4,7 @@ import {
   CreateMessageCommandHandler,
   type CreateMessageDataAccess,
 } from "./create-message.command-handler.ts";
-import type { CreateMessageCommand } from "./create-meessage.command.ts";
+import type { CreateMessageCommand } from "./create-message.command.ts";
 import type { CreateMessageResponse } from "./create-message.response.ts";
 
 export interface CreateMessageTypes {

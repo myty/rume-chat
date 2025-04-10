@@ -1,4 +1,4 @@
-import type { CreateMessageCommand } from "../../../domain/messages/create-message/create-meessage.command.ts";
+import type { CreateMessageCommand } from "../../../domain/messages/create-message/create-message.command.ts";
 import type { CreateMessageDataAccess } from "../../../domain/messages/create-message/create-message.command-handler.ts";
 import type { Message } from "../../entities/message.entity.ts";
 import { CreateMessageResponse } from "../../../domain/messages/create-message/create-message.response.ts";

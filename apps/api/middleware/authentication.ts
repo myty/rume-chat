@@ -1,10 +1,13 @@
 import { createGitHubOAuthConfig, createHelpers } from "@deno/kv-oauth";
-import { LoginUserByProviderCommand } from "@myty/fresh-workspace-domain/users/login-user-by-provider";
-import { GetUserBySessionIdQuery } from "@myty/fresh-workspace-domain/users/get-user-by-session-id";
 import { createMiddleware } from "hono/factory";
 import type { Hono } from "hono";
 import type { UserDto } from "../dtos/user.dto.ts";
 import type { buildContainer } from "./ioc/build-container.ts";
+import {
+  GetAuthProviderUserCommand,
+  GetUserBySessionIdQuery,
+  LoginUserByProviderCommand,
+} from "@myty/fresh-workspace-domain";
 
 export function configureAuthentication(
   app: Hono<{ Variables?: { container: ReturnType<typeof buildContainer> } }>,
@@ -52,27 +55,43 @@ export function configureAuthentication(
   });
 
   app.all("/auth/callback", async (ctx) => {
-    const handler = ctx.var.container.resolve(
-      "LoginUserByProviderCommandHandler",
-    );
+    try {
+      const getAuthProviderUserCommandHandler = ctx.var.container.resolve(
+        "GetAuthProviderUserCommandHandler",
+      );
+      const loginUserByProviderCommandHandler = ctx.var.container.resolve(
+        "LoginUserByProviderCommandHandler",
+      );
 
-    const { response, sessionId, tokens } = await githubAuth.handleCallback(
-      ctx.req.raw,
-    );
+      const { response, sessionId, tokens } = await githubAuth.handleCallback(
+        ctx.req.raw,
+      );
 
-    const commandResponse = await handler.execute(
-      new LoginUserByProviderCommand(
-        "github",
-        tokens.accessToken,
-        sessionId,
-      ),
-    );
+      const getAuthProviderResponse = await getAuthProviderUserCommandHandler
+        .execute(
+          new GetAuthProviderUserCommand(
+            "github",
+            tokens.accessToken,
+          ),
+        );
 
-    if (!commandResponse.sessionId) {
-      return new Response("Unauthorized", { status: 401 });
+      await loginUserByProviderCommandHandler.execute(
+        new LoginUserByProviderCommand(
+          sessionId,
+          getAuthProviderResponse,
+        ),
+      );
+
+      return response;
+    } catch (error) {
+      if (
+        error instanceof TypeError
+      ) {
+        return new Response("Unauthorized", { status: 401 });
+      }
+
+      return new Response("Internal Server Error", { status: 500 });
     }
-
-    return response;
   });
 
   app.all("/auth/signout", async (ctx) => {

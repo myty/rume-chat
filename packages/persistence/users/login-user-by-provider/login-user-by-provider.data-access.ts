@@ -2,9 +2,9 @@ import type {
   LoginUserByProviderCommand,
   LoginUserByProviderDataAccess,
   LoginUserByProviderResponse,
-} from "@myty/fresh-workspace-domain/users/login-user-by-provider";
-import type { GetAuthProviderUserResponse } from "@myty/fresh-workspace-domain/auth-providers/get-auth-provider-user";
-import type { User } from "../../entities/user.entity.ts";
+} from "@myty/fresh-workspace-domain";
+import { User } from "../../entities/user.entity.ts";
+import * as keys from "../../keys.ts";
 
 export class LoginUserByProviderDataAccessKv
   implements LoginUserByProviderDataAccess {
@@ -12,37 +12,40 @@ export class LoginUserByProviderDataAccessKv
 
   async loginUser(
     command: LoginUserByProviderCommand,
-    authProviderResponse: GetAuthProviderUserResponse,
   ): Promise<LoginUserByProviderResponse> {
-    const user = await this.kv.get<User>(["users", authProviderResponse.login]);
+    const userLoginKey = keys.userLoginKey(command.userInfo.login);
+    const userIdKey = keys.userIdKey(command.userInfo.id);
+    const [persistedUser] = await this.kv.getMany<User[]>([
+      userLoginKey,
+      userIdKey,
+    ]);
+    const user = User.fromCommand(command);
 
-    if (user.value === null) {
-      return await this.createUser({
-        handle: authProviderResponse.login,
-        sessionId: command.sessionId,
-        name: authProviderResponse.name,
-        avatarUrl: authProviderResponse.avatarUrl,
-      });
+    if (persistedUser.value === null) {
+      return await this.createUser(user);
     }
 
     return await this.updateUserSession(
       {
-        ...user.value,
-        name: authProviderResponse.name,
-        avatarUrl: authProviderResponse.avatarUrl,
+        ...persistedUser.value,
+        name: user.name,
+        avatarUrl: user.avatarUrl,
       },
       command.sessionId,
     );
   }
 
   private async createUser(user: User): Promise<User> {
-    const usersKey = ["users", user.handle];
-    const usersBySessionKey = ["users_by_session", user.sessionId];
+    const userLoginKey = keys.userLoginKey(user.handle);
+    const userIdKey = keys.userIdKey(user.id);
+    const usersBySessionKey = keys.userBySessionKey(user.sessionId);
 
     const res = await this.kv.atomic()
-      .check({ key: usersKey, versionstamp: null })
+      .check({ key: userLoginKey, versionstamp: null })
+      .check({ key: userIdKey, versionstamp: null })
       .check({ key: usersBySessionKey, versionstamp: null })
-      .set(usersKey, user)
+      .set(userLoginKey, user)
+      .set(userIdKey, user)
       .set(usersBySessionKey, user)
       .commit();
 
@@ -55,13 +58,15 @@ export class LoginUserByProviderDataAccessKv
     user: User,
     sessionId: string,
   ): Promise<User> {
-    const userKey = ["users", user.handle];
-    const oldUserBySessionKey = ["users_by_session", user.sessionId];
-    const newUserBySessionKey = ["users_by_session", sessionId];
+    const userLoginKey = keys.userLoginKey(user.handle);
+    const userIdKey = keys.userIdKey(user.id);
+    const oldUserBySessionKey = keys.userBySessionKey(user.sessionId);
+    const newUserBySessionKey = keys.userBySessionKey(sessionId);
     const newUser: User = { ...user, sessionId };
 
     const res = await this.kv.atomic()
-      .set(userKey, newUser)
+      .set(userLoginKey, newUser)
+      .set(userIdKey, newUser)
       .delete(oldUserBySessionKey)
       .check({ key: newUserBySessionKey, versionstamp: null })
       .set(newUserBySessionKey, newUser)
