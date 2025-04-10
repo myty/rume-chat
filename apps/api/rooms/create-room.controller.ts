@@ -1,22 +1,8 @@
-import type { Context } from "hono";
-import type { UserDto } from "../dtos/user.dto.ts";
-import type { buildContainer } from "../middleware/ioc/build-container.ts";
-import { CreateRoomCommand } from "@myty/fresh-workspace-domain";
-import type { BlankInput } from "hono/types";
+import { createController } from "../create-controller.ts";
 import { HTTPException } from "../http-exception.ts";
+import { CreateRoomCommand } from "@myty/fresh-workspace-domain";
 
-export const createRoomController = async (
-  c: Context<
-    {
-      Variables: {
-        currentUser: UserDto;
-        container: ReturnType<typeof buildContainer>;
-      };
-    },
-    "/rooms",
-    BlankInput
-  >,
-) => {
+export const createRoomController = createController("/rooms", async (c) => {
   try {
     const commandHandler = c.var.container.resolve(
       "CreateRoomCommandHandler",
@@ -35,4 +21,4 @@ export const createRoomController = async (
   } catch (error) {
     throw HTTPException.fromError(error);
   }
-};
+});

@@ -7,11 +7,7 @@ export function configureIocContainer(
 ): () => void {
   const container = buildContainer();
 
-  const middleware = createMiddleware<{
-    Variables: {
-      container: ReturnType<typeof buildContainer>;
-    };
-  }>(async (c, next) => {
+  const middleware = createMiddleware(async (c, next) => {
     using scopedContainer = container.beginScope();
     c.set("container", scopedContainer);
     await next();
