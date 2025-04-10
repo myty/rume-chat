@@ -1,6 +1,6 @@
 import { createController } from "../create-controller.ts";
 import { HTTPException } from "../http-exception.ts";
-import type { MessageDto } from "../dtos/message.dto.ts";
+import { MessageDto } from "../dtos/message.dto.ts";
 import { CreateMessageCommand } from "@myty/fresh-workspace-domain";
 
 export const createRoomMessageController = createController(
@@ -20,14 +20,7 @@ export const createRoomMessageController = createController(
       );
 
       const response = await commandHandler.execute(command);
-
-      const createdMessageDto: MessageDto = {
-        id: response.id,
-        roomId: response.roomId,
-        message: response.message,
-        userHandle: response.userHandle,
-        createdAt: response.createdAt,
-      };
+      const createdMessageDto = MessageDto.fromResponse(response);
 
       return c.json(createdMessageDto);
     } catch (error) {

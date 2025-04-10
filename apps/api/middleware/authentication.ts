@@ -1,7 +1,7 @@
 import { createGitHubOAuthConfig, createHelpers } from "@deno/kv-oauth";
 import { createMiddleware } from "hono/factory";
 import type { Hono } from "hono";
-import type { UserDto } from "../dtos/user.dto.ts";
+import { UserDto } from "../dtos/user.dto.ts";
 import type { buildContainer } from "./ioc/build-container.ts";
 import {
   GetAuthProviderUserCommand,
@@ -42,7 +42,7 @@ export function configureAuthentication(
 
       const user = await handler.handle(query);
 
-      c.set("currentUser", user);
+      c.set("currentUser", UserDto.fromResponse(user));
     }
 
     await next();

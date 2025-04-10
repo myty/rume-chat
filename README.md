@@ -36,7 +36,7 @@ scalability, and clean architecture in mind.
    deno task dev
    ```
 
-   The application will be available at `http://localhost:8000`
+   The application will be available at `http://localhost:5173`
 
 ## 🏗️ Technology Stack
 
