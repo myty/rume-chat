@@ -1,4 +1,4 @@
-import type { GetUserBySessionIdResponse } from "@myty/fresh-workspace-domain";
+import type { GetUserBySessionIdResponse } from "@myty/rume-chat-domain";
 
 export class UserDto {
   static fromResponse(response: GetUserBySessionIdResponse): UserDto {

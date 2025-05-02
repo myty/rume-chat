@@ -1,5 +1,5 @@
 {
-  "name": "@myty/fresh-workspace-github",
+  "name": "@myty/rume-chat-github",
   "version": "0.0.0",
   "exports": {
     ".": "./index.ts"

@@ -3,7 +3,7 @@ import {
   type CreateMessageCommand,
   type CreateMessageDataAccess,
   CreateMessageResponse,
-} from "@myty/fresh-workspace-domain";
+} from "@myty/rume-chat-domain";
 import type { Message } from "../../entities/message.entity.ts";
 import * as keys from "../../keys.ts";
 

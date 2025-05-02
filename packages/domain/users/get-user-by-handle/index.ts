@@ -1,4 +1,4 @@
-import { type BindableIoCModule, Lifecycle } from "@myty/fresh-workspace-ioc";
+import { type BindableIoCModule, Lifecycle } from "@myty/rume-chat-ioc";
 import type { GetUserByHandleDataAccess } from "./get-user-by-handle.data-access.ts";
 import type { QueryHandler } from "../../handlers/query-handler.ts";
 import { GetUserByHandleQuery } from "./get-user-by-handle.query.ts";

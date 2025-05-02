@@ -1,5 +1,4 @@
-export { IoCContainer, Lifecycle } from "./ioc-container.ts";
-export type {
-  BindableIoCModule,
-  ScopableIoCContainer,
-} from "./ioc-container.ts";
+export { IoCContainer } from "./ioc-container.ts";
+export { Lifecycle } from "./lifecycle.ts";
+export type { BindableIoCModule } from "./ioc-container.ts";
+export type { ScopableIoCContainer } from "./bound-ioc-container.ts";

@@ -1,7 +1,7 @@
-import { DomainIocModule } from "@myty/fresh-workspace-domain";
-import { GithubIocModule } from "@myty/fresh-workspace-github";
-import { IoCContainer } from "@myty/fresh-workspace-ioc";
-import { PersistenceIocModule } from "@myty/fresh-workspace-persistence";
+import { DomainIocModule } from "@myty/rume-chat-domain";
+import { GithubIocModule } from "@myty/rume-chat-github";
+import { IoCContainer } from "@myty/rume-chat-ioc";
+import { PersistenceIocModule } from "@myty/rume-chat-persistence";
 import { SubscriptionsIocModule } from "../../subscriptions/index.ts";
 
 export const buildContainer = () =>

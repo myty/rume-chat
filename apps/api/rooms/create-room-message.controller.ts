@@ -1,7 +1,7 @@
 import { createController } from "../create-controller.ts";
 import { HTTPException } from "../http-exception.ts";
 import { MessageDto } from "../dtos/message.dto.ts";
-import { CreateMessageCommand } from "@myty/fresh-workspace-domain";
+import { CreateMessageCommand } from "@myty/rume-chat-domain";
 
 export const createRoomMessageController = createController(
   "/rooms/:roomId/messages",

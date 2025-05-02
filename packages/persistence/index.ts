@@ -1,5 +1,5 @@
-import { type BindableIoCModule, Lifecycle } from "@myty/fresh-workspace-ioc";
-import type { DomainTypes } from "@myty/fresh-workspace-domain";
+import { type BindableIoCModule, Lifecycle } from "@myty/rume-chat-ioc";
+import type { DomainTypes } from "@myty/rume-chat-domain";
 import { GetRoomDataAccessKv } from "./rooms/get/get-room.data-access.ts";
 import { CreateRoomDataAccessKv } from "./rooms/create/create-room.data-access.ts";
 import { GetUserRoomsDataAccessKv } from "./rooms/get-user-rooms/get-user-rooms.data-access.ts";

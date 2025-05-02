@@ -1,5 +1,5 @@
-import { type BindableIoCModule, Lifecycle } from "@myty/fresh-workspace-ioc";
-import type { DomainTypes } from "@myty/fresh-workspace-domain";
+import { type BindableIoCModule, Lifecycle } from "@myty/rume-chat-ioc";
+import type { DomainTypes } from "@myty/rume-chat-domain";
 import type { MessageDto } from "../dtos/message.dto.ts";
 import { Subscriptions } from "./subscriptions.ts";
 

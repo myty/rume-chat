@@ -1,7 +1,7 @@
 import type { WSEvents } from "hono/ws";
 import { createController } from "../create-controller.ts";
 import { HTTPException } from "../http-exception.ts";
-import { CreateMessagesSubscriptionByRoomCommand } from "@myty/fresh-workspace-domain";
+import { CreateMessagesSubscriptionByRoomCommand } from "@myty/rume-chat-domain";
 
 export const createRoomSubscriptionController = createController(
   "ws/rooms/:roomId/subscription",

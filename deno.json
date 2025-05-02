@@ -1,11 +1,11 @@
 {
-  "name": "@myty/fresh-workspace",
+  "name": "@myty/rume-chat-workspace",
   "version": "0.0.0",
   "exports": {},
   "tasks": {
     "dev": "spino dev",
-    "build": "deno task --filter @myty/fresh-workspace-web build",
-    "start": "deno task --filter @myty/fresh-workspace-web start",
+    "build": "deno task --filter @myty/rume-chat-web build",
+    "start": "deno task --filter @myty/rume-chat-web start",
     "fix": {
       "command": "deno lint --fix",
       "description": "Check if the code is formatted and linted correctly based on deno rules and fix the issues",

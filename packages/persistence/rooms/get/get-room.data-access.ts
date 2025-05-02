@@ -2,7 +2,7 @@ import type {
   GetRoomDataAccess,
   GetRoomQuery,
   GetRoomResponse,
-} from "@myty/fresh-workspace-domain";
+} from "@myty/rume-chat-domain";
 import type { Room } from "../../entities/room.entity.ts";
 import * as keys from "../../keys.ts";
 

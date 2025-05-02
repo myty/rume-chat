@@ -1,6 +1,6 @@
 import { createController } from "../create-controller.ts";
 import { HTTPException } from "../http-exception.ts";
-import { GetUserRoomsQuery } from "@myty/fresh-workspace-domain";
+import { GetUserRoomsQuery } from "@myty/rume-chat-domain";
 
 export const getRoomsController = createController("/rooms", async (c) => {
   try {

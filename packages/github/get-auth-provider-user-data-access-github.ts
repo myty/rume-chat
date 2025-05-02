@@ -2,7 +2,7 @@ import type {
   GetAuthProviderUserCommand,
   GetAuthProviderUserDataAccess,
   GetAuthProviderUserResponse,
-} from "@myty/fresh-workspace-domain";
+} from "@myty/rume-chat-domain";
 
 export class GetAuthProviderUserDataAccessGitHub
   implements GetAuthProviderUserDataAccess {

@@ -1,4 +1,4 @@
-import type { CreateMessageResponse } from "@myty/fresh-workspace-domain";
+import type { CreateMessageResponse } from "@myty/rume-chat-domain";
 
 export class MessageDto {
   static fromResponse(message: CreateMessageResponse): MessageDto {

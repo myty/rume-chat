@@ -1,4 +1,4 @@
-import type { BindableIoCModule } from "@myty/fresh-workspace-ioc";
+import type { BindableIoCModule } from "@myty/rume-chat-ioc";
 import { type RoomDomainTypes, RoomsIocModule } from "./rooms/index.ts";
 import { type UserDomainTypes, UsersIocModule } from "./users/index.ts";
 import {

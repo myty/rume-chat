@@ -1,5 +1,5 @@
 {
-  "name": "@myty/fresh-workspace-api",
+  "name": "@myty/rume-chat-api",
   "exports": {},
   "tasks": {
     "dev": "deno run --env --unstable-kv -A --watch ./main.ts"

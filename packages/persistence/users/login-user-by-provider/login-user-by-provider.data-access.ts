@@ -2,7 +2,7 @@ import type {
   LoginUserByProviderCommand,
   LoginUserByProviderDataAccess,
   LoginUserByProviderResponse,
-} from "@myty/fresh-workspace-domain";
+} from "@myty/rume-chat-domain";
 import { User } from "../../entities/user.entity.ts";
 import * as keys from "../../keys.ts";
 

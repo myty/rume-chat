@@ -1,5 +1,5 @@
 {
-  "name": "@myty/fresh-workspace-domain",
+  "name": "@myty/rume-chat-domain",
   "version": "0.0.0",
   "exports": {
     ".": "./index.ts"

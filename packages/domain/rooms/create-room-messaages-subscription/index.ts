@@ -1,4 +1,4 @@
-import { type BindableIoCModule, Lifecycle } from "@myty/fresh-workspace-ioc";
+import { type BindableIoCModule, Lifecycle } from "@myty/rume-chat-ioc";
 import type { CommandHandler } from "../../handlers/command-handler.ts";
 import {
   CreateRoomMessagesSubscriptionCommandHandler,

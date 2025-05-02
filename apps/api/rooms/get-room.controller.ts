@@ -1,6 +1,6 @@
 import { createController } from "../create-controller.ts";
 import { HTTPException } from "../http-exception.ts";
-import { GetRoomQuery } from "@myty/fresh-workspace-domain";
+import { GetRoomQuery } from "@myty/rume-chat-domain";
 
 export const getRoomController = createController(
   "/rooms/:roomId",

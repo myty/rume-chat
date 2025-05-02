@@ -1,5 +1,5 @@
 {
-  "name": "@myty/fresh-workspace-ioc",
+  "name": "@myty/rume-chat-ioc",
   "version": "0.0.0",
   "exports": {
     ".": "./index.ts"

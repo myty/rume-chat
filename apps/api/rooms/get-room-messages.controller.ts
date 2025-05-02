@@ -1,6 +1,6 @@
 import { createController } from "../create-controller.ts";
 import { HTTPException } from "../http-exception.ts";
-import { GetMessagesByRoomQuery } from "@myty/fresh-workspace-domain";
+import { GetMessagesByRoomQuery } from "@myty/rume-chat-domain";
 
 const PAGE_SIZE = 50;
 

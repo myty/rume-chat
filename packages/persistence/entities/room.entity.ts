@@ -1,4 +1,4 @@
-import type { CreateRoomCommand } from "@myty/fresh-workspace-domain";
+import type { CreateRoomCommand } from "@myty/rume-chat-domain";
 
 export class Room {
   constructor(

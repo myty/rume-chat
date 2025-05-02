@@ -2,7 +2,7 @@ import {
   type GetMessagesByRoomDataAccess,
   type GetMessagesByRoomQuery,
   GetMessagesByRoomResponse,
-} from "@myty/fresh-workspace-domain";
+} from "@myty/rume-chat-domain";
 import * as keys from "../../keys.ts";
 import type { Message } from "../../entities/message.entity.ts";
 

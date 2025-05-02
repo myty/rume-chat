@@ -7,7 +7,7 @@ import {
   GetAuthProviderUserCommand,
   GetUserBySessionIdQuery,
   LoginUserByProviderCommand,
-} from "@myty/fresh-workspace-domain";
+} from "@myty/rume-chat-domain";
 
 export function configureAuthentication(
   app: Hono<{ Variables?: { container: ReturnType<typeof buildContainer> } }>,

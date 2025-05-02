@@ -2,7 +2,7 @@ import {
   type CreateMessagesSubscriptionByRoomCommand,
   type CreateMessagesSubscriptionByRoomDataAccess,
   CreateMessagesSubscriptionByRoomResponse,
-} from "@myty/fresh-workspace-domain";
+} from "@myty/rume-chat-domain";
 import type { Message } from "../../entities/message.entity.ts";
 import type { User } from "../../entities/user.entity.ts";
 import * as keys from "../../keys.ts";

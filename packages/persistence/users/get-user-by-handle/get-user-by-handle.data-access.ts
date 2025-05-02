@@ -2,7 +2,7 @@ import type {
   GetUserByHandleDataAccess,
   GetUserByHandleQuery,
   GetUserByHandleResponse,
-} from "@myty/fresh-workspace-domain";
+} from "@myty/rume-chat-domain";
 import type { User } from "../../entities/user.entity.ts";
 import * as keys from "../../keys.ts";
 
