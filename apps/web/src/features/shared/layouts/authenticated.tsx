@@ -7,8 +7,8 @@ import { useStore } from "@tanstack/react-store";
 import { useState } from "react";
 import { SidebarButton } from "../../../components/sidebar-button.tsx";
 import {
-  Bars3Icon,
   ArrowLeftStartOnRectangleIcon,
+  Bars3Icon,
 } from "@heroicons/react/24/outline";
 import { clsx } from "clsx";
 import { Link } from "@tanstack/react-router";
@@ -27,8 +27,7 @@ export const AuthenticatedLayout: React.FC = () => {
             <img
               alt="Rume Chat"
               src="rume-chat-logo.png"
-              className="h-8 w-auto"
-            />
+              className="h-8 w-auto" />
           </div>
           <nav className="flex flex-1 flex-col">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -79,8 +78,7 @@ export const AuthenticatedLayout: React.FC = () => {
               <img
                 alt="Rume Chat"
                 src="rume-chat-logo.png"
-                className="h-18 w-auto"
-              />
+                className="h-18 w-auto" />
             </div>
             <nav className="flex flex-1 flex-col">
               <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -122,8 +120,7 @@ export const AuthenticatedLayout: React.FC = () => {
                     <img
                       alt=""
                       src={currentUser?.avatarUrl}
-                      className="size-8 rounded-full bg-gray-800"
-                    />
+                      className="size-8 rounded-full bg-gray-800" />
                     <span className="sr-only">Your profile</span>
                     <span aria-hidden="true">{currentUser.name}</span>
                     <span className="flex-1"></span>
@@ -155,8 +152,7 @@ export const AuthenticatedLayout: React.FC = () => {
               <img
                 alt=""
                 src={currentUser?.avatarUrl}
-                className="size-8 rounded-full bg-gray-800"
-              />
+                className="size-8 rounded-full bg-gray-800" />
             </a>
           </div>
 

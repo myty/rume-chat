@@ -1,9 +1,9 @@
 import React, { Suspense } from "react";
 import {
-  createRoute,
-  redirect,
   createRootRouteWithContext,
+  createRoute,
   Link,
+  redirect,
 } from "@tanstack/react-router";
 import { Dashboard } from "./features/dashboard/index.tsx";
 import Login from "./features/auth/login.tsx";
@@ -19,7 +19,7 @@ const TanStackRouterDevtools = React.lazy(() =>
   // Lazy load in development
   import("@tanstack/router-devtools").then((res) => ({
     default: res.TanStackRouterDevtools,
-  })),
+  }))
 );
 
 export default function setupRouter(queryClient: QueryClient) {

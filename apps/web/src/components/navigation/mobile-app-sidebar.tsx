@@ -6,7 +6,7 @@ import {
 } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { SidebarButton } from "../sidebar-button.tsx";
-import { useEffect, useState, type PropsWithChildren } from "react";
+import { type PropsWithChildren, useEffect, useState } from "react";
 
 interface MobileAppSidebarProps {
   isOpen: boolean;
@@ -29,8 +29,7 @@ function MobileAppSidebarInternal({
       className="relative z-50 lg:hidden">
       <DialogBackdrop
         transition
-        className="fixed inset-0 bg-gray-900/80 transition-opacity duration-300 ease-linear data-[closed]:opacity-0"
-      />
+        className="fixed inset-0 bg-gray-900/80 transition-opacity duration-300 ease-linear data-[closed]:opacity-0" />
 
       <div className="fixed inset-0 flex">
         <DialogPanel

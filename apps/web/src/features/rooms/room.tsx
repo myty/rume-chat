@@ -63,8 +63,7 @@ export default function Room() {
               <img
                 alt={`${m.userHandle} avatar`}
                 src={m.userAvatarUrl}
-                className="inline-block size-12 rounded-full"
-              />
+                className="inline-block size-12 rounded-full" />
               <div className="flex flex-col">
                 <div className="flex gap-2">
                   <h2 className="font-semibold">{m.userHandle}</h2>

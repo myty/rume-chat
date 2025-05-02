@@ -49,7 +49,7 @@
   ],
   "fmt": {
     "jsx.bracketPosition": "sameLine",
-    "tabSize": 2
+    "indentWidth": 2
   },
   "nodeModulesDir": "auto"
 }
