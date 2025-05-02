@@ -1,9 +1,9 @@
-import type { Room } from "../../entities/room.entity.ts";
 import type {
   GetRoomDataAccess,
   GetRoomQuery,
   GetRoomResponse,
-} from "../../../domain/rooms/get-room/index.ts";
+} from "@myty/fresh-workspace-domain";
+import type { Room } from "../../entities/room.entity.ts";
 import * as keys from "../../keys.ts";
 
 export class GetRoomDataAccessKv implements GetRoomDataAccess {

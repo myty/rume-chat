@@ -1,9 +1,16 @@
-import type { CreateMessagesSubscriptionByRoomDataAccess } from "../../../domain/messages/create-messages-subscription-by-room/create-messages-subscription-by-room.command-handler.ts";
-import type { CreateMessagesSubscriptionByRoomCommand } from "../../../domain/messages/create-messages-subscription-by-room/create-messages-subscription-by-room.command.ts";
-import type { Message as DomainMessage } from "../../../domain/messages/create-messages-subscription-by-room/create-messages-subscription-by-room.response.ts";
+import {
+  type CreateMessagesSubscriptionByRoomCommand,
+  type CreateMessagesSubscriptionByRoomDataAccess,
+  CreateMessagesSubscriptionByRoomResponse,
+} from "@myty/fresh-workspace-domain";
 import type { Message } from "../../entities/message.entity.ts";
 import type { User } from "../../entities/user.entity.ts";
 import * as keys from "../../keys.ts";
+
+type StreamType<T> = T extends ReadableStream<Array<infer U>> ? U : never;
+type DomainMessage = StreamType<
+  CreateMessagesSubscriptionByRoomResponse["messages"]
+>;
 
 export class CreateMessagesSubscriptionByRoomDataAccessKv
   implements CreateMessagesSubscriptionByRoomDataAccess {
@@ -11,7 +18,7 @@ export class CreateMessagesSubscriptionByRoomDataAccessKv
 
   async createMessagesSubscriptionByRoom(
     command: CreateMessagesSubscriptionByRoomCommand,
-  ): Promise<ReadableStream<DomainMessage[]>> {
+  ): Promise<CreateMessagesSubscriptionByRoomResponse> {
     const kv = this.kv;
     const getUserAvatarUrl = this.getUserAvatarUrl.bind(this);
 
@@ -36,7 +43,7 @@ export class CreateMessagesSubscriptionByRoomDataAccessKv
       lastRoomMessageIdKey,
     ]).getReader();
 
-    return new ReadableStream<DomainMessage[]>({
+    const messageStream = new ReadableStream<DomainMessage[]>({
       async start(controller) {
         let lastSeenMessageId = "";
 
@@ -90,6 +97,11 @@ export class CreateMessagesSubscriptionByRoomDataAccessKv
         lastRoomMessageIdsReader.cancel();
       },
     });
+
+    return new CreateMessagesSubscriptionByRoomResponse(
+      command.roomId,
+      messageStream,
+    );
   }
 
   async getUserAvatarUrl(userHandle: string): Promise<string> {

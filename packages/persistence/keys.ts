@@ -38,3 +38,7 @@ export const userLoginKey = (
 export const userIdKey = (
   id: number,
 ) => ["users_by_id", `${id}`] as const;
+
+export const roomMessagesKey = (
+  roomId: string,
+) => ["rooms", roomId, "messages"] as const;

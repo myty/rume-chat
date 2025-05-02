@@ -8,36 +8,26 @@
     "start": "deno task --filter @myty/fresh-workspace-web start",
     "fix": {
       "command": "deno lint --fix",
-      "description": "Check if the code is formatted and linted correctly based on deno and biomejs rules and fix the issues",
+      "description": "Check if the code is formatted and linted correctly based on deno rules and fix the issues",
       "dependencies": [
-        "fmt",
-        "fmt:biomejs"
+        "fmt"
       ]
     },
     "check:fmt": {
       "command": "deno fmt --check",
       "description": "Check if the code is formatted correctly based on deno formatting rules"
     },
-    "check:biomejs-fmt": {
-      "command": "deno run -A --node-modules-dir npm:@biomejs/biome format .",
-      "description": "Check if the code is formatted correctly based on biomejs formatting rules"
-    },
     "check": {
       "command": "deno check apps/**/*.ts packages/**/*.ts && deno check apps/**/*.tsx",
-      "description": "Check if the code is formatted and linted correctly based on deno and biomejs rules",
+      "description": "Check if the code is formatted and linted correctly based on deno rules",
       "dependencies": [
         "check:fmt",
-        "check:biomejs-fmt",
         "lint"
       ]
     },
     "fmt": {
       "command": "deno fmt",
-      "description": "Formtat the code based on deno formatting rules"
-    },
-    "fmt:biomejs": {
-      "command": "deno run -A --node-modules-dir npm:@biomejs/biome format --write .",
-      "description": "Formtat the code based on biomejs formatting rules"
+      "description": "Format the code based on deno formatting rules"
     },
     "lint": {
       "command": "deno lint",
@@ -45,8 +35,8 @@
     }
   },
   "imports": {
-    "@std/assert": "jsr:@std/assert@^1.0.12",
-    "@std/http": "jsr:@std/http@^1.0.14",
+    "@std/assert": "jsr:@std/assert@^1.0.13",
+    "@std/http": "jsr:@std/http@^1.0.15",
     "@std/testing": "jsr:@std/testing@^1.0.11"
   },
   "workspace": [
@@ -58,9 +48,8 @@
     "./packages/github"
   ],
   "fmt": {
-    "exclude": [
-      "**/*.tsx"
-    ]
+    "jsx.bracketPosition": "sameLine",
+    "tabSize": 2
   },
   "nodeModulesDir": "auto"
 }

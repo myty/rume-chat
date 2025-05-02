@@ -5,6 +5,7 @@ import { getRoomsController } from "./get-rooms.controller.ts";
 import { createRoomController } from "./create-room.controller.ts";
 import { getRoomController } from "./get-room.controller.ts";
 import { createRoomMessageController } from "./create-room-message.controller.ts";
+import { getRoomMessagesController } from "./get-room-messages.controller.ts";
 
 const api = new Hono<{
   Variables: {
@@ -21,6 +22,9 @@ api.post("/", createRoomController);
 
 // Get Room
 api.get("/:roomId", getRoomController);
+
+// Get Room Messages
+api.get("/:roomId/messages", getRoomMessagesController);
 
 // Create Room Message
 api.post("/:roomId/messages", createRoomMessageController);

@@ -1,6 +1,8 @@
-import type { GetAuthProviderUserCommand } from "../domain/auth-providers/get-auth-provider-user/get-auth-provider-user.command.ts";
-import type { GetAuthProviderUserDataAccess } from "../domain/auth-providers/get-auth-provider-user/get-auth-provider-user.data-access.ts";
-import type { GetAuthProviderUserResponse } from "../domain/auth-providers/get-auth-provider-user/get-auth-provider-user.response.ts";
+import type {
+  GetAuthProviderUserCommand,
+  GetAuthProviderUserDataAccess,
+  GetAuthProviderUserResponse,
+} from "@myty/fresh-workspace-domain";
 
 export class GetAuthProviderUserDataAccessGitHub
   implements GetAuthProviderUserDataAccess {

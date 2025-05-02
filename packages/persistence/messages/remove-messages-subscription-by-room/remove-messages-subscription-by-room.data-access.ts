@@ -1,5 +1,7 @@
-import type { RemoveMessagesSubscriptionByRoomDataAccess } from "../../../domain/messages/remove-messages-subscription-by-room/remove-messages-subscription-by-room.command-handler.ts";
-import type { RemoveMessagesSubscriptionByRoomCommand } from "../../../domain/messages/remove-messages-subscription-by-room/remove-messages-subscription-by-room.command.ts";
+import type {
+  RemoveMessagesSubscriptionByRoomCommand,
+  RemoveMessagesSubscriptionByRoomDataAccess,
+} from "@myty/fresh-workspace-domain";
 import * as keys from "../../keys.ts";
 
 export class RemoveMessagesSubscriptionByRoomDataAccessKv

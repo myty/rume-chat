@@ -1,14 +1,13 @@
 import type { CommandHandler } from "../../handlers/command-handler.ts";
 import type { CreateMessagesSubscriptionByRoomCommand } from "./create-messages-subscription-by-room.command.ts";
-import {
+import type {
   CreateMessagesSubscriptionByRoomResponse,
-  type Message,
 } from "./create-messages-subscription-by-room.response.ts";
 
 export interface CreateMessagesSubscriptionByRoomDataAccess {
   createMessagesSubscriptionByRoom(
     command: CreateMessagesSubscriptionByRoomCommand,
-  ): Promise<ReadableStream<Message[]>>;
+  ): Promise<CreateMessagesSubscriptionByRoomResponse>;
 }
 
 export class CreateMessagesSubscriptionByRoomCommandHandler
@@ -24,13 +23,10 @@ export class CreateMessagesSubscriptionByRoomCommandHandler
   async execute(command: CreateMessagesSubscriptionByRoomCommand) {
     this.validateCommand(command);
 
-    const messageStream = await this.dataAccess
+    const response = await this.dataAccess
       .createMessagesSubscriptionByRoom(command);
 
-    return new CreateMessagesSubscriptionByRoomResponse(
-      command.roomId,
-      messageStream,
-    );
+    return response;
   }
 
   validateCommand(command: CreateMessagesSubscriptionByRoomCommand) {

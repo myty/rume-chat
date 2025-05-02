@@ -1,8 +1,10 @@
-import type { CreateMessageCommand } from "../../../domain/messages/create-message/create-message.command.ts";
-import type { CreateMessageDataAccess } from "../../../domain/messages/create-message/create-message.command-handler.ts";
-import type { Message } from "../../entities/message.entity.ts";
-import { CreateMessageResponse } from "../../../domain/messages/create-message/create-message.response.ts";
 import { monotonicUlid } from "@std/ulid";
+import {
+  type CreateMessageCommand,
+  type CreateMessageDataAccess,
+  CreateMessageResponse,
+} from "@myty/fresh-workspace-domain";
+import type { Message } from "../../entities/message.entity.ts";
 import * as keys from "../../keys.ts";
 
 export class CreateMessageDataAccessKv implements CreateMessageDataAccess {
