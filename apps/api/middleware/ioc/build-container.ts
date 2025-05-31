@@ -4,7 +4,7 @@ import { IoCContainer } from "@myty/rume-chat-ioc";
 import { PersistenceIocModule } from "@myty/rume-chat-persistence";
 import { SubscriptionsIocModule } from "../../subscriptions/index.ts";
 
-export const buildContainer = () =>
+const buildContainer = () =>
   IoCContainer
     .create()
     .addModule(DomainIocModule)
@@ -12,3 +12,8 @@ export const buildContainer = () =>
     .addModule(GithubIocModule)
     .addModule(SubscriptionsIocModule)
     .build();
+
+type Container = ReturnType<typeof buildContainer>;
+
+export { buildContainer as build };
+export type { Container };

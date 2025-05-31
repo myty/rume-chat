@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import type { buildContainer } from "../middleware/ioc/build-container.ts";
+import type { Container } from "../middleware/ioc/build-container.ts";
 import type { UserDto } from "../dtos/user.dto.ts";
 import { getRoomsController } from "./get-rooms.controller.ts";
 import { createRoomController } from "./create-room.controller.ts";
@@ -10,7 +10,7 @@ import { getRoomMessagesController } from "./get-room-messages.controller.ts";
 const api = new Hono<{
   Variables: {
     currentUser: UserDto;
-    container: ReturnType<typeof buildContainer>;
+    container: Container;
   };
 }>().basePath("/rooms");
 

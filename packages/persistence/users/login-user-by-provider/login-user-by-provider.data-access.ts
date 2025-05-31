@@ -13,13 +13,13 @@ export class LoginUserByProviderDataAccessKv
   async loginUser(
     command: LoginUserByProviderCommand,
   ): Promise<LoginUserByProviderResponse> {
+    const user = User.fromCommand(command);
     const userLoginKey = keys.userLoginKey(command.userInfo.login);
     const userIdKey = keys.userIdKey(command.userInfo.id);
     const [persistedUser] = await this.kv.getMany<User[]>([
       userLoginKey,
       userIdKey,
     ]);
-    const user = User.fromCommand(command);
 
     if (persistedUser.value === null) {
       return await this.createUser(user);
