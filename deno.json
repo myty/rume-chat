@@ -4,6 +4,7 @@
   "exports": {},
   "tasks": {
     "dev": "spino dev",
+    "dev:cli": "deno task --filter @myty/rume-chat-cli dev:cli",
     "build": "deno task --filter @myty/rume-chat-web build",
     "start": "deno task --filter @myty/rume-chat-web start",
     "fix": {
@@ -41,6 +42,7 @@
   },
   "workspace": [
     "./apps/api",
+    "./apps/cli",
     "./apps/web",
     "./packages/domain",
     "./packages/ioc",
