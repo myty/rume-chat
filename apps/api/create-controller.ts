@@ -1,12 +1,12 @@
 import type { Context, Env } from "hono";
 import type { BlankInput, Input } from "hono/types";
-import type { buildContainer } from "./middleware/ioc/build-container.ts";
+import type { Container } from "./middleware/ioc/build-container.ts";
 import type { UserDto } from "./dtos/user.dto.ts";
 
 export type DefaultEnv = Env & {
   Variables: {
     currentUser: UserDto;
-    container: ReturnType<typeof buildContainer>;
+    container: Container;
   };
 };
 

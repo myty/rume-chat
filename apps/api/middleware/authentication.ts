@@ -2,7 +2,7 @@ import { createGitHubOAuthConfig, createHelpers } from "@deno/kv-oauth";
 import { createMiddleware } from "hono/factory";
 import type { Hono } from "hono";
 import { UserDto } from "../dtos/user.dto.ts";
-import type { buildContainer } from "./ioc/build-container.ts";
+import type { Container } from "./ioc/build-container.ts";
 import {
   GetAuthProviderUserCommand,
   GetUserBySessionIdQuery,
@@ -10,7 +10,7 @@ import {
 } from "@myty/rume-chat-domain";
 
 export function configureAuthentication(
-  app: Hono<{ Variables?: { container: ReturnType<typeof buildContainer> } }>,
+  app: Hono<{ Variables?: { container: Container } }>,
 ): void {
   const githubAuth = createHelpers(
     createGitHubOAuthConfig(),
@@ -20,7 +20,7 @@ export function configureAuthentication(
     {
       Variables: {
         currentUser: UserDto;
-        container: ReturnType<typeof buildContainer>;
+        container: Container;
       };
     }
   >(async (c, next) => {

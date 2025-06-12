@@ -126,7 +126,7 @@ export const AuthenticatedLayout: React.FC = () => {
                     <span className="flex-1"></span>
                     <a
                       className="text-gray-400 hover:bg-gray-800 hover:text-white"
-                      href={`auth/signout`}>
+                      href={`/auth/signout`}>
                       <ArrowLeftStartOnRectangleIcon className="size-6" />
                     </a>
                   </div>
