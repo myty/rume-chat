@@ -2,102 +2,116 @@
 
 ## Project Overview
 
-Rume Chat is a real-time chat application built with Deno, following
-Domain-Driven Design (DDD) principles. It uses a custom IoC container, Deno.KV
-for persistence, and WebSockets/SSE for real-time messaging.
+Rume Chat is a real-time chat application built with Deno 2.x, following
+Domain-Driven Design (DDD) principles. It features a monorepo workspace
+structure with separate API and web apps, using a custom IoC container, Deno.KV
+for persistence, and server-sent events (SSE) for real-time messaging.
 
 ## Architecture & Key Patterns
 
-### Domain-Driven Design Structure
+### Monorepo Workspace Structure
 
-- **Domain Layer** (`packages/domain/`): Contains domain logic,
-  commands/queries, and handlers
-- **Persistence Layer** (`packages/persistence/`): Deno.KV-based data access
-  implementations
-- **API Layer** (`apps/api/`): Hono-based REST API and WebSocket endpoints
-- **Web Layer** (`apps/web/`): Vite + React frontend
+- **Apps**: `apps/api/` (Hono-based API), `apps/web/` (React Router + Vite)
+- **Packages**: Domain logic, persistence, IoC container, and integrations
+- **Development**: Uses workspace tasks (`deno task dev` runs both API and web
+  concurrently)
 
-### IoC Container Pattern
+### Domain-Driven Design with CQRS
 
-The project uses a custom IoC container (`packages/ioc/`) with module-based
-registration:
+Every business operation follows strict CQRS pattern:
 
 ```typescript
-// Domain modules export types and IoC modules
+// Domain modules export interfaces and IoC bindings
 export interface CreateRoomTypes {
-  CreateRoomCommandHandler: CommandHandler<CreateRoomCommand, CreateRoomResponse>;
+  CreateRoomCommandHandler: CommandHandler<
+    CreateRoomCommand,
+    CreateRoomResponse
+  >;
 }
 
 export const CreateRoomIocModule: BindableIoCModule<CreateRoomTypes> = (c) => {
-  c.bind("CreateRoomCommandHandler", (c) => new CreateRoomCommandHandler(...), Lifecycle.Scoped);
+  c.bind(
+    "CreateRoomCommandHandler",
+    (c) => new CreateRoomCommandHandler(c.resolve("CreateRoomDataAccess")),
+    Lifecycle.Scoped,
+  );
 };
 ```
 
-### Command/Query Handler Pattern
+**Critical**: Data access interfaces are defined in domain, implemented in
+persistence layer. Never directly import persistence from domain.
 
-All business operations use explicit command/query handlers:
+### Custom IoC Container Pattern
 
-- Commands: `CreateRoomCommand`, `CreateMessageCommand`
-- Queries: `GetRoomQuery`, `GetMessagesByRoomQuery`
-- Handlers implement `CommandHandler<TCommand, TResponse>` or
-  `QueryHandler<TQuery, TResponse>`
+- **Registration**: Module-based with lifecycle management (`Lifecycle.Scoped`,
+  `Lifecycle.Singleton`)
+- **Resolution**: Type-safe container resolution in controllers via
+  `c.var.container.resolve("ServiceName")`
+- **Middleware**: IoC container is configured in `apps/api/middleware/ioc/` and
+  injected as Hono variable
 
-### Real-time Subscriptions
+### Controller Pattern
 
-Custom subscription system (`apps/api/subscriptions/`) manages WebSocket
-connections:
+Use `createController` helper for all endpoints:
 
-- Session-based connection tracking
-- Room-specific message subscriptions
-- Feed iterator pattern for async message streaming
+```typescript
+export const createRoomController = createController("/rooms", async (c) => {
+  const commandHandler = c.var.container.resolve("CreateRoomCommandHandler");
+  const { id, name } = await c.req.json();
+  const command = new CreateRoomCommand(id, name, c.var.currentUser.handle);
+  return c.json(await commandHandler.execute(command));
+});
+```
+
+**Critical**: Always use `HTTPException.fromError(error)` for error handling,
+access current user via `c.var.currentUser`.
+
+### Deno.KV Persistence Patterns
+
+Hierarchical key structure defined in `packages/persistence/keys.ts`:
+
+```typescript
+export const roomKey = (roomId: string) => ["rooms", roomId] as const;
+export const messageKey = (roomId: string, messageId: string) =>
+  ["rooms", roomId, "messages", messageId] as const;
+```
+
+**Critical**: All keys are typed and centralized. Use atomic operations for
+consistency.
 
 ## Development Workflow
 
 ### Essential Commands
 
 ```bash
-# Start development (uses spino for orchestration)
-deno task dev
-
-# Run specific app
-deno task --filter @myty/rume-chat-web build  # Web build
-
-# Code quality
-deno task check                # Full type checking + linting
-deno task fix                  # Auto-fix formatting + linting
-
-# Testing
-deno test                      # Run all tests using Deno's built-in test runner
+deno task dev          # Start both API (8000) and web (5173) in development
+deno task build        # Build web app for production
+deno test             # Run all tests (uses Deno's built-in test runner)
 ```
 
-### Testing Strategy
+### Testing Conventions
 
-Uses Deno's standard testing libraries (`@std/testing`, `@std/assert`,
-`@std/testing/mock`):
-
-- **Unit tests**: Command handlers with mocked data access layers
-- **Test structure**: Arrange-Act-Assert pattern with `setupSut()` helper
-  functions
-- **Mocking**: Spy-based mocking for dependency verification
-- **Location**: Tests are co-located with source files (`*.test.ts`)
+- **Pattern**: Arrange-Act-Assert with `setupSut()` helper functions
+- **Location**: Co-located with source files (`*.test.ts`)
+- **Mocking**: Use `@std/testing/mock` for spy-based mocking
+- **Structure**: BDD-style with `describe`/`it` from `@std/testing/bdd`
 
 ### Adding New Features
 
-1. **Define domain**: Create command/query in `packages/domain/{entity}/`
-2. **Implement handler**: Add command handler with data access interface
-3. **Add persistence**: Implement data access in `packages/persistence/`
-4. **Create controller**: Add HTTP endpoint in `apps/api/{entity}/`
-5. **Register IoC**: Wire dependencies in respective IoC modules
+1. **Domain**: Define command/query in `packages/domain/{entity}/{operation}/`
+2. **Handler**: Implement with data access interface dependency
+3. **Persistence**: Create Deno.KV implementation in
+   `packages/persistence/{entity}/`
+4. **IoC Module**: Wire dependencies in domain's index.ts
+5. **Controller**: Add endpoint using `createController` pattern
+6. **Routes**: Register controller in `apps/api/{entity}/index.ts`
 
 ### Key Conventions
 
 - **File naming**: `{operation}.{type}.ts` (e.g., `create-room.command.ts`)
-- **Data access**: Interface in domain, Deno.KV implementation in persistence
-- **Controllers**: Use `createController` helper with dependency injection
-- **Authentication**: Middleware extracts `currentUser` from session
-- **Error handling**: Use `HTTPException.fromError(error)` for API errors
-
-## Critical Integration Points
+- **Imports**: Use workspace package names (`@myty/rume-chat-domain`)
+- **Authentication**: GitHub OAuth with session-based authentication middleware
+- **Types**: Domain types exported from each operation's index.ts
 
 ### Authentication Flow (GitHub OAuth)
 
@@ -118,13 +132,6 @@ Uses Deno's standard testing libraries (`@std/testing`, `@std/assert`,
   ["users", "sessions", sessionId]; // User sessions
 ```
 
-### WebSocket Message Flow
-
-1. Client connects → `Subscriptions.connect(sessionId)`
-2. Subscribe to room → `addSubscription(sessionId, "room:messages:${roomId}")`
-3. New message → `publish("room:messages:${roomId}", message)`
-4. Auto-broadcast to all room subscribers
-
 ### Middleware Chain (apps/api/main.ts)
 
 1. Logging → IoC container → Authentication → Authorization
@@ -135,8 +142,4 @@ Uses Deno's standard testing libraries (`@std/testing`, `@std/assert`,
 
 - Uses `mise.toml` for Deno version management
 - Monorepo structure with workspace task filtering
-- **Spino**: Custom orchestration tool (alternative to Turborepo) for managing
-  multi-app development
-- Real-time via WebSockets, not SSE (despite README mention)
-- Custom subscription management instead of external pub/sub
 - Zero external dependencies philosophy (custom IoC vs third-party)
