@@ -1,0 +1,4 @@
+{
+  "name": "app",
+  "comment": "This only exists to help vite module resolution. Do not use this file, instread use deno.json."
+}

@@ -51,7 +51,9 @@ export function configureAuthentication(
   app.use(authenticationMiddleware);
 
   app.all("/auth/signin", async (c) => {
-    return await githubAuth.signIn(c.req.raw);
+    const response = await githubAuth.signIn(c.req.raw);
+
+    return response;
   });
 
   app.all("/auth/callback", async (ctx) => {

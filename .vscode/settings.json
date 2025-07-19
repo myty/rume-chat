@@ -1,21 +1,33 @@
 {
   "deno.enable": true,
   "deno.lint": true,
+
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+
   "editor.defaultFormatter": "denoland.vscode-deno",
-  "[typescriptreact]": {
+  "editor.formatOnSave": true,
+
+  "[javascript]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
   "[typescript]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
-  "[javascriptreact]": {
+  "[jsx]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
-  "[javascript]": {
+  "[tsx]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "[jsonc]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
   "css.customData": [".vscode/tailwind.json"],
-  "codevoid.inner-loop-buddy.defaultUrl": "http://localhost:8000/",
   "files.associations": {
     "*.tsx": "typescriptreact",
     "*.css": "tailwindcss",
@@ -30,5 +42,13 @@
     ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
   ],
   "trailing-spaces.trimOnSave": true,
-  "editor.stickyScroll.enabled": true
+  "editor.stickyScroll.enabled": true,
+
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "codevoid.inner-loop-buddy.defaultUrl": "http://localhost:8000/"
 }

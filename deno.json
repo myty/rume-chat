@@ -3,55 +3,47 @@
   "version": "0.0.0",
   "exports": {},
   "tasks": {
-    "dev": "spino dev",
-    "dev:cli": "deno task --filter @myty/rume-chat-cli dev:cli",
+    "dev:web": "deno task --cwd ./apps/web dev",
+    "dev:api": "deno task --cwd ./apps/api dev",
+    "dev": {
+      "command": "deno -V",
+      "description": "Run API + App in development mode",
+      "dependencies": [
+        "dev:web",
+        "dev:api"
+      ]
+    },
     "build": "deno task --filter @myty/rume-chat-web build",
-    "start": "deno task --filter @myty/rume-chat-web start",
-    "fix": {
-      "command": "deno lint --fix",
-      "description": "Check if the code is formatted and linted correctly based on deno rules and fix the issues",
-      "dependencies": [
-        "fmt"
-      ]
-    },
-    "check:fmt": {
-      "command": "deno fmt --check",
-      "description": "Check if the code is formatted correctly based on deno formatting rules"
-    },
-    "check": {
-      "command": "deno check apps/**/*.ts packages/**/*.ts && deno check apps/**/*.tsx",
-      "description": "Check if the code is formatted and linted correctly based on deno rules",
-      "dependencies": [
-        "check:fmt",
-        "lint"
-      ]
-    },
-    "fmt": {
-      "command": "deno fmt",
-      "description": "Format the code based on deno formatting rules"
-    },
-    "lint": {
-      "command": "deno lint",
-      "description": "Check if the code is linted correctly based on deno rules"
-    }
+    "start": "deno task --filter @myty/rume-chat-web start"
   },
   "imports": {
+    "@biomejs/biome": "npm:@biomejs/biome@^2.1.2",
     "@std/assert": "jsr:@std/assert@^1.0.13",
     "@std/http": "jsr:@std/http@^1.0.18",
     "@std/testing": "jsr:@std/testing@^1.0.14"
   },
   "workspace": [
     "./apps/api",
-    "./apps/cli",
     "./apps/web",
     "./packages/domain",
     "./packages/ioc",
     "./packages/persistence",
     "./packages/github"
   ],
+  "unstable": [
+    "sloppy-imports"
+  ],
   "fmt": {
     "jsx.bracketPosition": "sameLine",
     "indentWidth": 2
+  },
+  "lint": {
+    "rules": {
+      "tags": [
+        "recommended"
+      ],
+      "exclude": ["no-sloppy-imports"]
+    }
   },
   "nodeModulesDir": "auto"
 }

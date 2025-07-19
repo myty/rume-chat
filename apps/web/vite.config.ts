@@ -1,30 +1,29 @@
-import { defineConfig } from "vite";
+import { reactRouter } from "@react-router/dev/vite";
 import deno from "@deno/vite-plugin";
 import tailwindcss from "@tailwindcss/vite";
-import react from "@vitejs/plugin-react";
+import { defineConfig, type Plugin } from "vite";
+import devtoolsJson from "vite-plugin-devtools-json";
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [
+    (devtoolsJson as unknown as () => Plugin[])(),
+    reactRouter(),
     deno(),
     tailwindcss(),
-    // deno-lint-ignore no-explicit-any
-    (react as any)(),
   ],
   server: {
-    proxy: {
-      "/api": {
-        target: "http://localhost:8000",
-        changeOrigin: true,
+    fs: {
+      allow: ["../"],
+    },
+  },
+  environments: {
+    ssr: {
+      build: {
+        target: "ESNext",
       },
-      "/auth": {
-        target: "http://localhost:8000",
-        changeOrigin: true,
-      },
-      "/ws": {
-        target: "ws://localhost:8000",
-        changeOrigin: true,
-        ws: true,
+      resolve: {
+        conditions: ["deno"],
+        externalConditions: ["deno"],
       },
     },
   },
