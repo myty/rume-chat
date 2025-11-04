@@ -1,15 +1,15 @@
-import { Room } from "../../entities/room.entity.ts";
 import type {
-  CreateRoomCommand,
   CreateRoomDataAccess,
+  CreateRoomModel,
   CreateRoomResponse,
 } from "@myty/rume-chat-domain";
+import { Room } from "../../entities/room.entity.ts";
 import * as keys from "../../keys.ts";
 
 export class CreateRoomDataAccessKv implements CreateRoomDataAccess {
   constructor(private kv: Deno.Kv) {}
 
-  async createRoom(command: CreateRoomCommand): Promise<CreateRoomResponse> {
+  async createRoom(command: CreateRoomModel): Promise<CreateRoomResponse> {
     const room = Room.fromCommand(command);
     const roomKey = keys.roomKey(room.id);
     const roomActiveUsersKey = keys.roomActiveUsersKey(room.id);

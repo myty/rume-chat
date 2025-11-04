@@ -1,13 +1,16 @@
-import { beforeEach, describe, it } from "@std/testing/bdd";
 import { assertRejects } from "@std/assert";
+import { beforeEach, describe, it } from "@std/testing/bdd";
 import { CreateMessageCommand } from "./create-message.command.ts";
 import {
   CreateMessageCommandHandler,
+} from "./create-message.command-handler.ts";
+import { CreateMessageResponse } from "./create-message.response.ts";
+import {
+  CreateMessageService,
   ERROR_INVALID_COMMAND_MESSAGE,
   ERROR_INVALID_COMMAND_ROOM_ID,
   ERROR_INVALID_COMMAND_USER_HANDLE,
-} from "./create-message.command-handler.ts";
-import { CreateMessageResponse } from "./create-message.response.ts";
+} from "./create-message.service.ts";
 
 describe("CreateMessageCommandHandler", () => {
   let sut: CreateMessageCommandHandler;
@@ -87,7 +90,10 @@ function setupSut() {
     },
   };
 
-  return new CreateMessageCommandHandler(dataAccess);
+  return new CreateMessageCommandHandler(
+    dataAccess,
+    new CreateMessageService(),
+  );
 }
 
 function buildCommand(

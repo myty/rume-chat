@@ -1,6 +1,6 @@
+import clsx from "clsx";
 import { Link } from "react-router";
 import Card from "~/shared/ui/card.tsx";
-import clsx from "clsx";
 import type { Room } from "~/types.ts";
 
 interface RoomCardProps {

@@ -1,0 +1,47 @@
+{
+  "tasks": {
+    "build": "deno run -A npm:@react-router/dev@7.9.5 build",
+    "dev": "deno run -A npm:@react-router/dev@7.9.5 dev",
+    "start": "deno run --allow-env --allow-net --allow-read ./server.ts",
+    "typegen": "deno run -A npm:@react-router/dev@7.9.5 typegen",
+    "typegen:watch": "deno run -A npm:@react-router/dev@7.9.5 typegen --watch",
+    "typecheck": {
+      "command": "deno check .",
+      "dependencies": ["typegen"]
+    }
+  },
+  "imports": {
+    "~/": "./app/",
+    "@std/http": "jsr:@std/http@^1.0.21",
+    "@deno/vite-plugin": "npm:@deno/vite-plugin@^1.0.5",
+    "@headlessui/react": "npm:@headlessui/react@^2.2.9",
+    "@heroicons/react": "npm:@heroicons/react@^2.2.0",
+    "@react-router/dev": "npm:@react-router/dev@^7.9.5",
+    "@react-router/serve": "npm:@react-router/serve@^7.9.5",
+    "@std/assert": "jsr:@std/assert@^1.0.15",
+    "@tailwindcss/vite": "npm:@tailwindcss/vite@^4.1.16",
+    "@types/react-dom": "npm:@types/react-dom@^19.2.2",
+    "@types/react": "npm:@types/react@^19.2.2",
+    "class-variance-authority": "npm:class-variance-authority@^0.7.1",
+    "clsx": "npm:clsx@^2.1.1",
+    "eventsource-client": "npm:eventsource-client@^1.2.0",
+    "isbot": "npm:isbot@^5.1.32",
+    "react-dom": "npm:react-dom@^19.2.0",
+    "react-router": "npm:react-router@^7.9.5",
+    "react": "npm:react@^19.2.0",
+    "remix-utils": "npm:remix-utils@^9.0.0",
+    "tailwindcss": "npm:tailwindcss@^4.1.16",
+    "use-stick-to-bottom": "npm:use-stick-to-bottom@^1.1.1",
+    "vite": "npm:vite@^7.1.12",
+    "vite-plugin-devtools-json": "npm:vite-plugin-devtools-json@^1.0.0"
+  },
+  "compilerOptions": {
+    "verbatimModuleSyntax": true,
+    "strict": true,
+    "lib": ["dom", "dom.iterable", "esnext", "deno.ns"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "types": ["vite/client"],
+    "rootDirs": [".", "./.react-router/types"]
+  }
+}

@@ -1,13 +1,13 @@
 import { createGitHubOAuthConfig, createHelpers } from "@deno/kv-oauth";
-import { createMiddleware } from "hono/factory";
-import type { Hono } from "hono";
-import { UserDto } from "../dtos/user.dto.ts";
-import type { Container } from "./ioc/build-container.ts";
 import {
   GetAuthProviderUserCommand,
   GetUserBySessionIdQuery,
   LoginUserByProviderCommand,
 } from "@myty/rume-chat-domain";
+import type { Hono } from "hono";
+import { createMiddleware } from "hono/factory";
+import { UserDto } from "../dtos/user.dto.ts";
+import type { Container } from "./ioc/build-container.ts";
 
 export function configureAuthentication(
   app: Hono<{ Variables?: { container: Container } }>,

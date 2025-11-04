@@ -1,8 +1,8 @@
 import type { Hono } from "hono";
-import { HTTPException } from "hono/http-exception";
 import { createMiddleware } from "hono/factory";
-import type { Container } from "./ioc/build-container.ts";
+import { HTTPException } from "hono/http-exception";
 import type { UserDto } from "../dtos/user.dto.ts";
+import type { Container } from "./ioc/build-container.ts";
 
 export const configureAuthorization = (app: Hono): void => {
   const middleware = createMiddleware<{

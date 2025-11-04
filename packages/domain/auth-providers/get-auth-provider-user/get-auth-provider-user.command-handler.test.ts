@@ -1,12 +1,12 @@
-import { beforeAll, describe, it } from "@std/testing/bdd";
 import { assertRejects } from "@std/assert";
-import type { GetAuthProviderUserResponse } from "./get-auth-provider-user.response.ts";
+import { beforeAll, describe, it } from "@std/testing/bdd";
+import { GetAuthProviderUserCommand } from "./get-auth-provider-user.command.ts";
 import {
   ERROR_INVALID_COMMAND,
   ERROR_USER_NOT_FOUND,
   GetAuthProviderUserCommandHandler,
 } from "./get-auth-provider-user.command-handler.ts";
-import { GetAuthProviderUserCommand } from "./get-auth-provider-user.command.ts";
+import type { GetAuthProviderUserResponse } from "./get-auth-provider-user.response.ts";
 
 describe("GetAuthProviderUserCommandHandler", () => {
   let sut: GetAuthProviderUserCommandHandler;

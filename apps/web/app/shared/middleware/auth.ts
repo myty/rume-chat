@@ -1,10 +1,10 @@
 import { redirect } from "react-router";
-import { apiClientContext, userContext } from "~/context";
 import type { Route } from "~/+types/root.ts";
+import { apiClientContext, userContext } from "~/context";
 import { UnauthenticatedError } from "../http-errors/unauthenticated-error.ts";
 import { UnauthorizedError } from "../http-errors/unauthorized-error.ts";
 
-export const authMiddleware: Route.unstable_MiddlewareFunction = async ({
+export const authMiddleware: Route.MiddlewareFunction = async ({
   context,
 }) => {
   const apiClient = context.get(apiClientContext);

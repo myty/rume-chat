@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
-import { apiMiddleware } from "~/shared/middleware/api.ts";
+import { apiMiddleware } from "../middleware/api.ts";
 
-export const unstable_middleware = [apiMiddleware];
+export const middleware = [apiMiddleware];
 
 export default function AppLayout() {
   return (

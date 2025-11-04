@@ -1,18 +1,12 @@
-// Commands
 export { CreateMessageCommand } from "./create-message/create-message.command.ts";
-export { CreateMessagesSubscriptionByRoomCommand } from "./create-messages-subscription-by-room/create-messages-subscription-by-room.command.ts";
-export { RemoveMessagesSubscriptionByRoomCommand } from "./remove-messages-subscription-by-room/remove-messages-subscription-by-room.command.ts";
-
-// Queries
-export { GetMessagesByRoomQuery } from "./get-messages-by-room/get-messages-by-room.query.ts";
-
-// Data Access
-export { type RemoveMessagesSubscriptionByRoomDataAccess } from "./remove-messages-subscription-by-room/remove-messages-subscription-by-room.command-handler.ts";
-export { type CreateMessagesSubscriptionByRoomDataAccess } from "./create-messages-subscription-by-room/create-messages-subscription-by-room.command-handler.ts";
-export { type CreateMessageDataAccess } from "./create-message/create-message.command-handler.ts";
-export { type GetMessagesByRoomDataAccess } from "./get-messages-by-room/get-messages-by-room.query-handler.ts";
-
-// Responses
+export type { CreateMessageDataAccess } from "./create-message/create-message.command-handler.ts";
+export type { CreateMessageModel } from "./create-message/create-message.model.ts";
 export { CreateMessageResponse } from "./create-message/create-message.response.ts";
+export { CreateMessagesSubscriptionByRoomCommand } from "./create-messages-subscription-by-room/create-messages-subscription-by-room.command.ts";
+export type { CreateMessagesSubscriptionByRoomDataAccess } from "./create-messages-subscription-by-room/create-messages-subscription-by-room.command-handler.ts";
 export { CreateMessagesSubscriptionByRoomResponse } from "./create-messages-subscription-by-room/create-messages-subscription-by-room.response.ts";
+export { GetMessagesByRoomQuery } from "./get-messages-by-room/get-messages-by-room.query.ts";
+export type { GetMessagesByRoomDataAccess } from "./get-messages-by-room/get-messages-by-room.query-handler.ts";
 export { GetMessagesByRoomResponse } from "./get-messages-by-room/get-messages-by-room.response.ts";
+export { RemoveMessagesSubscriptionByRoomCommand } from "./remove-messages-subscription-by-room/remove-messages-subscription-by-room.command.ts";
+export type { RemoveMessagesSubscriptionByRoomDataAccess } from "./remove-messages-subscription-by-room/remove-messages-subscription-by-room.command-handler.ts";

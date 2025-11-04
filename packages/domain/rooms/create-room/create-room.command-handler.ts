@@ -1,28 +1,24 @@
 import type { CommandHandler } from "../../handlers/command-handler.ts";
 import type { CreateRoomCommand } from "./create-room.command.ts";
+import type { CreateRoomModel } from "./create-room.model.ts";
 import type { CreateRoomResponse } from "./create-room.response.ts";
+import type { CreateRoomService } from "./create-room.service.ts";
 
 export interface CreateRoomDataAccess {
-  createRoom(command: CreateRoomCommand): Promise<CreateRoomResponse>;
+  createRoom(model: CreateRoomModel): Promise<CreateRoomResponse>;
 }
 
 export class CreateRoomCommandHandler
   implements CommandHandler<CreateRoomCommand, CreateRoomResponse> {
-  constructor(private readonly dataAccess: CreateRoomDataAccess) {}
+  constructor(
+    private readonly dataAccess: CreateRoomDataAccess,
+    private readonly createRoomService: CreateRoomService,
+  ) {}
 
   async execute(command: CreateRoomCommand): Promise<CreateRoomResponse> {
-    this.validateCommand(command);
+    const model = this.createRoomService.execute(command);
+    const response = await this.dataAccess.createRoom(model);
 
-    return await this.dataAccess.createRoom(command);
-  }
-
-  private validateCommand(command: CreateRoomCommand) {
-    if (!command.roomId) {
-      throw new Error("Room ID is required");
-    }
-
-    if (!command.name) {
-      throw new Error("Room name is required");
-    }
+    return response;
   }
 }

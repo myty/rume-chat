@@ -13,7 +13,7 @@ import { navigationItems } from "../ui/navigation/navigation-items.ts";
 import { SidebarButton } from "../ui/sidebar-button.tsx";
 import type { Route } from "./+types/authenticated.layout.ts";
 
-export const unstable_middleware = [authMiddleware];
+export const middleware = [authMiddleware];
 
 export async function loader({ context }: Route.LoaderArgs) {
   const apiClient = context.get(apiClientContext);

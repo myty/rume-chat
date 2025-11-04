@@ -25,8 +25,8 @@ scalability, and clean architecture in mind.
 2. **Installation**
 
    ```bash
-   git clone https://github.com/yourusername/fresh-chat.git
-   cd fresh-chat
+   git clone https://github.com/myty/rume-chat.git
+   cd rume-chat
    deno install
    ```
 
@@ -40,7 +40,8 @@ scalability, and clean architecture in mind.
 
 ## 🏗️ Technology Stack
 
-- **Runtime**: Deno 2
+- **Runtime**: Deno v2
+- **Framework**: React-Router v7
 - **Storage**: Deno.KV
 - **Real-time**: Server-Side Events
 - **Architecture**: Domain-Driven Design

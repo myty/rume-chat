@@ -1,10 +1,10 @@
-import { unstable_createContext } from "react-router";
-import type { User } from "./types.ts";
+import { createContext } from "react-router";
 import type { ApiClient } from "./shared/middleware/api.ts";
+import type { User } from "./types.ts";
 
-export const userContext = unstable_createContext<User | null>(null);
+export const userContext = createContext<User | null>(null);
 
-export const apiClientContext = unstable_createContext<ApiClient>({
+export const apiClientContext = createContext<ApiClient>({
   createRoom: () => {
     throw new Error("API client not initialized");
   },

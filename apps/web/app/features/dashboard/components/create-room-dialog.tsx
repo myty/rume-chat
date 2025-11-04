@@ -1,16 +1,16 @@
 "use client";
 
-import { Button } from "~/shared/ui/button.tsx";
-import { CheckCircleIcon, PlusIcon } from "@heroicons/react/24/outline";
 import {
   Dialog,
   DialogBackdrop,
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
+import { CheckCircleIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-import type { Room } from "~/types.ts";
+import { Button } from "~/shared/ui/button.tsx";
 import Input from "~/shared/ui/input.tsx";
+import type { Room } from "~/types.ts";
 
 interface CreateRoomCardProps {
   onCreateRoom: (room: Partial<Room>) => void;

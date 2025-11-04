@@ -1,7 +1,7 @@
-import { apiClientContext } from "~/context";
 import type { Route } from "~/+types/root.ts";
-import type { Message, Room, User } from "~/types.ts";
+import { apiClientContext } from "~/context";
 import { UnauthenticatedError } from "~/shared/http-errors/unauthenticated-error.ts";
+import type { Message, Room, User } from "~/types.ts";
 import { BadRequestError } from "../http-errors/bad-request-error.ts";
 import { UnauthorizedError } from "../http-errors/unauthorized-error.ts";
 
@@ -13,12 +13,17 @@ export interface ApiClient {
 }
 
 function createApiClient(headers: Headers) {
-  const apiOriginUrl = Deno.env.get("API_ORIGIN")!;
+  const apiOriginUrl = Deno.env.get("API_ORIGIN");
+
+  if (!apiOriginUrl) {
+    throw new Error("API_ORIGIN environment variable is not set");
+  }
+
   const defaultHeaders = {
     ...Object.fromEntries(headers.entries()),
-    "host": new URL(apiOriginUrl).host,
-    "origin": apiOriginUrl,
-    "referer": apiOriginUrl,
+    host: new URL(apiOriginUrl).host,
+    origin: apiOriginUrl,
+    referer: apiOriginUrl,
     "content-type": "application/json",
   };
 
@@ -27,7 +32,7 @@ function createApiClient(headers: Headers) {
       ...options,
       headers: {
         ...defaultHeaders,
-        ...(options?.headers ?? {}),
+        ...options?.headers,
       },
     });
 
@@ -72,7 +77,7 @@ function createApiClient(headers: Headers) {
   };
 }
 
-export const apiMiddleware: Route.unstable_MiddlewareFunction = ({
+export const apiMiddleware: Route.MiddlewareFunction = ({
   request,
   context,
 }) => {

@@ -1,6 +1,6 @@
 import type { Hono } from "hono";
-import { build } from "./build-container.ts";
 import { createMiddleware } from "hono/factory";
+import { build } from "./build-container.ts";
 
 export function configureIocContainer(
   app: Hono,

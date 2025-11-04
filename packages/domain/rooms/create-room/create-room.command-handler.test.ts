@@ -1,11 +1,12 @@
 import { assertRejects } from "@std/assert";
 import { describe, it } from "@std/testing/bdd";
+import { assertSpyCalls, spy } from "@std/testing/mock";
+import { CreateRoomCommand } from "./create-room.command.ts";
 import {
   CreateRoomCommandHandler,
   type CreateRoomDataAccess,
 } from "./create-room.command-handler.ts";
-import { CreateRoomCommand } from "./create-room.command.ts";
-import { assertSpyCalls, spy } from "@std/testing/mock";
+import { CreateRoomService } from "./create-room.service.ts";
 
 describe("CreateRoomCommandHandler", () => {
   it("should throw an error when the room id is empty", async () => {
@@ -40,6 +41,9 @@ describe("CreateRoomCommandHandler", () => {
 function setupSut() {
   const createRoom = spy();
   const dataAccess = { createRoom } as unknown as CreateRoomDataAccess;
-  const commandHandler = new CreateRoomCommandHandler(dataAccess);
+  const commandHandler = new CreateRoomCommandHandler(
+    dataAccess,
+    new CreateRoomService(),
+  );
   return { createRoom, commandHandler };
 }

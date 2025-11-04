@@ -1,41 +1,24 @@
-import type { CommandHandler } from "../../index.ts";
+import type { CommandHandler } from "../../handlers";
 import type { CreateMessageCommand } from "./create-message.command.ts";
+import type { CreateMessageModel } from "./create-message.model.ts";
 import type { CreateMessageResponse } from "./create-message.response.ts";
-
-export const ERROR_INVALID_COMMAND_ROOM_ID =
-  "Create Message: roomId is required";
-export const ERROR_INVALID_COMMAND_MESSAGE =
-  "Create Message: message is required";
-export const ERROR_INVALID_COMMAND_USER_HANDLE =
-  "Create Message: userHandle is required";
+import type { CreateMessageService } from "./create-message.service.ts";
 
 export interface CreateMessageDataAccess {
-  createMessage(command: CreateMessageCommand): Promise<CreateMessageResponse>;
+  createMessage(command: CreateMessageModel): Promise<CreateMessageResponse>;
 }
 
 export class CreateMessageCommandHandler
   implements CommandHandler<CreateMessageCommand, CreateMessageResponse> {
-  constructor(private readonly dataAccess: CreateMessageDataAccess) {}
+  constructor(
+    private readonly dataAccess: CreateMessageDataAccess,
+    private readonly createMessageService: CreateMessageService,
+  ) {}
 
   async execute(command: CreateMessageCommand): Promise<CreateMessageResponse> {
-    this.validate(command);
+    const model = this.createMessageService.execute(command);
+    const response = await this.dataAccess.createMessage(model);
 
-    const message = await this.dataAccess.createMessage(command);
-
-    return message;
-  }
-
-  validate(command: CreateMessageCommand) {
-    if (!command.roomId) {
-      throw new TypeError(ERROR_INVALID_COMMAND_ROOM_ID);
-    }
-
-    if (!command.message) {
-      throw new TypeError(ERROR_INVALID_COMMAND_MESSAGE);
-    }
-
-    if (!command.userHandle) {
-      throw new TypeError(ERROR_INVALID_COMMAND_USER_HANDLE);
-    }
+    return response;
   }
 }

@@ -1,9 +1,9 @@
-import { monotonicUlid } from "@std/ulid";
 import {
-  type CreateMessageCommand,
   type CreateMessageDataAccess,
+  type CreateMessageModel,
   CreateMessageResponse,
 } from "@myty/rume-chat-domain";
+import { monotonicUlid } from "@std/ulid";
 import type { Message } from "../../entities/message.entity.ts";
 import * as keys from "../../keys.ts";
 
@@ -11,7 +11,7 @@ export class CreateMessageDataAccessKv implements CreateMessageDataAccess {
   constructor(private readonly kv: Deno.Kv) {}
 
   async createMessage(
-    command: CreateMessageCommand,
+    command: CreateMessageModel,
   ): Promise<CreateMessageResponse> {
     const message: Message = {
       id: monotonicUlid(),
